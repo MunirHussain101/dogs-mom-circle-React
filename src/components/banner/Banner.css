@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
+.img_banner{
+    height: 45vh;
+    width: 100%;
+}
+.head_banner{
+    /* position: absolute; */
+/* width: 809px; */
+/* height: 96px; */
+/* left: calc(50% - 809px/2 - 0.5px); */
+/* top: 566px; */
+
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 48px;
+/* or 150% */
+
+/* Text */
+color: #1F2124;
+}
+.head_banner_inner{
+
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 48px;
+/* or 150% */
+
+/* Text */
+color: #EAB2BB;
+font-family: 'Syne', sans-serif;
+
+}
+@media screen and (max-width: 800px) {
+    .head_banner{
+        /* position: absolute; */
+    /* width: 809px; */
+    /* height: 96px; */
+    /* left: calc(50% - 809px/2 - 0.5px); */
+    /* top: 566px; */
+
+    /* font-weight: 700; */
+    font-size: 22px;
+    padding-left: 20px;
+    /* line-height: 48px; */
+    /* or 150% */
+    
+    /* Text */
+    }
+    .head_banner_inner{
+
+        font-size: 22px;
+        /* padding: 20px; */
+        
+        }
+}
+

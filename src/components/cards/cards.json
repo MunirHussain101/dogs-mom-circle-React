@@ -1,0 +1,86 @@
+{
+    "pets": [
+        {
+            "petsName": "Emaily",
+            "petsPoint": "20",
+            "petsPara": "Richmond, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 7th’23 - Apr 8th’23",
+            "rating": "" ,
+            "img": "assets/home-cards/new20.svg",
+            "ratingNo": "(2)"
+        },
+        {
+            "petsName": "Nevena",
+            "petsPoint": "20",
+            "petsPara": "Walnut Creek, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 9th’23",
+            "rating": "",
+            "img": "assets/home-cards/new13.svg",
+            "ratingNo": "(5)"
+        },
+        {
+            "petsName": "Hannah",
+            "petsPoint": "",
+            "petsPara": "San Francisco, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 10th'23",
+            "rating": "" ,
+            "img": "assets/home-cards/new12.svg",
+            "ratingNo": "(--)"
+        },
+        {
+            "petsName": "Oceane",
+            "petsPoint": "20",
+            "petsPara": "San Francisco, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 10th’23 - Apr 11th’23",
+            "rating": "--",
+            "img": "assets/home-cards/new21.svg",
+            "ratingNo": "(10)"
+
+        },
+        {
+            "petsName": "Kristin",
+            "petsPoint": "20",
+            "petsPara": "Piedmont, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 10th’23 - Apr 11th’23",
+            "rating": "",
+            "img": "assets/home-cards/new22.svg",
+            "ratingNo": "(8)"
+        },
+        {
+            "petsName": "Cairn",
+            "petsPoint": "20",
+            "petsPara": "Berkeley, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 12th’23",
+            "rating": "",
+            "img": "assets/home-cards/new23.svg",
+            "ratingNo": "(2)"
+        },
+        {
+            "petsName": "Sarah",
+            "petsPoint": "",
+            "petsPara": "Concord, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 12th’23 - Apr 13th’23",
+            "rating": "",
+            "img": "assets/home-cards/new24.svg",
+            "ratingNo": "(--)"
+
+        },
+        {
+            "petsName": "LG",
+            "petsPoint": "20",
+            "petsPara": "Piedmont, CA",
+            "datePara": "Dates need help",
+            "date": "Apr 15th’23",
+            "rating": "--", 
+            "img": "assets/home-cards/new25.svg",
+            "ratingNo": "(12)"
+        }
+    ]
+}

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
+.firstBanner_head{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    
+    /* Primary Pink */
+    
+    color: #EAB2BB;
+    
+    }
+    .secBanner_head{
+        /* position: absolute; */
+    /* width: 826px; */
+    /* height: 24px; */
+    /* left: 303px; */
+    /* top: 208px; */
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    
+    text-align: center;
+    
+    /* Text */
+    
+    color: #1F2124;
+    }
+    .search_field{
+        /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+    /* padding: 10px 8px; */
+    /* gap: 8px; */
+    
+    /* width: 652px; */
+    height: 40px;
+    
+    background: #F8F8F8;
+    border-radius: 8px 0px 0px 8px;
+    
+    /* Inside auto layout */
+    
+    /* flex: none; */
+    /* order: 0; */
+    /* flex-grow: 0; */
+    
+    }
+    .search_field::placeholder{
+        /* position: absolute; */
+    /* width: 138px; */
+    /* height: 24px; */
+    /* left: -3px; */
+    /* top: 0px; */
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+    
+    
+    color: #ACACAC;
+    
+    }
+    .search_field_btn{
+        /* Auto layout */
+    
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    /* padding: 8px 12px; */
+    /* gap: 4px; */
+    
+    width: 100px;
+    height: 40px;
+    
+    /* Primary Pink */
+    
+    background: #EAB2BB;
+    border-radius: 0px 8px 8px 0px;
+    
+    /* Inside auto layout */
+    
+    /* flex: none;
+    order: 1;
+    flex-grow: 0; */
+    
+    /* width: 48px; */
+    /* height: 24px; */
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+    
+    text-align: center;
+    
+    color: #FFFFFF;
+    
+    
+    /* Inside auto layout */
+    
+    /* flex: none;
+    order: 1;
+    flex-grow: 0; */
+    }
+    .search_field_btn:hover{
+        color: #FFFFFF;
+    
+    }
