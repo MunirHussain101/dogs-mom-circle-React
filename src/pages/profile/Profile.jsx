@@ -54,6 +54,7 @@ const Profile = () => {
                 alt="profile-image"
                 style={{marginTop: 70, borderRadius:100}}
               /> */}
+              
          <Avatar  style={{marginTop: 70,width:100, height:100}} src={card.pets[0].img} />
               {/* <h1 className={styles.userName}>Lisa</h1> */}
             </Col>

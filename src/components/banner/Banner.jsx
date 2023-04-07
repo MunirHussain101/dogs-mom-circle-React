@@ -1,30 +1,36 @@
 import { Col, Row } from "antd"
 import './Banner.css'
-// import styles from "../../../styles/sections/ImageBanner.module.css"
-// import Image from "next/image"
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 
 const Banner=()=>{
-    const imgBanner='assets/banner/Dogbannerimg.svg'
+    // const imgBanner='assets/banner/Dogbannerimg.svg'
     return(
         <>
        <Row style={{ background: "linear-gradient(180.51deg, #ffe5ea, #fff)" }}>
         <Col lg={6} xs={0}></Col>
        
 <Col style={{display:'flex', justifyContent:'center'}} lg={12} xs={24}>
-     <img
+     {/* <img
         src={imgBanner}
 
         alt="Picture of the author"
   className="img_banner"     
     />
-      {/* <img
-     width={400}
-     height={464}
-        src={imgBanner}
-        alt="Picture of the author"
-  className="img_banner"       
-    /> */}
+      */}
+       <LazyLoadImage
+        src="assets/banner/Dogbannerimg.svg"
+        // width={600}
+        // height={400}
+        alt="Image Alt"
+        effect="opacity"
+        className="img_banner"     
+
+
+        
+
+      />
 </Col>
 
         <Col lg={6} xs={0}></Col>
