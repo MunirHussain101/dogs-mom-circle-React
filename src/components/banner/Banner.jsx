@@ -1,11 +1,11 @@
-import { Col, Row } from "antd"
+import { Col, Image, Row } from "antd"
 import './Banner.css'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 
 const Banner=()=>{
-    // const imgBanner='assets/banner/Dogbannerimg.svg'
+    const imgBanner='assets/banner/Dogbannerimg.svg'
     return(
         <>
        <Row style={{ background: "linear-gradient(180.51deg, #ffe5ea, #fff)" }}>
@@ -19,7 +19,7 @@ const Banner=()=>{
   className="img_banner"     
     />
       */}
-       <LazyLoadImage
+       {/* <LazyLoadImage
         src="assets/banner/Dogbannerimg.svg"
         // width={600}
         // height={400}
@@ -30,6 +30,12 @@ const Banner=()=>{
 
         
 
+      /> */}
+      <Image
+       src={imgBanner}
+   preview={false}
+       alt="New Images Next image"
+ className="img_banner"     
       />
 </Col>
 
