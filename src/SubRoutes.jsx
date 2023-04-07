@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import React , {Suspense, lazy} from 'react';
 import {Routes, Route} from 'react-router-dom';
+import ProfileNew from './pages/profile/ProfileNew';
 
 
 const Home=lazy(()=>import('./pages/home/Home'))
@@ -16,7 +17,7 @@ const SubRoutes=()=>{
                 <Route path='/' element={<Home/>} />
                 <Route path='/search' element={<SearchPage/>} />
                 <Route path='/profile' element={<Profile/>} />
-                {/* <Route path='/profile' element={< ProfileNew/>} /> */}
+                <Route path='/profile-new' element={< ProfileNew/>} />
 
                 
 

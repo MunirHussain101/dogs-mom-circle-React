@@ -29,44 +29,7 @@ const ProfileNew = () => {
   return (
     <>
   {/* main row */}
-  <div className="main_margin_box">
-  <Row className="main_row_first">
-     {/* left col */}
-     <Col lg={12} className="first_contentleft">
-         <Row className="avatar_row_content">
-            <Col className="avatar_img">
-            <Avatar  style={{marginTop: 70,width:100, height:100}} src={card.pets[0].img} />
-            </Col>
-            <Col className="avatar_content">
-            <h1  className="userName">{card.pets[0].petsName}</h1>
-              <img
-                src="assets/profile/verify-user.svg"
-                width={18}
-                height={22}
-                
-                alt="profile-image"
-                className="verify_img"
-              />
-
-            </Col>
-
-         </Row>
-     </Col>
-     <Col lg={12} className="sec_contentRight">
-  <div className="main_right_first">
-
-    <h1>Pints and pint image </h1>
-    <h1>Ratting</h1>
-
-</div>
-<div className="main_right_sec">
-  <h1>Button</h1>
-</div>
-
-     </Col>
-
-  </Row>
-  </div>
+<h2>New profile page added</h2>
    </>
   );
 };
