@@ -5,7 +5,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Banner=()=>{
-    const imgBanner='assets/banner/Dogbannerimg.svg'
+    const imgBanner='assets/banner/Dogbannerimg.png'
     return(
         <>
        <Row style={{ background: "linear-gradient(180.51deg, #ffe5ea, #fff)" }}>
@@ -19,8 +19,8 @@ const Banner=()=>{
   className="img_banner"     
     />
       */}
-       {/* <LazyLoadImage
-        src="assets/banner/Dogbannerimg.svg"
+       <LazyLoadImage
+        src="assets/banner/Dogbannerimg.png"
         // width={600}
         // height={400}
         alt="dog mom banner image"
@@ -30,13 +30,13 @@ const Banner=()=>{
 
         
 
-      /> */}
-      <Image
+      />
+      {/* <Image
        src={imgBanner}
    preview={false}
        alt="New Images Next image"
  className="img_banner"     
-      />
+      /> */}
 </Col>
 
         <Col lg={6} xs={0}></Col>
