@@ -23,7 +23,7 @@ const Banner=()=>{
         src="assets/banner/Dogbannerimg.png"
         // width={600}
         // height={400}
-        alt="dog mom banner image"
+        alt="dog mom banner"
         effect="opacity"
         className="img_banner"     
 
