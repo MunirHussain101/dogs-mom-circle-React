@@ -1,0 +1,75 @@
+.main_login_input {
+    width: 360px;
+    height: 46px;
+    background: #F0F2F5;
+    border-radius: 22px;
+    display: flex;
+    /* gap: 30px; */
+
+}
+
+.login_input {
+    width: 360px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 22px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.25);
+}
+.ant-input {
+    text-align: center;
+}
+
+.login_link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    /* line-height: 22px; */
+}
+
+.signup_link {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.forget_password_head {
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-evenly; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    /* line-height: 22px; */
+    color: #EAB2BB;
+}
+
+.login_btn {
+    background: #EAB2BB;
+    border: 1px solid #EAB2BB;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+    border-radius: 22px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* line-height: 24px; */
+    /* or 150% */
+
+    text-align: center;
+
+    /* Character / Primary(inverse) */
+
+    color: #FFFFFF;
+}

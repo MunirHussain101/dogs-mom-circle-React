@@ -1,44 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=League+Spartan:wght@400;500;600&family=Poppins:wght@200;300&display=swap');
+
+.main_row_div {
+    /* margin-top: 40px;
+    margin-left: 367px;
+    margin-right: 367px;
+    margin-bottom: 40px; */
+}
+
+.main_row_user_profile {
+    /* display: flex;
+    justify-content: center; */
+
+}
+
+.main_subrow_user_profile {
+    /* display: flex;
+    justify-content: center; */
+    /* gap: 15px; */
+}
+
 .userName {
-    width: 47px;
-    height: 17px;
-    /* left: 498px; */
-    margin-top: 70px;
+    /* width: 47px; */
+    height: 1px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    line-height: 40px;
+    /* line-height: 30px; */
     color: #1F2124;
 }
 
 .verify_img {
-        margin-left: 100px;
-        position: relative;
-        bottom: 25px;
-        /* margin-top: -34px; */
+    /* display: flex;
+    justify-self: center;
+    align-items: center; */
+    margin-top: 20px;
+    /* height: 1px; */
 }
 
 .place_name {
-    width: 191px;
-    height: 17px;
+    /* width: 191px; */
+    /* height: 17px; */
     font-style: normal;
     font-family: "Inter";
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    /* line-height: 17px; */
     color: #7A7777;
 }
 
 .user_para {
-    width: 186px;
-    height: 17px;
-    margin-top: 15px;
+    /* width: 186px; */
+    /* height: 17px; */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 28x;
+    /* line-height: 28x; */
     color: #1F2124;
 }
 
@@ -49,135 +67,113 @@
 }
 
 .card {
-    padding-top: 5px;
-    padding-left: 8px;
-    padding-right: 8px;
-
-    padding-bottom: 1px;
-    /* padding: 8px; */
     /* display: flex; */
     /* flex-direction: column; */
     /* justify-content: center; */
-    /* align-items: flex-start; */
-    /* padding: 16px 16px 16px 8px; */
-    /* gap: 8px; */
-    /* margin-top: 8px; */
-
-    /* position: absolute; */
-    /* width: 163px; */
-    /* height: 56px; */
-    /* left: 498px; */
-    /* top: 285px; */
-
+    /* align-items: center; */
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 1px;
     background: #dde9f9;
     border-radius: 6px;
 }
-/* .ant-card-body{
-    padding: 0px !important;
-} */
+
 .card_msg {
-      /* width: 78px; */
-    /* height: 7px; */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 4px;
-    /* text-align: center; */
-    color: #7A7777;
-    /* flex: none;
-    order: 0;
-    flex-grow: 0; */
+    /* width: 78px; */
+  /* height: 7px; */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  /* line-height: 4px; */
+  color: #7A7777;
 }
 
-
 .card_date {
-     /* padding-bottom: 1px; */
-    /* width: 139px; */
-    /* height: 9px; */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 12px;
-    /* line-height: 24px; */
-    /* text-align: center; */
-    color: #1F2124;
-    /* flex: none;
-    order: 1;
-    flex-grow: 0; */
+  /* width: 139px; */
+  /* height: 9px; */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  /* line-height: 24px; */
+  color: #1F2124;
 }
 
 .main_row_cards_icon_profile {
-    /* margin-left: 12.5%; */
-    /* margin-right: 12.5%; */
-    margin-top: 70px;
-    /* margin-bottom: 12.5%; */
-    /* background: #FFE814; */
+    /* margin-top: 21px; */
 }
 
 .main_row_card_f_points_profile {
-    width: 63px;
-    height: 10px;
-    margin-left: 30px;
-    display: flex;
-    flex-direction: row;
-    column-gap: 4px;
-    margin-top: -32px;
+    /* width: 63px; */
+    /* height: 10px; */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    line-height: 40px;
+    /* line-height: 40px; */
     color: #1F2124;
 }
 
 .rating {
-    margin-left: 50px;
-    margin-top: 62px;
 }
 
-.chat_btn {
+.image_gallery_row {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 8px 12px;
-    gap: 4px;
-    width: 90px;
-    height: 40px;
-    margin-left: -100px;
-    margin-top: 170px;
-    background: #EAB2BB;
-    border-radius: 12px;
-}
-
-.btn_msg {
-    width: 66px;
-    height: 24px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: center;
-    color: #FFFFFF;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    justify-content: center;
+    /* flex-direction: column; */
 }
 
 .gallery_head {
-    width: 150px;
-    height: 17px;
+    /* width: 150px; */
+    /* height: 17px; */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    line-height: 17px;
+    /* line-height: 17px; */
     color: #1F2124;
 }
 
 .gallery_name {
     color: #EAB2BB;
+}
+
+
+.line_col {
+    height: 2px;
+    width: 100%;
+    background-color: lightgray;
+}
+
+.chat_btn {
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    /* padding: 8px 12px; */
+    /* gap: 4px; */
+    /* width: 90px; */
+    /* height: 40px; */
+    background: #EAB2BB;
+    border-radius: 12px;
+}
+.btn_row_chat{
+    display: flex;
+    justify-content:left;
+    align-items: baseline;
+}
+
+.btn_msg {
+    /* width: 66px; */
+    /* height: 24px; */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    /* line-height: 24px; */
+    text-align: center;
+    color: #FFFFFF;
 }
 
 .flex_container {
@@ -295,4 +291,16 @@
     font-size: 14px;
     line-height: 22px;
     color: #1F2124;
+}
+
+@media screen and (max-width: 800px) {
+    .main_row_div {
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .main_row_user_profile {display: flex; justify-content: center;}
 }

@@ -1,182 +1,130 @@
-import {Avatar, Row, Col, Card, Rate, Button} from "antd";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import { Gallery } from "react-grid-gallery";
-import card from "../../components/cards/cards.json";
+import React from 'react';
+import { Row, Col, Avatar, Rate, Button } from "antd";
 import "./Profile.css";
 
-const images = [
-  "assets/gallery/image 1 (1).svg",
-  "assets/gallery/image2.svg",
-  "assets/gallery/image3.svg",
-  "assets/gallery/image4.svg",
-  "assets/gallery/image5.svg",
-];
-
-// const images = [
-//   {src: "assets/gallery/Frame 21.svg", width:279, height:231 },
-//   {src: "assets/gallery/Frame 22.svg", width:202, height:115 },
-//   <br/>,
-//   {src: "assets/gallery/Frame 23.svg", width:203, height:115 },
-//   {src: "assets/gallery/Frame 24.svg", width:202, height:115 },
-//   {src: "assets/gallery/Frame 25.svg", width:203, height:115 },
-// ]
-function srcset(image, size, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
-
-const Profile = () => {
-  // console.log("Profile", card.pets[0].petsName);
-
+function Profile() {
   return (
     <>
-      {/* UserProfile */}
-      <Row style={{marginLeft: 300}} >
-        <Col lg={12}>
-          {/* Image */}
-          <Row
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              columnGap: "20px",
-            }}
-          >
-            <Col>
-              {/* <img
-                src={card.pets[0].img}
-                width={100}
-                height={100}
-                alt="profile-image"
-                style={{marginTop: 70, borderRadius:100}}
-              /> */}
-              
-         <Avatar  style={{marginTop: 70,width:100, height:100}} src={card.pets[0].img} />
-              {/* <h1 className={styles.userName}>Lisa</h1> */}
-            </Col>
-            <Col>
-              <h1  className="userName">{card.pets[0].petsName}</h1>
-              <img
-                src="assets/profile/verify-user.svg"
-                width={18}
-                height={22}
-                
-                alt="profile-image"
-                className="verify_img"
-              />
-              <div>
-                <p className="place_name">{card.pets[0].petsPara}</p>
-                <p className="user_para">
-                  User - <span className="user_para2"><b>Franny</b></span>
-                </p>
-              </div>
-              {/* <Card className={styles.card} > */}
-              <div className="card" >
-                <p className="card_msg">{card.pets[0].datePara}</p>
-                <p className="card_date">{card.pets[0].date}</p>
-              {/* </Card> */}
-              </div>
-            </Col>
-          </Row>
+        {/* // <div className='main_row_div'> */}
+        {/* Row and Col for User Profile */}
+      <Row className='main_row_user_profile' style={{marginTop: 80}}>
+      <Col lg={4}></Col>
+        {/* This col used for Left side data */}
+        <Col lg={8}>
+            <Row className='main_subrow_user_profile' style={{display:"flex", gap:20}}>
+                {/* This Col used for Avatar */}
+                <Col>
+                    <Avatar style={{width:100, height:100}} src="assets/home-cards/new20.svg" />
+                </Col>
+
+                <Col>
+                    <Row style={{display:"flex", gap:20}}>
+                    <h1 className="userName">Emily</h1>
+                    <img
+                        src="assets/profile/verify-user.svg"
+                        width={18}
+                        height={22}
+                        alt="profile-image"
+                        className="verify_img"
+                    />
+                    </Row>
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <p className="place_name">Richmond, CA</p>
+                        <p className="user_para">
+                        User - <span className="user_para2"><b>Franny</b></span>
+                        </p>
+                    </div>
+                    <div className="card" >
+                    <p className="card_msg">Dates need help</p>
+                    <p className="card_date">Apr 7th’23 - Apr 8th’23</p>
+                    </div>
+                </Col>
+            </Row>
         </Col>
-        <Col lg={12}>
-          <Row>
-            <Col>
-              <img
+
+        {/* This Col used for Right side content */}
+        <Col lg={8}>
+            <Row  style={{marginTop:7, display:'flex', justifyContent:'flex-end', gap:40}}>
+                <Col style={{display:"flex", flexDirection:"row", alignItems:"center" ,columnGap:10}}>
+                <img
                 src="assets/home-cards/layer1.svg"
                 alt="Picture of the author"
                 className="main_row_cards_icon_profile"
               />
-              <p className="main_row_card_f_points_profile">
-                {card.pets[0].petsPoint} {""}
-                 {""}
-
-                <span style={{color: "#A6A6A6", fontWeight: "lighter"}}>
-                  Points
-                </span>
-              </p>
-
-            </Col>
-              <Col>
-              <Rate
+                <p className="main_row_card_f_points_profile">
+                    20
+                    {" "}
+                    <span style={{color: "#A6A6A6", fontWeight: "lighter"}}>
+                    Points
+                    </span>
+                </p>
+                </Col>
+                <Col style={{display:"flex", flexDirection:"row", alignItems:"center" ,columnGap:10}}> 
+                <Rate
                 className="rating"
                 style={{color: "#3E6DA8", fontSize: 15}}
-                allowHalf
                 defaultValue={5}
               />
-              <span style={{marginLeft: 10, color: "#3E6DA8", fontSize: 15}}>
-              {card.pets[0].ratingNo}
+              <span style={{color: "#3E6DA8", fontSize: 15}}>
+              (10)
               </span>
+              
               </Col>
-            <Col>
-              <div>
-                <Button className="chat_btn">
-                  <span className="btn_msg">Chat Now</span>
-                </Button>
-              </div>
-            </Col>
-          </Row>
+             
+            </Row>
+           
+
+          
+
+            <Row style={{marginTop:7, display:'flex', justifyContent:'flex-end', marginTop:100}}>
+              <Col>
+                  <Button className="chat_btn">
+                    <span className="btn_msg">Chat Now</span>
+                  </Button>
+              </Col>
+            </Row>
         </Col>
+        <Col lg={4}></Col>
       </Row>
 
       {/* Line */}
       <br />
-      <hr style={{marginLeft:330, marginRight:320, height:0, backgroundColor:'lightgray'}} />
-    
-      {/* <br /> */}
-      {/* <br /> */}
-<br />
-<br />
-<br />
+      {/* <hr style={{ height:0, backgroundColor:'lightgray'}} /> */}
+      <Row>
+        <Col lg={4}></Col>
+        
+        <Col lg={16} className='line_col'>
 
-<br />
-
-  
-      {/* Image Gallery */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
-          <h1 className="gallery_head">
-          {card.pets[0].petsName} <span className="gallery_name">Gallery</span>
-          </h1>
-          <br />
-          
-          {/* <Gallery images={images} /> */}
-          {/* <ImageList
-            sx={{width: 500, height: 450}}
-            variant="quilted"
-            cols={2}
-            rowHeight={121}
-          >
-            {images.map((item) => (
-              <ImageListItem
-                key={item}
-                cols={item.cols || 1}
-                rows={item.rows || 1}
-              >
-                <img
-                  {...srcset(item, 121, item.rows, item.cols)}
-                  alt="Image"
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-          </ImageList> */}
-
-          <img src="assets/gallery/Frame 26.svg" />
 
         </Col>
+        
+        <Col lg={4}></Col>
+
+
+
+
+      </Row>
+
+       {/* Image Gallery */}
+       <Row className='image_gallery_row'>
+        <Col lg={4}></Col>
+        <Col lg={16}>
+          <h1 className="gallery_head">
+          Emily <span className="gallery_name">Gallery</span>
+          </h1>
+          <img src="assets/gallery/Frame 26.svg" />
+        </Col>
+        <Col lg={4}></Col>
       </Row>
       <br />
+    
 
-      {/* Lisa's Profile */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
+    {/* Lisa's Profile */}
+    <Row>
+        <Col lg={4}></Col>
+        <Col lg={16}>
           <h1 className="gallery_head">
-            {card.pets[0].petsName} <span className="gallery_name">Profile</span>
+            Emily <span className="gallery_name">Profile</span>
           </h1>
           <br />
 
@@ -190,11 +138,12 @@ const Profile = () => {
             <div className="profile_box">1 Dogs</div>
           </div>
         </Col>
+        <Col lg={4}></Col>
       </Row>
 
-      {/* Lise can Host */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
+      <Row>
+        <Col lg={4}></Col>
+        <Col lg={16}>
           <h1 className="furBaby_head">
             Franny's <span className="furBaby_name">Profile</span>
           </h1>
@@ -207,13 +156,15 @@ const Profile = () => {
             <div className="furBaby_box">Get along with cats</div>
           </div>
         </Col>
+        <Col lg={4}></Col>
       </Row>
 
       {/* Fur baby's Profile */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
+      <Row>
+        <Col lg={4}></Col>
+        <Col lg={16}>
           <h1 className="furBaby_head">
-            {card.pets[0].petsName} can <span className="furBaby_name">Host</span>
+            Lisa can <span className="furBaby_name">Host</span>
           </h1>
           <br />
 
@@ -224,22 +175,20 @@ const Profile = () => {
             </div>
           </div>
         </Col>
+        <Col lg={4}></Col>
       </Row>
 
-      {/* Additional Information */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
+       {/* Additional Information */}
+       <Row>
+       <Col lg={4}></Col>
+       <Col lg={16}>
           <div>
             <h1 className="additional_Info">Additional Information</h1>
-            <br />
             <ul className="styles.info_list">
               <li>
               franny and i live alone in a house with a backyard. we’re hoping to make connections with other dog parents to build a network of support.
               <br />
                franny would love a sibling so hopefully Dog Moms can help us keep her company since we can’t fully manage another dog at this time!
-
-
-
               </li>
               <li>Dogs Allowed On Bed</li>
               <li>Potty Breaks Every 2-4 Hours</li>
@@ -248,12 +197,15 @@ const Profile = () => {
           </div>
           <br />
         </Col>
+       <Col lg={4}></Col>
+
       </Row>
       <br />
       <br />
       {/* Review */}
-      <Row style={{marginLeft: 300}}>
-        <Col lg={24}>
+      <Row>
+        <Col lg={4}></Col>
+        <Col lg={16}>
           <h1 className="additional_Info">Reviews</h1>
           <Row>
             <Col>
@@ -272,18 +224,17 @@ const Profile = () => {
           </Row>
           <br />
           <p className="review_last_para">
-            {card.pets[0].petsName} has helped me out for some last minute extended trips several
+            Lisa has helped me out for some last minute extended trips several
             times now. She is always super helpful and accommodating with my
             messy schedule and my little guy seems totally happy when I pick him
             up. Recommend 100%.
           </p>
         </Col>
+        <Col lg={4}></Col>
       </Row>
-      {/* </div> */}
-      <br />
-      <br />
-      <br />
-    </>
-  );
-};
-export default Profile;
+</>
+    // </div>
+  )
+}
+
+export default Profile
