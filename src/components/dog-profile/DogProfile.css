@@ -1,0 +1,105 @@
+.pets_heading {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    /* line-height: 26px; */
+    color: #222222;
+}
+
+.input_box {
+    width: 176px;
+    height: 56px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 12px
+}
+
+.dog_size_heading {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    /* line-height: 26px; */
+    color: #222222;
+}
+
+
+.radio_btn {
+    /* box-sizing: border-box; */
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    /* gap: 10px; */
+    /* width: 117px; */
+    /* height: 87px; */
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+    font-weight: 600;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.next_btn { 
+    /* width: 91px; */
+    /* height: 56px; */
+    background: #EAB2BB;
+    border-radius: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    /* line-height: 24px; */
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.back_btn {
+    /* padding: 16px 24px; */
+    /* width: 92px; */
+    /* height: 56px; */
+    /* background: #1F2124; */
+    border-radius: 50px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    /* line-height: 24px; */
+    text-align: center;
+    color: #1F2124;
+}
+
+
+.add_info {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    /* line-height: 26px; */
+    color: #222222;
+}
+
+.upload_heading {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    color: #222222;
+}
+
+.modal_btn {
+    width: 904px;
+    height: 414px;
+    /* background: #FFFFFF; */
+    /* padding: 100px; */
+    border-radius: 12px;
+}

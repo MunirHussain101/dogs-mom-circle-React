@@ -27,7 +27,7 @@ const AntdCard=()=>{
 
            <Row justify='space-around' style={{marginTop:60,marginBottom:100}}>
               <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
-              <Link to="/search">
+              <Link to="/register">
               <img src={imgMine1} className="card_img"/>
            
               </Link>
@@ -36,7 +36,7 @@ const AntdCard=()=>{
               </Col>
 
               <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
-              <Link to="/search">
+              <Link to="/register">
                <img src={imgMine2} className="card_img"/> 
            
               </Link>
@@ -47,7 +47,7 @@ const AntdCard=()=>{
               </Col>
 
               <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
-              <Link to="/search">
+              <Link to="/register">
               <img src={imgMine3} className="card_img"/>
          
               </Link>
