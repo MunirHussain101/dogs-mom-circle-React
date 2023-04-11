@@ -2,7 +2,6 @@ import React from "react";
 import {Row, Col, Form, Input, Button, Checkbox} from "antd";
 import {Link} from "react-router-dom";
 import "./SignUp.css";
-import {LockOutlined, MailOutline} from "@mui/icons-material";
 
 const Login = () => {
   return (
@@ -13,6 +12,10 @@ const Login = () => {
           lg={14}
           xs={24}
           style={{
+            display:'flex', 
+            justifyContent:'center',
+
+            
             background: "#FFFFFF",
             padding: "45px",
             borderRadius: "20px",
@@ -27,7 +30,7 @@ const Login = () => {
                   </Button>
                 </Link>
                 {"  "}
-                <Link to="register" className="signup_link">
+                <Link to="/register" className="signup_link">
                   <Button
                     type="text"
                     className="login_link"
@@ -73,8 +76,9 @@ const Login = () => {
               </Button>
             </Col>
           </Form>
-          <Col lg={5} xs={0}></Col>
         </Col>
+        <Col lg={5} xs={0}></Col>
+
       </Row>
       <br />
     </>

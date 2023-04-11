@@ -2,7 +2,9 @@ import React from 'react'
 import { Row, Col, Form, Input, Button, Checkbox } from "antd";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import { LockOutlined, MailOutline } from '@mui/icons-material';
+import { LockOutlined,  MailOutlined} from "@ant-design/icons"
+
+// import { LockOutlined, MailOutline } from 'antd';
 
 const Login = () => {
   return (
@@ -13,6 +15,8 @@ const Login = () => {
           lg={14}
           xs={24}
           style={{
+            display:'flex',
+            justifyContent:"center",
             background: "#FFFFFF",
             padding: "45px",
             borderRadius: "20px",
@@ -33,7 +37,7 @@ const Login = () => {
             <br />
             <Col lg={24} xs={24}>
              <Form.Item >
-                <Input placeholder='Enter your email' className='login_input' prefix={<MailOutline 
+                <Input placeholder='Enter your email' className='login_input' prefix={<MailOutlined 
                 style={{color: "#EAB2BB"}}/>}/>
              </Form.Item>
             </Col>
@@ -61,8 +65,9 @@ const Login = () => {
               </Link>
             </Col>
           </Form>
-          <Col lg={5} xs={0}></Col>
         </Col>
+        <Col lg={5} xs={0}></Col>
+
       </Row>
       <br />
     </>
