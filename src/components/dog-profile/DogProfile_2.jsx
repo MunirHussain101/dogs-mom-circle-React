@@ -56,7 +56,7 @@ const DogProfile_2 = () => {
 
         <Col lg={16}>
           <Row>
-            <h1 className="pets_heading">what's your zip code</h1>
+            <h1 className="pets_heading">what's your zip code?</h1>
           </Row>
 
           {/* Row for Input Box */}
@@ -69,26 +69,23 @@ const DogProfile_2 = () => {
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">
-              how far are you willing to travel for boarding
+              how far are you willing to travel for boarding?
             </h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="10miles">
-                  10 miles
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
+                <Radio.Button className="radio_btn" value="10miles" style={{color:"black"}}>
+                  {"<10 miles"}
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
                 <Radio.Button
                   className="radio_btn"
-                  style={{background: "#EAB2BB", color: "#fff"}}
                   value="10-25miles"
+                  style={{color:"black"}}
                 >
                   10-25 miles
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="25 miles">
+                <Radio.Button className="radio_btn" value="25 miles" style={{color:"black"}}>
                   {">25 miles"}
                 </Radio.Button>
               </Radio.Group>
@@ -99,27 +96,24 @@ const DogProfile_2 = () => {
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">
-              What are you looking for ( Feel free to select multiple choices)
+              What are you looking for ( Feel free to select multiple choices)?
             </h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
                 <Radio.Button
                   className="radio_btn"
-                  value="No"
-                  style={{background: "#EAB2BB", color: "#fff"}}
+                  value="Boarding"
+                  style={{color:"black"}}
                 >
-                  No
+                  Boarding
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Moderate">
-                  Moderate
+                <Radio.Button className="radio_btn" value="Daycare" style={{color:"black"}}>
+                Daycare
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Alot">
-                  Alot
+                <Radio.Button className="radio_btn" value="Playdate" style={{color:"black"}}>
+                  Playdate
                 </Radio.Button>
               </Radio.Group>
               {/* </Form.Item> */}

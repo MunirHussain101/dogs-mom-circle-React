@@ -44,10 +44,11 @@
 }
 
 .forget_password_head {
-    /* display: flex; */
+    display: flex;
+    align-items:center;
     /* flex-direction: row; */
     /* justify-content: space-evenly; */
-    font-family: 'Roboto';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

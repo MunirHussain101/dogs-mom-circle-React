@@ -3,7 +3,7 @@ import {Row, Col, Form, Input, Button, Checkbox} from "antd";
 import {Link} from "react-router-dom";
 import "./SignUp.css";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <>
       <Row className="main_row_for_login" justify="center">
@@ -12,10 +12,9 @@ const Login = () => {
           lg={14}
           xs={24}
           style={{
-            display:'flex', 
-            justifyContent:'center',
+            display: "flex",
+            justifyContent: "center",
 
-            
             background: "#FFFFFF",
             padding: "45px",
             borderRadius: "20px",
@@ -75,14 +74,30 @@ const Login = () => {
                 Create my account
               </Button>
             </Col>
+
+            <Col
+              lg={24}
+              xs={24}
+              className="login_btn_div"
+              style={{marginTop: 22}}
+            >
+                <Row>
+                  <Checkbox >
+                  By using this platform, you accept full <br/>responsibility for the
+                  safety of yourself and <br/>your dog during any exchanges. The
+                  platform <br/>is not liable for any incidents or damages that <br/>may
+                  occur. Please use caution and due <br/>diligence when interacting
+                  with other users.
+                </Checkbox>
+                </Row>
+            </Col>
           </Form>
         </Col>
         <Col lg={5} xs={0}></Col>
-
       </Row>
       <br />
     </>
   );
 };
 
-export default Login;
+export default SignUp;

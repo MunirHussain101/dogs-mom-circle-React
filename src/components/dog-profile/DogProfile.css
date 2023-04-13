@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
+
 .pets_heading {
     font-family: 'Inter';
     font-style: normal;
@@ -25,6 +27,7 @@
 }
 
 
+
 .radio_btn {
     /* box-sizing: border-box; */
 
@@ -40,13 +43,34 @@
     /* height: 87px; */
     background: #FFFFFF;
     border: 1px solid #DDDDDD;
-    border-radius: 12px;
+    /* border-radius: 12px; */
     font-weight: 600;
-    font-family: 'Roboto';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
 }
+
+.radio_btn_2 {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding: 35px;
+    /* gap: 10px; */
+    /* width: 117px; */
+    /* height: 50px; */
+    background: #FFFFFF;
+    /* border: 1px solid #DDDDDD; */
+    /* border-radius: 12px; */
+    font-weight: 600;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
 
 .next_btn { 
     /* width: 91px; */
@@ -102,4 +126,34 @@
     /* background: #FFFFFF; */
     /* padding: 100px; */
     border-radius: 12px;
+}
+
+.input_box_1 {
+    /* width: 176px; */
+    /* height: 56px; */
+    background: #FFFFFF;
+    /* border: 1px solid #DDDDDD; */
+    /* border-radius: 12px */
+}
+
+.btn_breed {
+    font-size: 17px;
+    font-weight: 600;
+    font-family: "Inter";
+
+}
+
+.ant-radio-button-checked,
+.ant-radio-button-inner,
+.ant-radio-button-inner,
+.ant-radio-button-wrapper-checked,
+.ant-radio-button-input:focus,
+.ant-radio-button-inner {
+  background: #EAB2BB;
+  border-color: none;
+}
+
+.ant-radio:hover,
+.ant-radio-button-wrapper:hover {
+  background: #EAB2BB;
 }

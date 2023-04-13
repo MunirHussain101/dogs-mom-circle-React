@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Avatar, Rate, Button } from "antd";
+import card from "../../components/cards/cards.json";
 import "./Profile.css";
 
 function Profile() {
@@ -14,12 +15,12 @@ function Profile() {
             <Row className='main_subrow_user_profile' style={{display:"flex", gap:20}}>
                 {/* This Col used for Avatar */}
                 <Col>
-                    <Avatar style={{width:100, height:100}} src="assets/home-cards/new20.svg" />
+                    <Avatar style={{width:100, height:100}} src={card.pets[0].img}/>
                 </Col>
 
                 <Col>
                     <Row style={{display:"flex", gap:20}}>
-                    <h1 className="userName">Emily</h1>
+                    <h1 className="userName">{card.pets[0].petsName}</h1>
                     <img
                         src="assets/profile/verify-user.svg"
                         width={18}
@@ -29,14 +30,14 @@ function Profile() {
                     />
                     </Row>
                     <div style={{display:"flex", flexDirection:"column"}}>
-                        <p className="place_name">Richmond, CA</p>
+                        <p className="place_name">{card.pets[0].petsPara}</p>
                         <p className="user_para">
                         User - <span className="user_para2"><b>Franny</b></span>
                         </p>
                     </div>
                     <div className="card" >
-                    <p className="card_msg">Dates need help</p>
-                    <p className="card_date">Apr 7th’23 - Apr 8th’23</p>
+                    <p className="card_msg">{card.pets[0].datePara}</p>
+                    <p className="card_date">{card.pets[0].date}</p>
                     </div>
                 </Col>
             </Row>
@@ -52,7 +53,7 @@ function Profile() {
                 className="main_row_cards_icon_profile"
               />
                 <p className="main_row_card_f_points_profile">
-                    20
+                    {card.pets[0].petsPoint}
                     {" "}
                     <span style={{color: "#A6A6A6", fontWeight: "lighter"}}>
                     Points
@@ -66,7 +67,7 @@ function Profile() {
                 defaultValue={5}
               />
               <span style={{color: "#3E6DA8", fontSize: 15}}>
-              (10)
+              {card.pets[0].ratingNo}
               </span>
               
               </Col>
@@ -76,7 +77,7 @@ function Profile() {
 
           
 
-            <Row style={{marginTop:7, display:'flex', justifyContent:'flex-end', marginTop:100}}>
+            <Row style={{marginTop:100, display:'flex', justifyContent:'flex-end'}}>
               <Col>
                   <Button className="chat_btn">
                     <span className="btn_msg">Chat Now</span>
@@ -164,7 +165,7 @@ function Profile() {
         <Col lg={4}></Col>
         <Col lg={16}>
           <h1 className="furBaby_head">
-            Lisa can <span className="furBaby_name">Host</span>
+            {card.pets[0].petsName} can <span className="furBaby_name">Host</span>
           </h1>
           <br />
 
@@ -224,7 +225,7 @@ function Profile() {
           </Row>
           <br />
           <p className="review_last_para">
-            Lisa has helped me out for some last minute extended trips several
+            {card.pets[0].petsName} has helped me out for some last minute extended trips several
             times now. She is always super helpful and accommodating with my
             messy schedule and my little guy seems totally happy when I pick him
             up. Recommend 100%.
