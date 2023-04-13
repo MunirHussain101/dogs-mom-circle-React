@@ -1,7 +1,21 @@
 import React, {useState} from "react";
-import {Row, Col, Steps, Input, Radio, Form, Button} from "antd";
+import {
+  Row,
+  Col,
+  Steps,
+  Input,
+  Radio,
+  Form,
+  Button,
+  DatePicker,
+  Select
+} from "antd";
+import {DownOutlined, UserOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import "./DogProfile.css";
+
+const { Option } = Select;
+
 
 const DogProfile_1 = () => {
   const [current, setCurrent] = useState(0);
@@ -10,7 +24,25 @@ const DogProfile_1 = () => {
     setCurrent(value);
   };
 
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+  }
+
+  // const [radioBtnActive, setRadioBtnActive] = useState(false);
+
+  // const radioBtnColorChange = () => {
+  //   setRadioBtnActive(!radioBtnActive);
+  // };
+
+  // const styles = {
+  //   popup: {
+  //     background: radioBtnActive ? "#EAB2BB" : "",
+  //   },
+  // };
+
   const navigate = useNavigate();
+
+
 
   return (
     <>
@@ -55,44 +87,91 @@ const DogProfile_1 = () => {
         <Col lg={4}></Col>
 
         <Col lg={16}>
-          <Row>
+          <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="pets_heading">What's your dog name?</h1>
-          </Row>
-
-          {/* Row for Input Box */}
-          <Row>
             <Input className="input_box" />
           </Row>
+          <br />
 
+          <Row style={{display: "flex", flexDirection: "column", gap: 10}}>
+            <h1 className="pets_heading">
+              The dog was born in year xx month xx
+            </h1>
+            <Row style={{gap: 10}}>
+              <Col>
+                <DatePicker
+                  onChange={onChange}
+                  picker="month"
+                  placeholder="Select month and year"
+                  className="input_box"
+                />
+              </Col>
+              {/* <Col><DatePicker onChange={onChange} picker="year"  className="input_box" /></Col> */}
+            </Row>
+          </Row>
           <br />
 
           {/* Row for Breed  */}
-          <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
+          <Row style={{display: "flex", flexDirection: "column"}} >
             <h1 className="dog_size_heading">Dog Size</h1>
-            <Row style={{gap: 10}}>
+            <Row>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="0-15lbs">
-                  0-15lbs
+              <Radio.Group
+                style={{display: "flex", flexDirection: "row", gap: 10}}
+                defaultValue=""
+              >
+                <Radio.Button className="radio_btn_2" > 
+                  <Row
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      color:"black"
+                    }}
+                  >
+                    <img src="assets/size/small-dog.svg" style={{color:"black"}} />
+                    0-15lbs Small
+                  </Row>
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button
-                  className="radio_btn"
-                  style={{background: "#EAB2BB", color: "#fff"}}
-                  value="16-40lbs"
-                >
-                  16-40lbs
+
+                <Radio.Button className="radio_btn_2" value="16-40lbs" >
+                  <Row
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      color:"black"
+                    }}
+                  >
+                    <img src="assets/size/medium-dog.svg" />
+                    16-40lbs Medium
+                  </Row>
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Alot">
-                  41-100lbs
+                <Radio.Button className="radio_btn_2" value="Alot" >
+                  <Row
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      color:"black"
+                    }}
+                  >
+                    <img src="assets/size/large-dog.svg" />
+                    141-100lbs Large
+                  </Row>
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="101+lbs">
-                  101+lbs
+                <Radio.Button className="radio_btn_2" value="101+lbs">
+                  <Row
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      color:"black"
+                    }}
+                  >
+                    <img src="assets/size/gaintdog.svg" />
+                    101+lbs Giant
+                  </Row>
                 </Radio.Button>
               </Radio.Group>
               {/* </Form.Item> */}
@@ -104,30 +183,31 @@ const DogProfile_1 = () => {
             <h1 className="dog_size_heading">The breed is</h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="0-15lbs">
-                  0-15lbs
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button
-                  className="radio_btn"
-                  style={{background: "#EAB2BB", color: "#fff"}}
-                  value="16-40lbs"
-                >
-                  16-40lbs
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Alot">
-                  41-100lbs
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="101+lbs">
-                  101+lbs
-                </Radio.Button>
-              </Radio.Group>
+              {/* <Dropdown
+                menu={{
+                  items,
+                }}
+                className="input_box_1"
+              >
+                <Button className="btn_breed">
+                  <Space>
+                    Breed
+                    <DownOutlined className="btn_breed" />
+                  </Space>
+                </Button>
+              </Dropdown> */}
+               <Select defaultValue="Select Breed" style={{ width: 120 }} onChange={handleChange} className="input_box_1">
+              <Option value="German">German Shepherd</Option>
+              <Option value="bulldog">Bulldog</Option>
+              <Option value="Siberian">Siberian Husky</Option>
+              <Option value="Golden">Golden Retriever</Option>
+              <Option value="French">French Bulldog</Option>
+              <Option value="Alaskan">Alaskan Malamute</Option>
+              <Option value="Poodle">Poodle</Option>
+              <Option value="Chihuahua">Chihuahua</Option>
+              <Option value="Poodle">Afghan Hound</Option>
+              </Select>
+
               {/* </Form.Item> */}
             </Row>
           </Row>

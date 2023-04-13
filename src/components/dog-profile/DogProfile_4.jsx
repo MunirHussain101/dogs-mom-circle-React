@@ -73,31 +73,21 @@ const DogProfile_4 = () => {
         <Col lg={16}>
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
-            <h1 className="dog_size_heading">Dog size</h1>
+            <h1 className="dog_size_heading">preference regarding spaying or neutering</h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="0-15lbs">
-                  0-15lbs
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
+                <Radio.Button className="radio_btn" value="No preference" style={{color:"black"}}>
+                  No <br />preference
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
                 <Radio.Button
                   className="radio_btn"
-                  style={{background: "#EAB2BB", color: "#fff"}}
-                  value="16-40lbs"
+                  style={{color:"black"}}
+                  
+                  value="preferDog"
                 >
-                  16-40lbs
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="41-100lbs">
-                  41-100lbs
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="101+lbs">
-                  101+lbs
+                  prefer the <br />dog is fixed
                 </Radio.Button>
               </Radio.Group>
               {/* </Form.Item> */}
@@ -106,82 +96,65 @@ const DogProfile_4 = () => {
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
-            <h1 className="dog_size_heading">Does your dog shed?</h1>
+            <h1 className="dog_size_heading">Shedding type you'd prefer?</h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
+                <Radio.Button
+                  className="radio_btn"
+                  value="No shedding"
+                  style={{color:"black"}}
+                >
+                  No shedding
+                </Radio.Button>
+                <Radio.Button className="radio_btn" value="Moderate shedding" style={{color:"black"}}>
+                Moderate <br/>shedding
+                </Radio.Button>
+                <Radio.Button className="radio_btn" value="Shedding" style={{color:"black"}}>
+                Shedding doesn’t <br/> bother me
+                </Radio.Button>
+              </Radio.Group>
+              {/* </Form.Item> */}
+            </Row>
+          </Row>
+          <br />
+
+          <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
+            <h1 className="dog_size_heading">House training level you'd prefer</h1>
+            <Row style={{gap: 10}}>
+              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
+                <Radio.Button className="radio_btn" value="No" style={{color:"black"}}>
+                Fully house <br/>trained
+                </Radio.Button>
+                <Radio.Button className="radio_btn" value="working in progress" style={{color:"black"}}>
+                Not house <br/>trained is ok
+                </Radio.Button>
+              </Radio.Group>
+              {/* </Form.Item> */}
+            </Row>
+          </Row>
+          <br />
+
+          <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
+            <h1 className="dog_size_heading">Will the dog be left along?</h1>
+            <Row style={{gap: 10}}>
+              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
                 <Radio.Button
                   className="radio_btn"
                   value="No"
-                  style={{background: "#EAB2BB", color: "#fff"}}
+                  style={{color:"black"}}
                 >
                   No
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Moderate">
-                  Moderate
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Alot">
-                  Alot
-                </Radio.Button>
-              </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
-          </Row>
-          <br />
-
-          <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
-            <h1 className="dog_size_heading">Is your dog house trained?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="No">
-                  No
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="working in progress">
-                  working in <br />
-                  progress
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button
-                  className="radio_btn"
-                  value="Yes"
-                  style={{background: "#EAB2BB", color: "#fff"}}
-                >
-                  Yes
-                </Radio.Button>
-              </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
-          </Row>
-          <br />
-
-          <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
-            <h1 className="dog_size_heading">Can your dog be left along?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
-                <Radio.Button
-                  className="radio_btn"
-                  value="No"
-                  style={{background: "#EAB2BB", color: "#fff"}}
-                >
-                  No
-                </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="coupleHour">
+                <Radio.Button className="radio_btn" value="coupleHour" style={{color:"black"}}>
                   yes, a couple <br /> of hours
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="yes, a few of hours">
+                <Radio.Button className="radio_btn" value="yes, a few of hours" style={{color:"black"}}>
                   yes, a few of <br /> hours
                 </Radio.Button>
               </Radio.Group>
@@ -194,17 +167,16 @@ const DogProfile_4 = () => {
             <h1 className="dog_size_heading">Do you have a cat?</h1>
             <Row style={{gap: 10}}>
               {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group>
+              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+              defaultValue="">
                 <Radio.Button
                   className="radio_btn"
                   value="No"
-                  style={{background: "#EAB2BB", color: "#fff"}}
+                  style={{color:"black"}}
                 >
                   No
                 </Radio.Button>
-              </Radio.Group>
-              <Radio.Group>
-                <Radio.Button className="radio_btn" value="Yes">
+                <Radio.Button className="radio_btn" value="Yes" style={{color:"black"}}>
                   Yes
                 </Radio.Button>
               </Radio.Group>

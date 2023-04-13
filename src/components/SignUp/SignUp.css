@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: row;
     /* justify-content: space-evenly; */
-    font-family: 'Roboto';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -74,4 +74,11 @@
     /* Character / Primary(inverse) */
 
     color: #FFFFFF;
+}
+
+.login_btn_div_2 {
+    width: 22px;
+    height: 22px;
+    background: #FFFFFF;
+    border: 1px solid #7A7777;
 }

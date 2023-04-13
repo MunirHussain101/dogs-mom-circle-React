@@ -48,12 +48,12 @@ const Login = () => {
              </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-              <Row justify="space-evenly">
-              <Checkbox color="#EAB2BB">Remember me</Checkbox>
-              {/* <Link to="/forget-password">
-                {" "}
+              <Row >
+              <Col><Checkbox color="#EAB2BB" style={{display:"flex", alignItems:"center"}}>Remember me</Checkbox></Col>
+              {/* <Col><Link to="/forget-password">
                 <p className="forget_password_head">Forget Password?</p>
-              </Link> */}
+              </Link>
+              </Col> */}
               </Row>
             </Col>
             <br />
