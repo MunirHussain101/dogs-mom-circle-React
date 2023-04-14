@@ -4,28 +4,67 @@ import {UserOutlined} from "@ant-design/icons";
 import {Link, useLocation} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import "./Navbar.css";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUserAuth } from "../../features/auth/authSlice";
 
-const items = [
-  {
-    key: "1",
-    label: <Link to="/register">SignUp</Link>,
-  },
-  {
-    key: "2",
-    label: <Link to="/login">Login</Link>,
-  },
-];
-const handleMenuClick = (e) => {
-  message.info("Click on menu item.");
-  console.log("click", e);
-};
-const menuProps = {
-  items,
-  //   onClick: handleMenuClick,
-};
+
+// const handleMenuClick = (e) => {
+//   message.info("Click on menu item.");
+//   console.log("click", e);
+// };
 
 const Navbar = () => {
   const location = useLocation();
+  const dispatch=useDispatch()
+  const authDetails = useSelector((state) => state?.auth?.userDetails);
+
+
+  const firstName = authDetails?.firstname;
+  const lastName = authDetails?.lastname;
+
+ 
+
+
+  
+     const logoutAuth=()=>{
+      dispatch((logoutUserAuth()))
+  }
+
+
+
+  const itemsMenuAuth = [
+    {
+      key: "4",
+      label: <Link to='/' onClick={logoutAuth}>Logout</Link>,
+    },
+   
+  ];
+     
+
+  const itemsMenuNoAuth = [
+    {
+      key: "1",
+      label: <Link to="/register">SignUp</Link>,
+    },
+    {
+      key: "2",
+      label: <Link to="/login">Login</Link>,
+    },
+  
+  ];
+  const menuPropsAuth = {
+    items:itemsMenuAuth
+    //   onClick: handleMenuClick,
+  };
+  const menuPropsNoAuth = {
+    items:itemsMenuNoAuth
+    //   onClick: handleMenuClick,
+  };
+
+
+
+
+  
   return (
     <>
       <Row
@@ -52,7 +91,52 @@ const Navbar = () => {
         </Col>
         <Col lg={12} className="main_sec_col">
           <Link href="/search-page">
-            {location.pathname === "/" ? (
+   
+               {location.pathname==='/'?(
+                <>
+                  <Dropdown menu={authDetails?menuPropsAuth:menuPropsNoAuth}>
+                  <Button>
+                    <Space>
+                       
+                        {!authDetails?'Account':`${firstName + " " +lastName}`}
+                      
+                      <UserOutlined />
+                    </Space>
+                  </Button>
+                </Dropdown>
+                </>
+               ):<>
+                      <Dropdown menu={authDetails?menuPropsAuth:menuPropsNoAuth}>
+                  <Button>
+                    <Space>
+                    {!authDetails?'Account':`${firstName + " " +lastName}`}
+
+                      <UserOutlined />
+                    </Space>
+                  </Button>
+                </Dropdown>
+               </>}
+
+              {/* {authDetails ? (
+              <>
+                <Dropdown menu={menuProps}>
+                  <Button>
+                    <Space>
+                    <b>{firstName + " " + lastName}</b>
+                      <UserOutlined />
+                    </Space>
+                  </Button>
+                </Dropdown>
+              </>
+            ) : (
+              <>
+                <Button icon={<UserOutlined />}>
+                  {""}
+                  <b>{firstName + " " + lastName}</b>
+                </Button>
+              </>
+            )} */}
+            {/* {location.pathname === "/" ? (
               <>
                 <Dropdown menu={menuProps}>
                   <Button>
@@ -67,10 +151,10 @@ const Navbar = () => {
               <>
                 <Button icon={<UserOutlined />}>
                   {""}
-                  <b>Bao</b>
+                  <b>{firstName + " " + lastName}</b>
                 </Button>
               </>
-            )}
+            )} */}
             {/* <Button icon={<UserOutlined />}>
                   {''}
                   <b>

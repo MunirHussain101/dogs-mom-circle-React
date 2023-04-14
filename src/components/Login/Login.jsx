@@ -25,9 +25,13 @@ const Login = () => {
           password: values.password,
         },
       );
-      console.log("response::", response.data);
+      console.log("response::", response?.data?.data?.user.id);
+      setUserId(response?.data?.data?.user.id)
+      localStorage.setItem("token", response.data.data.token);
       setLoginSuccess(true);
-      navigate('/search');
+      // navigate('/search');
+      // console.log("response::", response.data.data.token);
+
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -35,19 +39,32 @@ const Login = () => {
       });
     }
   }
+  const tokenValue = localStorage.getItem("token");
+
 
   useEffect(()=>{
+    console.log("my id::", userId)
+
     if(loginSuccess){
       const userDetails=async()=>{
         try {
-        const tokenValue = localStorage.getItem("token");
 
-        const response =await axios.get(`/User/User/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${tokenValue}`,
-          },
-        });
-        dispatch((getUserDetails(response.data[0])))
+        const response =await axios.post(`/api/user/get-profile`, {
+          
+            id:userId,
+            token:tokenValue
+          
+          
+          // headers: {
+          //   Authorization: `${tokenValue}`,
+          // },
+         
+        }, 
+        
+      
+        
+        );
+        dispatch((getUserDetails(response.data)))
         messageApi.open({
           type: "success",
           content: "Logged In SuccessFully",
@@ -55,7 +72,7 @@ const Login = () => {
         setTimeout(()=>{
         form.resetFields()
 
-    navigate('/')
+    navigate('/search')
         },1000)
       
     }catch(err){

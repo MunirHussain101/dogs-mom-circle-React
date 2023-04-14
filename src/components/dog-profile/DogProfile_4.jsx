@@ -8,6 +8,8 @@ const {TextArea} = Input;
 
 const DogProfile_4 = () => {
   const [current, setCurrent] = useState(3);
+  const [profileSuccess, setProfileSuccess] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   const onChange = (value) => {
     console.log("onChange:", value);
     setCurrent(value);
@@ -28,9 +30,56 @@ const DogProfile_4 = () => {
   };
 
 
+ 
+  const handleSubmit = async (values) => {
+
+    try {
+      const response = await axios.post(
+        '/api/auth/additional-data',
+        {
+          id: values.id,
+          zipCode: values.zipCode,
+          willing_travel_distance: values.willing_travel_distance,
+          activity_type: values.activity_type,
+          spay_neuter_prefs: values.spay_neuter_prefs,
+          shedding_prefs: values.shedding_prefs,
+          house_training_prefs: values.house_training_prefs,
+          dog_left_alone_prefs: values.dog_left_alone_prefs,
+          have_a_cat: values.have_a_cat,
+          additional_notes: values.additional_notes,
+          profile_pic: values.profile_pic,
+          dog_name: values.dog_name,
+          dog_birthday: values.dog_birthday,
+          dog_size: values.dog_size,
+          dog_shedding: values.dog_shedding,
+          dog_house_trained: values.dog_house_trained,
+          dog_can_be_left_alone: values.dog_can_be_left_alone,
+          dog_spayed_neutered: values.dog_spayed_neutered,
+          dog_good_with_cats: values.dog_good_with_cats,
+          dog_other_dog_size_compatibility: values.dog_other_dog_size_compatibility,
+          dog_breed: values.dog_breed,
+          image: values.image,
+        },
+      );
+      console.log("response::", response.data);
+      // navigate("/");
+     
+      setProfileSuccess(true);
+
+    } catch (err) {
+      // console.log(err.response.data.message);
+      messageApi.open({
+        type: "error",
+        content: err.response.data.message,
+      });
+    }
+  };
+
+
   return (
     <>
       {/* ProgressBar */}
+    <Form>
       <Row>
         <Col lg={4}></Col>
 
@@ -257,6 +306,7 @@ const DogProfile_4 = () => {
 
         <Col lg={4}></Col>
       </Row>
+      </Form>
 
       <br />
       <br />
