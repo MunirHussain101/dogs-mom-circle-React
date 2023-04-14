@@ -89,7 +89,7 @@ const DogProfile_1 = () => {
         <Col lg={16}>
           <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="pets_heading">What's your dog name?</h1>
-            <Input className="input_box" />
+            <Input className="input_box" name="dog_name" />
           </Row>
           <br />
 
@@ -100,10 +100,11 @@ const DogProfile_1 = () => {
             <Row style={{gap: 10}}>
               <Col>
                 <DatePicker
-                  onChange={onChange}
+                  // onChange={onChange}
                   picker="month"
                   placeholder="Select month and year"
                   className="input_box"
+                  name="dog_birthday"
                 />
               </Col>
               {/* <Col><DatePicker onChange={onChange} picker="year"  className="input_box" /></Col> */}
@@ -116,7 +117,7 @@ const DogProfile_1 = () => {
             <h1 className="dog_size_heading">Dog Size</h1>
             {/* <Row> */}
              <Form>
-             <Form.Item>
+             <Form.Item name="dog_size">
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
                 defaultValue=""
@@ -197,7 +198,8 @@ const DogProfile_1 = () => {
                   </Space>
                 </Button>
               </Dropdown> */}
-               <Select defaultValue="Select Breed" style={{ width: 120 }} onChange={handleChange} className="input_box_1">
+               <Select defaultValue="Select Breed" style={{ width: 120 }}
+               name="dog_breed" onChange={handleChange} className="input_box_1">
               <Option value="German">German Shepherd</Option>
               <Option value="bulldog">Bulldog</Option>
               <Option value="Siberian">Siberian Husky</Option>

@@ -61,7 +61,7 @@ const DogProfile_2 = () => {
 
           {/* Row for Input Box */}
           <Row>
-            <Input className="input_box" />
+            <Input className="input_box" name="zipCode"/>
           </Row>
 
           <br />
@@ -72,7 +72,7 @@ const DogProfile_2 = () => {
               how far are you willing to travel for boarding?
             </h1>
               <Form>
-                <Form.Item>
+                <Form.Item name="willing_travel_distance">
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="10miles" style={{color:"black"}}>
@@ -99,7 +99,7 @@ const DogProfile_2 = () => {
               What are you looking for ( Feel free to select multiple choices)?
             </h1>
              <Form>
-               <Form.Item>
+               <Form.Item name="activity_type">
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button

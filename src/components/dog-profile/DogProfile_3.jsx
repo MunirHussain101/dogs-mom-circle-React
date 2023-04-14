@@ -59,7 +59,7 @@ const DogProfile_3 = () => {
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">What is your dog's shedding level?</h1>
              <Form>
-               <Form.Item>
+               <Form.Item name="shedding_prefs">
                <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
