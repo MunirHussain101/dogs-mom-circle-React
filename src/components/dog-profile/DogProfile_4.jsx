@@ -74,12 +74,12 @@ const DogProfile_4 = () => {
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">preference regarding spaying or neutering</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Form>
+                <Form.Item>
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="No preference" style={{color:"black"}}>
-                  No <br />preference
+                  No <span>preference</span>
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
@@ -87,19 +87,19 @@ const DogProfile_4 = () => {
                   
                   value="preferDog"
                 >
-                  prefer the <br />dog is fixed
+                  prefer the <br/><span>dog is fixed</span>
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+              </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Shedding type you'd prefer?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn"
@@ -115,15 +115,15 @@ const DogProfile_4 = () => {
                 Shedding doesn’t <br/> bother me
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">House training level you'd prefer</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Form>
+                <Form.Item>
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="No" style={{color:"black"}}>
@@ -133,16 +133,16 @@ const DogProfile_4 = () => {
                 Not house <br/>trained is ok
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+              </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Will the dog be left along?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn"
@@ -158,16 +158,16 @@ const DogProfile_4 = () => {
                   yes, a few of <br /> hours
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Do you have a cat?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn"
@@ -180,8 +180,8 @@ const DogProfile_4 = () => {
                   Yes
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -230,12 +230,12 @@ const DogProfile_4 = () => {
                 className="back_btn"
                 onClick={() => navigate("/dogprofile3")}
               >
-                Back
+                <span style={{color:"black"}}>Back</span>
               </Button>
             </Col>
             <Col>
               <Button className="next_btn" onClick={showModal}>
-                Save
+              <span style={{color:"white"}}>Save</span>
               </Button>
             </Col>
           </Row>

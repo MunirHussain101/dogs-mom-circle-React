@@ -58,9 +58,9 @@ const DogProfile_3 = () => {
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">What is your dog's shedding level?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn"
@@ -77,16 +77,16 @@ const DogProfile_3 = () => {
                   Alot
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Is your dog house trained?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="No" 
                   style={{color:"black"}}
@@ -94,8 +94,8 @@ const DogProfile_3 = () => {
                   No
                 </Radio.Button>
                 <Radio.Button className="radio_btn" value="working in progress" style={{color:"black"}}>
-                  working in <br />
-                  progress
+                  working in <br/><span>progress</span>
+                  
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
@@ -105,15 +105,15 @@ const DogProfile_3 = () => {
                   Yes
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Can your dog be left alone? If so, how long?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Form>
+                <Form.Item>
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
@@ -125,24 +125,22 @@ const DogProfile_3 = () => {
                   No
                 </Radio.Button>
                 <Radio.Button className="radio_btn" value="coupleHour" style={{color:"black"}}>
-                  yes, a couple <br />
-                  of hours
+                  yes, a couple <br /><span>of hour</span>
                 </Radio.Button>
                 <Radio.Button className="radio_btn" value="fewHour" style={{color:"black"}}>
-                  yes, a few of <br />
-                  hours
+                  yes, a few of <br/><span>hours</span>
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+              </Form>
           </Row>
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Has your dog been spayed or neutered?</h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn"
@@ -156,8 +154,8 @@ const DogProfile_3 = () => {
                  Yes
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -165,9 +163,9 @@ const DogProfile_3 = () => {
             <h1 className="dog_size_heading">
               Do your dog get along with cats?
             </h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="No" style={{color:"black"}}>
                   No
@@ -183,8 +181,8 @@ const DogProfile_3 = () => {
                   Yes
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -193,9 +191,9 @@ const DogProfile_3 = () => {
               What size dogs does your dog get along with? (Feel free to select
               multiple choices)
             </h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
-              <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
+             <Form>
+               <Form.Item>
+               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
                   className="radio_btn_2"
@@ -204,30 +202,30 @@ const DogProfile_3 = () => {
                 >
                  <Row style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                   <img src="assets/size/small-dog.svg"  />
-                  0-15lbs Small
+                  0-15lbs <span>Small</span>
                   </Row>
                 </Radio.Button>
                 <Radio.Button className="radio_btn_2" value="Medium" style={{color:"black"}}>
                 <Row style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                   <img src="assets/size/medium-dog.svg"  />
-                  16-40lbs Medium
+                  16-40lbs <span>Medium</span>
                   </Row>
                 </Radio.Button>
                 <Radio.Button className="radio_btn_2" value="Large" style={{color:"black"}}>
                 <Row style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                   <img src="assets/size/large-dog.svg"  />
-                  141-100lbs Large
+                  141-100lbs <span>Large</span>
                   </Row>
                 </Radio.Button>
                 <Radio.Button className="radio_btn_2" value="Giant" style={{color:"black"}}>
                 <Row style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                   <img src="assets/size/gaintdog.svg"  />
-                  101+lbs Giant
+                  101+lbs <span>Giant</span>
                   </Row>
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -237,7 +235,7 @@ const DogProfile_3 = () => {
                 className="back_btn"
                 onClick={() => navigate("/dogprofile2")}
               >
-                Back
+                <span style={{color:"black"}}>Back</span>
               </Button>
             </Col>
             <Col>
@@ -245,7 +243,7 @@ const DogProfile_3 = () => {
                 className="next_btn"
                 onClick={() => navigate("/dogProfile4")}
               >
-                Next
+                <span style={{color:"white"}}>Next</span>
               </Button>
             </Col>
           </Row>

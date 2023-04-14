@@ -1,11 +1,47 @@
-import React from "react";
-import {Row, Col, Form, Input, Button, Checkbox} from "antd";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
+import {Link, useNavigate} from "react-router-dom";
 import "./SignUp.css";
+// import axios from "axios";
+import axios from "../../api/axios";
 
 const SignUp = () => {
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+ 
+  const handleSubmit = async (values) => {
+
+    try {
+      const response = await axios.post(
+        '/api/auth/signup',
+        {
+          firstname: values.firstname,
+          lastname: values.lastname,
+          email: values.email,
+          password: values.password,
+          phone: values.phone,
+        },
+      );
+      // console.log("response::", response.data);
+      navigate("/login");
+     
+      setRegisterSuccess(true);
+
+    } catch (err) {
+      // console.log(err.response.data.message);
+      messageApi.open({
+        type: "error",
+        content: err.response.data.message,
+      });
+    }
+  };
+
+
   return (
     <>
+      {contextHolder}
       <Row className="main_row_for_login" justify="center">
         <Col lg={5} xs={0}></Col>
         <Col
@@ -20,11 +56,11 @@ const SignUp = () => {
             borderRadius: "20px",
           }}
         >
-          <Form>
+          <Form onFinish={handleSubmit} scrollToFirstError>
             <Col lg={24} xs={24}>
               <div className="main_login_input">
                 <Link to="/login">
-                  <Button type="text" className="login_link">
+                  <Button type="text" className="login_link" style={{background:"none"}}>
                     Login
                   </Button>
                 </Link>
@@ -33,7 +69,7 @@ const SignUp = () => {
                   <Button
                     type="text"
                     className="login_link"
-                    style={{color: "#EAB2BB"}}
+                    style={{color: "#EAB2BB", background:"none"}}
                   >
                     Sign Up
                   </Button>
@@ -42,35 +78,66 @@ const SignUp = () => {
             </Col>
             <br />
             <Col lg={24} xs={24}>
-              <Form.Item>
-                <Input placeholder="First name" className="login_input" />
+              <Form.Item name="firstname"  rules={[
+                  {
+                    required: true,
+                    message: "FirstName is required",
+                  }
+                ]} >
+                <Input placeholder="First name" className="login_input" style={{color:"black"}} />
               </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-              <Form.Item>
-                <Input placeholder="Last name" className="login_input" />
+              <Form.Item  name="lastname" 
+               rules={[
+                {
+                  required: true,
+                  message: "LastName is required",
+                }
+              ]} >
+                <Input placeholder="Last name" className="login_input" style={{color:"black"}} />
               </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-              <Form.Item>
-                <Input placeholder="Email" className="login_input" />
+              <Form.Item name="email" 
+               rules={[
+                {
+                  required: true,
+                  message: "Email is required",
+                }
+              ]} >
+                <Input type="email" placeholder="Email" className="login_input" style={{color:"black"}}
+                />
               </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-              <Form.Item>
-                <Input placeholder="Phone number" className="login_input" />
+              <Form.Item name="phone"  rules={[
+                  {
+                    required: true,
+                    message: "Phone is required",
+                  }
+                ]} >
+                <Input placeholder="Phone number"  className="login_input" style={{color:"black"}} />
               </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-              <Form.Item>
-                <Input
+              <Form.Item name="password" 
+               rules={[
+                {
+                  required: true,
+                  message: "Password is required",
+                }
+              ]} >
+                <Input.Password
                   placeholder="Password(6 digits at least)"
                   className="login_input"
+                  style={{color:"black"}}
+                  
                 />
               </Form.Item>
             </Col>
             <Col lg={24} xs={24} className="login_btn_div">
-              <Button htmlType="submit" className="login_btn">
+              <Button htmlType="submit" className="login_btn" style={{border:"none", color:"white"}}>
                 Create my account
               </Button>
             </Col>

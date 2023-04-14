@@ -71,8 +71,8 @@ const DogProfile_2 = () => {
             <h1 className="dog_size_heading">
               how far are you willing to travel for boarding?
             </h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+              <Form>
+                <Form.Item>
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button className="radio_btn" value="10miles" style={{color:"black"}}>
@@ -89,8 +89,8 @@ const DogProfile_2 = () => {
                   {">25 miles"}
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+              </Form>
           </Row>
           <br />
 
@@ -98,8 +98,8 @@ const DogProfile_2 = () => {
             <h1 className="dog_size_heading">
               What are you looking for ( Feel free to select multiple choices)?
             </h1>
-            <Row style={{gap: 10}}>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+             <Form>
+               <Form.Item>
               <Radio.Group style={{display: "flex", flexDirection: "row", gap: 10}}
               defaultValue="">
                 <Radio.Button
@@ -116,8 +116,8 @@ const DogProfile_2 = () => {
                   Playdate
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -127,7 +127,7 @@ const DogProfile_2 = () => {
                 className="back_btn"
                 onClick={() => navigate("/dogprofile1")}
               >
-                Back
+                <span style={{color:"black"}}>Back</span>
               </Button>
             </Col>
             <Col>
@@ -135,7 +135,7 @@ const DogProfile_2 = () => {
                 className="next_btn"
                 onClick={() => navigate("/dogProfile3")}
               >
-                Next
+                <span style={{color:"white"}}>Next</span>
               </Button>
             </Col>
           </Row>
