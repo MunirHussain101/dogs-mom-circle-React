@@ -114,14 +114,15 @@ const DogProfile_1 = () => {
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} >
             <h1 className="dog_size_heading">Dog Size</h1>
-            <Row>
-              {/* <Form.Item style={{display:"flex", gap:20}}> */}
+            {/* <Row> */}
+             <Form>
+             <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
                 defaultValue=""
               >
                 <Radio.Button className="radio_btn_2" > 
-                  <Row
+                  <div
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -130,12 +131,12 @@ const DogProfile_1 = () => {
                     }}
                   >
                     <img src="assets/size/small-dog.svg" style={{color:"black"}} />
-                    0-15lbs Small
-                  </Row>
+                    0-15lbs <span>Small</span>
+                  </div>
                 </Radio.Button>
 
                 <Radio.Button className="radio_btn_2" value="16-40lbs" >
-                  <Row
+                  <div
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -144,11 +145,11 @@ const DogProfile_1 = () => {
                     }}
                   >
                     <img src="assets/size/medium-dog.svg" />
-                    16-40lbs Medium
-                  </Row>
+                    16-40lbs <span>Medium</span>
+                  </div>
                 </Radio.Button>
                 <Radio.Button className="radio_btn_2" value="Alot" >
-                  <Row
+                  <div
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -157,8 +158,8 @@ const DogProfile_1 = () => {
                     }}
                   >
                     <img src="assets/size/large-dog.svg" />
-                    141-100lbs Large
-                  </Row>
+                    141-100lbs <span>Large</span>
+                  </div>
                 </Radio.Button>
                 <Radio.Button className="radio_btn_2" value="101+lbs">
                   <Row
@@ -170,12 +171,12 @@ const DogProfile_1 = () => {
                     }}
                   >
                     <img src="assets/size/gaintdog.svg" />
-                    101+lbs Giant
+                    101+lbs <span>Giant</span>
                   </Row>
                 </Radio.Button>
               </Radio.Group>
-              {/* </Form.Item> */}
-            </Row>
+              </Form.Item>
+             </Form>
           </Row>
           <br />
 
@@ -213,13 +214,13 @@ const DogProfile_1 = () => {
           </Row>
           <br />
 
-          <Row style={{display: "flex", justifyContent: "space-evenly"}}>
+          <Row style={{display: "flex", justifyContent: "space-around"}}>
             <Col>
               <Button
                 className="next_btn"
                 onClick={() => navigate("/dogProfile2")}
               >
-                Next
+                <span style={{color:"white"}}>Next</span>
               </Button>
             </Col>
           </Row>
