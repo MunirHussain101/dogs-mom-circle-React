@@ -1,14 +1,18 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Row, Col, Form, Input, Button, Checkbox, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { LockOutlined,  MailOutlined} from "@ant-design/icons"
 import InputField from '../common-component/dynamic/form/InputField';
 import axios from '../../api/axios';
+import { getUserDetails } from '../../features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-
+  const [userId, setUserId] = useState("");
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
@@ -21,7 +25,7 @@ const Login = () => {
           password: values.password,
         },
       );
-      // console.log("response::", response.data);
+      console.log("response::", response.data);
       setLoginSuccess(true);
       navigate('/search');
     } catch (err) {
@@ -32,6 +36,41 @@ const Login = () => {
     }
   }
 
+  useEffect(()=>{
+    if(loginSuccess){
+      const userDetails=async()=>{
+        try {
+        const tokenValue = localStorage.getItem("token");
+
+        const response =await axios.get(`/User/User/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${tokenValue}`,
+          },
+        });
+        dispatch((getUserDetails(response.data[0])))
+        messageApi.open({
+          type: "success",
+          content: "Logged In SuccessFully",
+        });
+        setTimeout(()=>{
+        form.resetFields()
+
+    navigate('/')
+        },1000)
+      
+    }catch(err){
+
+      messageApi.open({
+        type: "error",
+        content: err.response.data.message,
+      });
+    }
+  }
+      userDetails()  
+      }
+    
+  },[loginSuccess])
+  
   return (
     <> 
       {contextHolder}

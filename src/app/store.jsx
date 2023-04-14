@@ -1,24 +1,29 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { configureStore, combineReducers} from '@reduxjs/toolkit';
+import authSlice from '../features/auth/authSlice';
+import  storage  from 'redux-persist/lib/storage';
+import {
+  persistReducer,
+} from 'redux-persist'
 
 
-// const initialState = {
-//     userDetails: null
-// }
+const persistConfig={
+  key:'root',
+  version:1,
+  storage
+}
+
+const reducer=combineReducers({
+  auth:authSlice,
+})
 
 
-// export const authSlice = createSlice({
-//     name: "auth",
-//     initialState,
-//     reducers: {
-//         getUserDetails: (state, action) => {
-//             state.userDetails = action.payload;
-//         },
-//         logoutUserAuth: (state) => {
-//             state.userDetails = null;
-//         }
-//     }
-// })
+const persistedReducer=persistReducer(persistConfig, reducer)
 
-// const { getUserDetails, logoutUserAuth } = authSlice.actions;
+export const store = configureStore({
+     reducer:persistedReducer,
+})
 
-// export default authSlice.reducer;
+
+
+// export type RootState = ReturnType<typeof store.getState>
+// export type AppDispatch = typeof store.dispatch

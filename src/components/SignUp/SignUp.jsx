@@ -25,8 +25,10 @@ const SignUp = () => {
         },
       );
       // console.log("response::", response.data);
-      navigate("/login")
+      navigate("/login");
+     
       setRegisterSuccess(true);
+
     } catch (err) {
       // console.log(err.response.data.message);
       messageApi.open({
@@ -126,8 +128,7 @@ const SignUp = () => {
                   message: "Password is required",
                 }
               ]} >
-                <Input
-                  type="password"
+                <Input.Password
                   placeholder="Password(6 digits at least)"
                   className="login_input"
                   style={{color:"black"}}
