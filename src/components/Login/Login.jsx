@@ -72,14 +72,14 @@ const Login = () => {
         setTimeout(()=>{
         form.resetFields()
 
-    navigate('/search')
+    navigate('/profileReg')
         },1000)
       
     }catch(err){
 
       messageApi.open({
         type: "error",
-        content: err.response.data.message,
+        content: err.response,
       });
     }
   }

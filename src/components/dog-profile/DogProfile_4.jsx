@@ -10,11 +10,20 @@ const DogProfile_4 = () => {
   const [current, setCurrent] = useState(3);
   const [profileSuccess, setProfileSuccess] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [obj, setObj] = useState({
+
+  });
   const onChange = (value) => {
     console.log("onChange:", value);
     setCurrent(value);
   };
   const navigate = useNavigate();
+
+
+
+  
+
+
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
