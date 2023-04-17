@@ -25,12 +25,9 @@ const Login = () => {
           password: values.password,
         },
       );
-      console.log("response::", response?.data?.data?.user.id);
       setUserId(response?.data?.data?.user.id)
-      localStorage.setItem("token", response.data.data.token);
+      localStorage.setItem("token", response?.data?.data?.token);
       setLoginSuccess(true);
-      // navigate('/search');
-      // console.log("response::", response.data.data.token);
 
     } catch (err) {
       messageApi.open({
@@ -43,7 +40,6 @@ const Login = () => {
 
 
   useEffect(()=>{
-    console.log("my id::", userId)
 
     if(loginSuccess){
       const userDetails=async()=>{
@@ -53,12 +49,6 @@ const Login = () => {
           
             id:userId,
             token:tokenValue
-          
-          
-          // headers: {
-          //   Authorization: `${tokenValue}`,
-          // },
-         
         }, 
         
       
@@ -79,7 +69,7 @@ const Login = () => {
 
       messageApi.open({
         type: "error",
-        content: err.response.data.message,
+        content: err.response,
       });
     }
   }

@@ -1,43 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Avatar, Rate, Button } from "antd";
 import card from "../../components/cards/cards.json";
 import "./Profile.css";
+import { useParams } from 'react-router-dom';
+import axios from '../../api/axios';
 
 function Profile() {
+  const [userData, setUserData] = useState();
+  
+  const {id}  = useParams();
+  const tokenValue = localStorage.getItem("token");
+
+
+    const getData = async () => {
+      const response = await axios.post(`/api/user/get-profile`, {
+        id: id,
+        token: tokenValue
+      });
+      setUserData(response?.data);
+    }
+    getData();
+  
   return (
     <>
-        {/* // <div className='main_row_div'> */}
-        {/* Row and Col for User Profile */}
       <Row className='main_row_user_profile' style={{marginTop: 80}}>
       <Col lg={4}></Col>
-        {/* This col used for Left side data */}
         <Col lg={8}>
             <Row className='main_subrow_user_profile' style={{display:"flex", gap:20}}>
-                {/* This Col used for Avatar */}
                 <Col>
-                    <Avatar style={{width:100, height:100}} src={card.pets[0].img}/>
+                    <Avatar style={{width:100, height:100}} src={userData?.profile_pic}/>
                 </Col>
 
                 <Col>
                     <Row style={{display:"flex", gap:20}}>
-                    <h1 className="userName">{card.pets[0].petsName}</h1>
-                    <img
+                    <h1 className="userName">{userData?.firstname} {userData?.lastname}</h1>
+                    {/* <img
                         src="assets/profile/verify-user.svg"
                         width={18}
                         height={22}
                         alt="profile-image"
                         className="verify_img"
-                    />
+                    /> */}
                     </Row>
                     <div style={{display:"flex", flexDirection:"column"}}>
-                        <p className="place_name">{card.pets[0].petsPara}</p>
+                        <p className="place_name">Richmond, CA</p>
                         <p className="user_para">
                         User - <span className="user_para2"><b>Franny</b></span>
                         </p>
                     </div>
                     <div className="card" >
                     <p className="card_msg">{card.pets[0].datePara}</p>
-                    <p className="card_date">{card.pets[0].date}</p>
+                    <p className="card_date">{new Date(userData?.createdAt).toLocaleString().split(',')[0]}</p>
                     </div>
                 </Col>
             </Row>
@@ -47,11 +60,11 @@ function Profile() {
         <Col lg={8}>
             <Row  style={{marginTop:7, display:'flex', justifyContent:'flex-end', gap:40}}>
                 <Col style={{display:"flex", flexDirection:"row", alignItems:"center" ,columnGap:10}}>
-                <img
+                {/* <img
                 src="assets/home-cards/layer1.svg"
                 alt="Picture of the author"
                 className="main_row_cards_icon_profile"
-              />
+              /> */}
                 <p className="main_row_card_f_points_profile">
                     {card.pets[0].petsPoint}
                     {" "}
@@ -111,9 +124,9 @@ function Profile() {
         <Col lg={4}></Col>
         <Col lg={16}>
           <h1 className="gallery_head">
-          Emily <span className="gallery_name">Gallery</span>
+          {userData?.firstname} {userData?.lastname} <span className="gallery_name">Gallery</span>
           </h1>
-          <img src="assets/gallery/Frame 26.svg" />
+          <img src={userData?.profile_pic}  />
         </Col>
         <Col lg={4}></Col>
       </Row>
@@ -125,7 +138,7 @@ function Profile() {
         <Col lg={4}></Col>
         <Col lg={16}>
           <h1 className="gallery_head">
-            Emily <span className="gallery_name">Profile</span>
+          {userData?.firstname} {userData?.lastname}  <span className="gallery_name">Profile</span>
           </h1>
           <br />
 
@@ -135,8 +148,8 @@ function Profile() {
             </h1>
             {/* <div className="profile_box">Mom</div>
             <div className="profile_box">2 Kids</div> */}
-            <div className="profile_box">0 Cat</div>
-            <div className="profile_box">1 Dogs</div>
+            <div className="profile_box">{userData?.have_a_cat}</div>
+            <div className="profile_box">1 Dog</div>
           </div>
         </Col>
         <Col lg={4}></Col>
@@ -165,7 +178,7 @@ function Profile() {
         <Col lg={4}></Col>
         <Col lg={16}>
           <h1 className="furBaby_head">
-            {card.pets[0].petsName} can <span className="furBaby_name">Host</span>
+          {userData?.firstname} {userData?.lastname} can <span className="furBaby_name">Host</span>
           </h1>
           <br />
 
@@ -186,14 +199,15 @@ function Profile() {
           <div>
             <h1 className="additional_Info">Additional Information</h1>
             <ul className="styles.info_list">
-              <li>
+              <li>{userData?.additional_notes}</li>
+              {/* <li>
               franny and i live alone in a house with a backyard. we’re hoping to make connections with other dog parents to build a network of support.
               <br />
                franny would love a sibling so hopefully Dog Moms can help us keep her company since we can’t fully manage another dog at this time!
               </li>
               <li>Dogs Allowed On Bed</li>
               <li>Potty Breaks Every 2-4 Hours</li>
-              <li>Not Yard</li>
+              <li>Not Yard</li> */}
             </ul>
           </div>
           <br />
@@ -210,13 +224,13 @@ function Profile() {
           <h1 className="additional_Info">Reviews</h1>
           <Row>
             <Col>
-              <img
+              {/* <img
                 src="assets/profile/IMAGE.svg"
                 width={50}
                 height={50}
                 alt="foot"
                 className="pets_foot"
-              />
+              /> */}
             </Col>
             <Col>
               <p className="review_para">Anna</p>
@@ -225,7 +239,7 @@ function Profile() {
           </Row>
           <br />
           <p className="review_last_para">
-            {card.pets[0].petsName} has helped me out for some last minute extended trips several
+            {userData?.firstname} {userData?.lastname} has helped me out for some last minute extended trips several
             times now. She is always super helpful and accommodating with my
             messy schedule and my little guy seems totally happy when I pick him
             up. Recommend 100%.
