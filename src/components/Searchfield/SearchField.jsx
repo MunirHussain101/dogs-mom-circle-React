@@ -14,13 +14,13 @@ const SearchField=()=>{
     const searchData = useSelector((state) => state?.info?.getSearchData);
     // console.log("searchData", searchData);
 
-    const handleSearchData = () => {
-        const filerData = searchData.filter((item) => {
-            return item.zipCode == "909"
-        });
-        console.log("filerData", filerData);
-        // setSearchDataSave(filerData);
-    }
+    // const handleSearchData = () => {
+    //     const filerData = searchData.filter((item) => {
+    //         return item.zipCode == "909"
+    //     });
+    //     console.log("filerData", filerData);
+    //     // setSearchDataSave(filerData);
+    // }
     
     return(
         <>
@@ -31,7 +31,7 @@ const SearchField=()=>{
                 // value={searchDataSave}
               
               />
-              <Button type='text' className="search_field_btn" onClick={handleSearchData}>
+              <Button type='text' className="search_field_btn" >
                Search <SearchOutlined />
               </Button>
               </div>
