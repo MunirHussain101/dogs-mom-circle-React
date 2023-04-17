@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
+import axios from "../../api/axios";
+import { getUserId } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
+
+
 import "./SignUp.css";
 // import axios from "axios";
-import axios from "../../api/axios";
 
 const SignUp = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
  
   const handleSubmit = async (values) => {
 
@@ -24,20 +29,18 @@ const SignUp = () => {
           phone: values.phone,
         },
       );
-      // console.log("response::", response.data);
-      navigate("/login");
-     
+      dispatch(getUserId(response?.data?.data?.id));
+
+      navigate("/profileReg");
       setRegisterSuccess(true);
 
     } catch (err) {
-      // console.log(err.response.data.message);
       messageApi.open({
         type: "error",
         content: err.response.data.message,
       });
     }
-  };
-
+  };  
 
   return (
     <>

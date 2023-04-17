@@ -5,6 +5,7 @@ import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import { useSelector } from 'react-redux';
 import ProfileRegistration from './components/dog-profile/ProfileRegistration';
+import ErrorPage from './pages/404/ErrorPage';
 
 
 const Home=lazy(()=>import('./pages/home/Home'))
@@ -20,8 +21,8 @@ const SubRoutes=()=>{
             <Routes>
                 {authObject ? (
                     <>
-                    {/* <Route path='/search' element={<SearchPage/>} />
-                    <Route path='/profile' element={<Profile/>} /> */}
+                    <Route path='/search' element={<SearchPage/>} />
+                    <Route path='/profile/:id' element={<Profile/>} />
                  
                 </>
                 ) : (
@@ -33,8 +34,7 @@ const SubRoutes=()=>{
                 <Route path="/register" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profileReg" element={<ProfileRegistration />} />
-                <Route path='/search' element={<SearchPage/>} />
-                    <Route path='/profile' element={<Profile/>} />
+                <Route path="*" element={<ErrorPage />} />
 
             </Routes>
             </Suspense>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   Row,
   Col,
@@ -11,112 +11,131 @@ import {
   Select,
   Upload,
   Modal,
+  message,
 } from "antd";
-import {DownOutlined, LoadingOutlined, PlusOutlined} from "@ant-design/icons";
+import {
+  UploadOutlined,
+} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import "./DogProfile.css";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import axios from "../../api/axios";
 
 const {TextArea} = Input;
 
 const ProfileRegistration = () => {
   const [current, setCurrent] = useState(0);
-  const authDetails = useSelector((state) => state?.auth?.userDetails);
-
-  console.log(authDetails?.id);
-  // const id = authDetails?.id;
+  const authDetails = useSelector((state) => state?.auth?.userGetId);
   const [profileData, setProfileData] = useState({
-      id: authDetails?.id,
-      zipCode: "",
-      willing_travel_distance: "",
-      activity_type: "",
-      spay_neuter_prefs: "",
-      shedding_prefs:"",
-      house_training_prefs:"",
-      dog_left_alone_prefs: "",
-      have_a_cat: "",
-      additional_notes: "",
-      profile_pic: "",
-      dog_name: "",
-      dog_birthday:"",
-      dog_size: "",
-      dog_shedding: "",
-      dog_house_trained: "",
-      dog_can_be_left_alone: "",
-      dog_spayed_neutered:"",
-      dog_good_with_cats: "",
-      dog_other_dog_size_compatibility:"",
-      dog_breed: "",
-      image: "",
+    zipCode: "",
+    willing_travel_distance: "",
+    activity_type: "",
+    spay_neuter_prefes: "",
+    shedding_prefs: "",
+    house_training_prefs: "",
+    dog_left_alone_prefs: "",
+    have_a_cat: "",
+    additional_notes: "",
+    profile_pic: "",
+    dog_name: "",
+    dog_birthday: "",
+    dog_size: "",
+    dog_shedding: "",
+    dog_house_trained: "",
+    dog_can_be_left_alone: "",
+    dog_spayed_neutered: "",
+    dog_good_with_cats: "",
+    dog_other_dog_size_compatibility: "",
+    dog_breed: "",
+    user_profile: null,
+    dog_profile: null,
   });
 
-  // const onInputChange = (e) =>{
-  //   setProfileData({...profileData, [e.target.name] : e.target.value});
-  // }
+  const cloud_name = "dbwdp3ixw";
+  const [images, setImages] = useState();
+  const [images2, setImages2] = useState();
 
+  const handleImage = (e) => {
+  const file = e.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "profilePic");
+  axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,  formData)
+  .then(res => {
+    console.log(res.data)
+    setImages(res.data.secure_url)
+  })
+  .then(err => console.log(err))
+}
+
+const handleImage2 = (e) => {
+  const file = e.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "dogPic");
+  axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,  formData)
+  .then(res => {
+    console.log(res.data.secure_url)
+    setImages2(res.data.secure_url)
+  })
+  .then(err => console.log(err))
+}
+
+  let formData = new FormData();
+  formData.append("id", authDetails);
+  formData.append("zipCode", profileData.zipCode);
+  formData.append(
+    "willing_travel_distance",
+    profileData.willing_travel_distance
+  );
+  formData.append("activity_type", profileData.activity_type);
+  formData.append("spay_neuter_prefes", profileData.spay_neuter_prefes);
+  formData.append("shedding_prefs", profileData.shedding_prefs);
+  formData.append("house_training_prefs", profileData.house_training_prefs);
+  formData.append("dog_left_alone_prefs", profileData.dog_left_alone_prefs);
+  formData.append("have_a_cat", profileData.have_a_cat);
+  formData.append("additional_notes", profileData.additional_notes);
+  formData.append("dog_name", profileData.dog_name);
+  formData.append("dog_birthday", profileData.dog_birthday);
+  formData.append("dog_shedding", profileData.dog_shedding);
+  formData.append("dog_size", profileData.dog_size);
+  formData.append("dog_house_trained", profileData.dog_house_trained);
+  formData.append("dog_can_be_left_alone", profileData.dog_can_be_left_alone);
+  formData.append("dog_spayed_neutered", profileData.dog_spayed_neutered);
+  formData.append("dog_good_with_cats", profileData.dog_good_with_cats);
+  formData.append(
+    "dog_other_dog_size_compatibility",
+    profileData.dog_other_dog_size_compatibility
+  );
+  formData.append("dog_breed", profileData.dog_breed);
+  formData.append("user_profile", images);
+  formData.append("dog_profile", images2);
+
+  
 
   const navigate = useNavigate();
 
-  const onFinishForwardStep = () => {
-    setCurrent(current + 1);
-  };
-
-  const onChange = (value) => {
-    // console.log("onChange:", value);
-    setCurrent(value);
-  };
-
-  // console.log("current --> ", current);
 
   const handleSubmit = async (values) => {
-    if(current == 0) {
+    if (current == 0) {
       setCurrent(current + 1);
-    } else if(current == 1) {
+    } else if (current == 1) {
       setCurrent(current + 1);
-    } else if(current == 2) {
+    } else if (current == 2) {
       setCurrent(current + 1);
-    } else if(current == 3) {
-      setCurrent(navigate("/search"));
+    } else if (current == 3) {
+      setCurrent(navigate("/login"));
       try {
         const response = await axios.post(
           "/api/auth/additional-data",
-          profileData
-          // {
-          //   id: values.id,
-          //   zipCode: values.zipCode,
-          //   willing_travel_distance: values.willing_travel_distance,
-          //   activity_type: values.activity_type,
-          //   spay_neuter_prefs: values.spay_neuter_prefs,
-          //   shedding_prefs: values.shedding_prefs,
-          //   house_training_prefs: values.house_training_prefs,
-          //   dog_left_alone_prefs: values.dog_left_alone_prefs,
-          //   have_a_cat: values.have_a_cat,
-          //   additional_notes: values.additional_notes,
-          //   profile_pic: values.profile_pic,
-          //   dog_name: values.dog_name,
-          //   dog_birthday: values.dog_birthday,
-          //   dog_size: values.dog_size,
-          //   dog_shedding: values.dog_shedding,
-          //   dog_house_trained: values.dog_house_trained,
-          //   dog_can_be_left_alone: values.dog_can_be_left_alone,
-          //   dog_spayed_neutered: values.dog_spayed_neutered,
-          //   dog_good_with_cats: values.dog_good_with_cats,
-          //   dog_other_dog_size_compatibility:
-          //     values.dog_other_dog_size_compatibility,
-          //   dog_breed: values.dog_breed,
-          //   image: values.image,
-          // }
+          formData
         );
-        console.log("response::", response?.data);
-        // navigate("/");
         setProfileSuccess(true);
       } catch (err) {
-        console.log(err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: err.response.data.message,
-        // });
+        messageApi.open({
+          type: "error",
+          content: err,
+        });
       }
     }
   };
@@ -124,13 +143,35 @@ const ProfileRegistration = () => {
   const conditionalComponent = () => {
     switch (current) {
       case 0:
-        return <ProfileRegistration1 profileData={profileData} setProfileData={setProfileData} />;
+        return (
+          <ProfileRegistration1
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        );
       case 1:
-        return <ProfileRegistration2 profileData={profileData} setProfileData={setProfileData} />;
+        return (
+          <ProfileRegistration2
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        );
       case 2:
-        return <ProfileRegistration3 profileData={profileData} setProfileData={setProfileData} />;
+        return (
+          <ProfileRegistration3
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        );
       case 3:
-        return <ProfileRegistration4 profileData={profileData} setProfileData={setProfileData} />;
+        return (
+          <ProfileRegistration4
+            profileData={profileData}
+            setProfileData={setProfileData}
+            handleImage={handleImage}
+            handleImage2={handleImage2}
+          />
+        );
       default:
         <></>;
     }
@@ -146,7 +187,6 @@ const ProfileRegistration = () => {
             type="navigation"
             size="small"
             current={current}
-            onChange={onChange}
             className="site-navigation-steps"
             items={[
               {
@@ -170,7 +210,7 @@ const ProfileRegistration = () => {
           <Form>
             {conditionalComponent()}
 
-            <div style={{display: "flex", justifyContent: "space-evenly"}}>
+            <div style={{display: "flex", justifyContent: "space-around"}}>
               {current > 0 && (
                 <Button
                   className="back_btn"
@@ -199,9 +239,6 @@ const ProfileRegistration = () => {
 };
 
 function ProfileRegistration1({profileData, setProfileData}) {
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
   return (
     <>
       <Row>
@@ -210,11 +247,16 @@ function ProfileRegistration1({profileData, setProfileData}) {
         <Col lg={16}>
           <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="pets_heading">What's your dog name?</h1>
-            <Input className="input_box" name="dog_name" 
-             onChange={(e) => {
-              setProfileData({...profileData, [e.target.name] : e.target.value})
-            }}
-            value={profileData.dog_name}  />
+            <Input
+              className="input_box"
+              name="dog_name"
+              onChange={(e) => {
+                setProfileData({
+                  ...profileData,
+                  [e.target.name]: e.target.value,
+                });
+              }}
+            />
           </Row>
           <br />
 
@@ -231,11 +273,10 @@ function ProfileRegistration1({profileData, setProfileData}) {
                   name="dog_birthday"
                   value={profileData.dog_birthday}
                   onChange={(e) => {
-                    setProfileData({ ...profileData, dog_birthday: e });
+                    setProfileData({...profileData, dog_birthday: e});
                   }}
                 />
               </Col>
-              {/* <Col><DatePicker onChange={onChange} picker="year"  className="input_box" /></Col> */}
             </Row>
           </Row>
           <br />
@@ -244,18 +285,16 @@ function ProfileRegistration1({profileData, setProfileData}) {
           <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="dog_size_heading">Dog Size</h1>
             {/* <Row> */}
-            <Form.Item name="dog_size">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
                 value={profileData.dog_size}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
                     dog_size: e.target.value,
                   });
-                }} 
-
+                }}
               >
                 <Radio.Button className="radio_btn_2" value="0-15lbs">
                   <div
@@ -287,7 +326,7 @@ function ProfileRegistration1({profileData, setProfileData}) {
                     16-40lbs <span>Medium</span>
                   </div>
                 </Radio.Button>
-                <Radio.Button className="radio_btn_2" value="141-100lbs">
+                <Radio.Button className="radio_btn_2" value="41-100lbs">
                   <div
                     style={{
                       display: "flex",
@@ -300,7 +339,7 @@ function ProfileRegistration1({profileData, setProfileData}) {
                     141-100lbs <span>Large</span>
                   </div>
                 </Radio.Button>
-                <Radio.Button className="radio_btn_2" value="101+lbs">
+                <Radio.Button className="radio_btn_2" value="100+lbs">
                   <Row
                     style={{
                       display: "flex",
@@ -310,7 +349,7 @@ function ProfileRegistration1({profileData, setProfileData}) {
                     }}
                   >
                     <img src="assets/size/gaintdog.svg" />
-                    101+lbs <span>Giant</span>
+                    100+lbs <span>Giant</span>
                   </Row>
                 </Radio.Button>
               </Radio.Group>
@@ -322,27 +361,17 @@ function ProfileRegistration1({profileData, setProfileData}) {
             <h1 className="dog_size_heading">The breed is</h1>
             <div>
               <Select
-                defaultValue="Select Breed"
                 style={{width: 120}}
-                name="dog_breed"
                 value={profileData.dog_breed}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
-                      dog_breed: e,
+                    dog_breed: e,
                   });
                 }}
                 className="input_box_1"
               >
-                <Option value="German">German Shepherd</Option>
-                <Option value="bulldog">Bulldog</Option>
-                <Option value="Siberian">Siberian Husky</Option>
-                <Option value="Golden">Golden Retriever</Option>
-                <Option value="French">French Bulldog</Option>
-                <Option value="Alaskan">Alaskan Malamute</Option>
-                <Option value="Poodle">Poodle</Option>
-                <Option value="Chihuahua">Chihuahua</Option>
-                <Option value="Poodle">Afghan Hound</Option>
+                <Option value="pug">Pug</Option>
               </Select>
 
               {/* </Form.Item> */}
@@ -370,11 +399,16 @@ function ProfileRegistration2({profileData, setProfileData}) {
 
           {/* Row for Input Box */}
           <Row>
-            <Input className="input_box" name="zipCode"
-            value={profileData.zipCode} 
-            onChange={(e) => 
-              setProfileData({...profileData, [e.target.name] : e.target.value}) }
-             />
+            <Input
+              className="input_box"
+              name="zipCode"
+              onChange={(e) =>
+                setProfileData({
+                  ...profileData,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
           </Row>
 
           <br />
@@ -384,14 +418,16 @@ function ProfileRegistration2({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               how far are you willing to travel for boarding?
             </h1>
-            <Form.Item name="willing_travel_distance">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.willing_travel_distance} 
+                value={profileData.willing_travel_distance}
                 onChange={(e) => {
-                  setProfileData({...profileData, willing_travel_distance:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    willing_travel_distance: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -423,32 +459,34 @@ function ProfileRegistration2({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               What are you looking for ( Feel free to select multiple choices)?
             </h1>
-            <Form.Item name="activity_type">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.activity_type} 
+                value={profileData.activity_type}
                 onChange={(e) => {
-                  setProfileData({...profileData, activity_type:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    activity_type: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
-                  value="Boarding"
+                  value="boarding"
                   style={{color: "black"}}
                 >
                   Boarding
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="Daycare"
+                  value="daycare"
                   style={{color: "black"}}
                 >
                   Daycare
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="Playdate"
+                  value="playdate"
                   style={{color: "black"}}
                 >
                   Playdate
@@ -477,33 +515,34 @@ function ProfileRegistration3({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               What is your dog's shedding level?
             </h1>
-            <Form.Item name="dog_shedding">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_shedding} 
+                value={profileData.dog_shedding}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_shedding:e.target.value});
-                 }}
-
+                  setProfileData({
+                    ...profileData,
+                    dog_shedding: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
-                  value="No Shedding"
+                  value="no shedding"
                   style={{color: "black"}}
                 >
                   No shedding
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="Moderate"
+                  value="moderate"
                   style={{color: "black"}}
                 >
                   Moderate
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="Alot"
+                  value="alot"
                   style={{color: "black"}}
                 >
                   Alot
@@ -515,14 +554,16 @@ function ProfileRegistration3({profileData, setProfileData}) {
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Is your dog house trained?</h1>
-            <Form.Item name="dog_house_trained">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_house_trained} 
+                value={profileData.dog_house_trained}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_house_trained:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    dog_house_trained: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -533,7 +574,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="working in progress"
+                  value="work in progress"
                   style={{color: "black"}}
                 >
                   working in <br />
@@ -555,14 +596,16 @@ function ProfileRegistration3({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               Can your dog be left alone? If so, how long?
             </h1>
-            <Form.Item name="dog_can_be_left_alone">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_can_be_left_alone} 
+                value={profileData.dog_can_be_left_alone}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_can_be_left_alone:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    dog_can_be_left_alone: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -573,7 +616,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="coupleHour"
+                  value="couple hours"
                   style={{color: "black"}}
                 >
                   yes, a couple <br />
@@ -581,7 +624,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="fewHour"
+                  value="a few hours"
                   style={{color: "black"}}
                 >
                   yes, a few of <br />
@@ -596,15 +639,16 @@ function ProfileRegistration3({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               Has your dog been spayed or neutered?
             </h1>
-            <Form.Item name="dog_spayed_neutered">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_spayed_neutered} 
+                value={profileData.dog_spayed_neutered}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_spayed_neutered:e.target.value});
-                 }}
-                
+                  setProfileData({
+                    ...profileData,
+                    dog_spayed_neutered: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -629,15 +673,16 @@ function ProfileRegistration3({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               Do your dog get along with cats?
             </h1>
-            <Form.Item name="dog_good_with_cats">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_good_with_cats} 
+                value={profileData.dog_good_with_cats}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_good_with_cats:e.target.value});
-                 }}
-                
+                  setProfileData({
+                    ...profileData,
+                    dog_good_with_cats: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -670,15 +715,16 @@ function ProfileRegistration3({profileData, setProfileData}) {
               What size dogs does your dog get along with? (Feel free to select
               multiple choices)
             </h1>
-            <Form.Item name="dog_other_dog_size_compatibility">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.dog_other_dog_size_compatibility} 
+                value={profileData.dog_other_dog_size_compatibility}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_other_dog_size_compatibility:e.target.value});
-                 }}
-                
+                  setProfileData({
+                    ...profileData,
+                    dog_other_dog_size_compatibility: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn_2"
@@ -714,7 +760,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn_2"
-                  value="141-100lbs"
+                  value="41-100lbs"
                   style={{color: "black"}}
                 >
                   <Row
@@ -725,12 +771,12 @@ function ProfileRegistration3({profileData, setProfileData}) {
                     }}
                   >
                     <img src="assets/size/large-dog.svg" />
-                    141-100lbs <span>Large</span>
+                    41-100lbs <span>Large</span>
                   </Row>
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn_2"
-                  value="101+lbs"
+                  value="100+lbs"
                   style={{color: "black"}}
                 >
                   <Row
@@ -741,7 +787,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                     }}
                   >
                     <img src="assets/size/gaintdog.svg" />
-                    101+lbs <span>Giant</span>
+                    100+lbs <span>Giant</span>
                   </Row>
                 </Radio.Button>
               </Radio.Group>
@@ -756,8 +802,10 @@ function ProfileRegistration3({profileData, setProfileData}) {
   );
 }
 
-function ProfileRegistration4({profileData, setProfileData}) {
+function ProfileRegistration4({profileData, setProfileData, handleImage, handleImage2}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -765,44 +813,27 @@ function ProfileRegistration4({profileData, setProfileData}) {
     setIsModalOpen(false);
     navigate("/search");
   };
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  // };
-  const [loading, setLoading] = useState(false);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([]);
+
   const handleCancel = () => {
     setIsModalOpen(false);
-    setPreviewOpen(false);
   };
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewOpen(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
+  const props = {
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    headers: {
+      authorization: "authorization-text",
+    },
+    onChange(info) {
+      if (info.file.status !== "uploading") {
+        // console.log(info.file, info.fileList);
+      }
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   };
-  const handleChange = ({fileList: newFileList, e}) => {
-    setFileList(newFileList)
-    setProfileData({...profileData, image:e.target.value})
-  };
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -815,15 +846,16 @@ function ProfileRegistration4({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               preference regarding spaying or neutering
             </h1>
-            <Form.Item name="spay_neuter_prefs">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
-                value={profileData.spay_neuter_prefs}
+                value={profileData.spay_neuter_prefes}
                 onChange={(e) => {
-                  setProfileData({...profileData, spay_neuter_prefs:e.target.value});
-                 }}
-
+                  setProfileData({
+                    ...profileData,
+                    spay_neuter_prefes: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -835,7 +867,7 @@ function ProfileRegistration4({profileData, setProfileData}) {
                 <Radio.Button
                   className="radio_btn"
                   style={{color: "black"}}
-                  value="prefer Dog"
+                  value="prefer fixed dog"
                 >
                   prefer the <br />
                   <span>dog is fixed</span>
@@ -847,14 +879,16 @@ function ProfileRegistration4({profileData, setProfileData}) {
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Shedding type you'd prefer?</h1>
-            <Form.Item name="shedding_prefs">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
                 value={profileData.shedding_prefs}
                 onChange={(e) => {
-                  setProfileData({...profileData, shedding_prefs:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    shedding_prefs: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -873,7 +907,7 @@ function ProfileRegistration4({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="shedding"
+                  value="doesnt bother"
                   style={{color: "black"}}
                 >
                   Shedding doesn’t <br /> bother me
@@ -887,15 +921,16 @@ function ProfileRegistration4({profileData, setProfileData}) {
             <h1 className="dog_size_heading">
               House training level you'd prefer
             </h1>
-            <Form.Item name="house_training_prefs">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
                 value={profileData.house_training_prefs}
                 onChange={(e) => {
-                  setProfileData({...profileData, house_training_prefs:e.target.value});
-                 }}
-                
+                  setProfileData({
+                    ...profileData,
+                    house_training_prefs: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -907,7 +942,7 @@ function ProfileRegistration4({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="not house trained"
+                  value="doesnt bother"
                   style={{color: "black"}}
                 >
                   Not house <br />
@@ -920,14 +955,16 @@ function ProfileRegistration4({profileData, setProfileData}) {
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Will the dog be left along?</h1>
-            <Form.Item name="dog_left_alone_prefs">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
                 value={profileData.dog_left_alone_prefs}
                 onChange={(e) => {
-                  setProfileData({...profileData, dog_left_alone_prefs:e.target.value});
-                 }}
+                  setProfileData({
+                    ...profileData,
+                    dog_left_alone_prefs: e.target.value,
+                  });
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -938,14 +975,14 @@ function ProfileRegistration4({profileData, setProfileData}) {
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="coupleHour"
+                  value="couple hours"
                   style={{color: "black"}}
                 >
                   yes, a couple <br /> of hours
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
-                  value="fewHours"
+                  value="a few hours"
                   style={{color: "black"}}
                 >
                   yes, a few of <br /> hours
@@ -957,14 +994,13 @@ function ProfileRegistration4({profileData, setProfileData}) {
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">Do you have a cat?</h1>
-            <Form.Item name="have_a_cat">
+            <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
-                defaultValue=""
                 value={profileData.have_a_cat}
                 onChange={(e) => {
-                  setProfileData({...profileData, have_a_cat:e.target.value});
-                 }}
+                  setProfileData({...profileData, have_a_cat: e.target.value});
+                }}
               >
                 <Radio.Button
                   className="radio_btn"
@@ -992,70 +1028,88 @@ function ProfileRegistration4({profileData, setProfileData}) {
             <TextArea
               rows={4}
               style={{width: 340, height: 120}}
-              name="additional_notes"
               value={profileData.additional_notes}
               onChange={(e) => {
-                setProfileData({...profileData, additional_notes:e.target.value});
-               }}
+                setProfileData({
+                  ...profileData,
+                  additional_notes: e.target.value,
+                });
+              }}
             />
           </Row>
           <br />
 
           {/*  Upload your profile picture */}
-          <Row>
+          <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="upload_heading">Upload your profile picture</h1>
-            {/* <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture-card"
-              fileList={fileList}
-              name="image"
-              onPreview={handlePreview}
-              value={profileData.image}
-              onChange={handleChange}
-              
+            <Form.Item
+              name="user_profile"
+              onChange={handleImage}
             >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload> */}
-            <input type="file" value={profileData.images} onChange={(e) => 
-              setProfileData({...profileData, image:e.target.files})} />
-            <Modal
-              open={previewOpen}
-              title={previewTitle}
-              footer={null}
-              onCancel={handleCancel}
-            >
-              <img alt="example" style={{width: "100%"}} src={previewImage} />
-            </Modal>
+              <Upload {...props}>
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              </Upload>
+            </Form.Item>
           </Row>
 
           {/* Upload your dog pictures */}
-          <Row>
+          <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="upload_heading">
               Upload your dog pictures{" "}
               <span style={{color: "#7A7777"}}>(upto 5)</span>
             </h1>
-            <input type="file" value={profileData.images} onChange={(e) => 
-              setProfileData({...profileData, image:e.target.files})} />
-            {/* <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            <Form.Item
+              name="dog_profile"
+              onChange={handleImage2}
+            >
+              <Upload {...props}>
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              </Upload>
+
+            </Form.Item>
+            {/* <Form.Item 
+            valuePropName="fileList"
+            name="dog_profile"
+            getValueFromEvent={(event) => {
+              return event?.fileList
+            }}
+            rules={[
+              {
+                required: true,
+                message: "Please upload your profile"
+              },
+              {
+                validator(_, fileList) {
+                  return new Promise((resolve, reject) => {
+                    if(fileList && fileList[0].size > 9000000) {
+                      reject("File size exceeded")
+                    } else {
+                      resolve("success")
+                    }
+                  })
+                }
+              }
+            ]}>
+            <Upload
+              maxCount={1}
+              beforeUpload={(file) => {
+                return new Promise((resolve, reject) => {
+                  if(file.size > 9000000) {
+                    reject("File size exceeded")
+                  } else {
+                    resolve("success")
+                  }
+                })
+              }}
+              name="dog_profile"
               listType="picture-card"
-              fileList={fileList}
-              onPreview={handlePreview}
-              // onChange={handleChange}
-              name="image"
-               value={profileData.image}
-              onChange={handleChange}
+              className="avatar-uploader"
+              showUploadList={true}
             >
-              {fileList.length >= 8 ? null : uploadButton}
+              <PlusOutlined />
             </Upload>
-            <Modal
-              open={previewOpen}
-              title={previewTitle}
-              footer={null}
-              onCancel={handleCancel}
-            >
-              <img alt="example" style={{width: "100%"}} src={previewImage} />
-            </Modal> */}
+              
+            </Form.Item> */}
           </Row>
           <br />
 

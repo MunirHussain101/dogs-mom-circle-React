@@ -1,5 +1,7 @@
 import { configureStore, combineReducers} from '@reduxjs/toolkit';
 import authSlice from '../features/auth/authSlice';
+import InfoSlice from "../features/additionalnfo/Info";
+
 import  storage  from 'redux-persist/lib/storage';
 import {
   persistReducer,
@@ -14,6 +16,7 @@ const persistConfig={
 
 const reducer=combineReducers({
   auth:authSlice,
+  info: InfoSlice
 })
 
 

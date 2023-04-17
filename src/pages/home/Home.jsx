@@ -16,6 +16,7 @@ const Home = () => {
             <Banner/>        
               <EmailSec />
               <AntdCard />  
+
     </div>
     </>
 
