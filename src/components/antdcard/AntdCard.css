@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
-.card_head_first{
+
+.card_head_first {
 
     font-family: 'Inter';
     font-style: normal;
@@ -9,49 +10,51 @@
     line-height: 48px;
     /* identical to box height, or 200% */
     text-align: center;
-    
+
     /* Text */
-    
+
     color: #1F2124;
-    
-    }
-    .card_img{
+
+}
+
+.card_img {
     height: 50%;
     width: 100%;
     object-fit: cover;
     /* background-size: cover; */
-    
+
     border-radius: 8px;
-    }
-    .card_head_first_sign{
-        /* width: 299px; */
+}
+
+.card_head_first_sign {
+    /* width: 299px; */
     /* height: 48px; */
-    
-    
+
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 48px;
     /* identical to box height, or 267% */
-    
-    
+
+
     color: #000000;
-    
-    
+
+
     /* Inside auto layout */
     /* 
     flex: none;
     order: 0;
     align-self: stretch;
     flex-grow: 0; */
-    }
-    
-    .card_head_first_para{
-        /* width: 299px; */
+}
+
+.card_head_first_para {
+    /* width: 299px; */
     /* height: 72px; */
-    
-    
+
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -59,24 +62,47 @@
     line-height: 24px;
     /* padding-bottom: 10px; */
     /* or 150% */
-    
-    
+
+
     color: #000000;
-    
-    
+
+
     /* Inside auto layout */
-    
+
     /* flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0; */
-    }
-    .card_box{
-        box-shadow: 4px 4px 15px lightgray;
-        padding: 24px;
-    }
-    .content_antd_card_box{
-        padding-left: 10px;
-        padding-right: 10px;
+}
+
+.card_box {
+    box-shadow: 4px 4px 15px lightgray;
+    padding: 24px;
+   
+}
+
+.content_antd_card_box {
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.main_card_antdBox {
+    margin-left: 5%;
+    margin-right: 5%
+}
+
+@media screen and (max-width: 800px) {
+
+    .main_card_antdBox {
+        margin-left: 18px;
+        margin-right: 18px;
+        text-align: center;
 
     }
+    .card_box {
+        padding: 14px;
+       
+    }
+    
+}

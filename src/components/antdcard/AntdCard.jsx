@@ -2,6 +2,7 @@ import { Card, Col, Row } from "antd"
 import { Link } from "react-router-dom";
 import './AntdCard.css'
 import { useSelector } from "react-redux";
+import './AntdCard.css';
 
 // import styles from "../../styles/components/antdCard.module.css";
 
@@ -14,7 +15,7 @@ const AntdCard=()=>{
     return(
         <>
         <div 
-        style={{ marginLeft:183, marginRight:183}}
+        className="main_card_antdBox"
         >
            <Row style={{marginTop:40}}>
             <Col lg={6}></Col>
@@ -25,8 +26,8 @@ const AntdCard=()=>{
 
            </Row>
 
-           <Row justify='space-around' style={{marginTop:60,marginBottom:100}}>
-              <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
+           <Row  justify='space-around' style={{marginTop:60,marginBottom:100,display:"flex", flexWrap:'wrap'}}>
+              <Col className="card_box" lg={7} md={24} xs={24} style={{width:'100%', paddingBottom:70}}> 
               {/* <Link to="/"> */}
               <img src={imgMine1} className="card_img"/>
            
@@ -35,7 +36,7 @@ const AntdCard=()=>{
                  <p className="card_head_first_para">Sign up, tell us a little about you and your dog. Fill out your hosting preferences.</p>
               </Col>
 
-              <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
+              <Col className="card_box" lg={7} md={24} xs={24} style={{width:'100%', paddingBottom:70}}> 
               {/* <Link to="/"> */}
                <img src={imgMine2} className="card_img"/> 
            
@@ -46,7 +47,7 @@ const AntdCard=()=>{
                  <p className="card_head_first_para">Post about your upcoming boarding and daycare needs in the group. We will help you find the best match. Everyday of boarding costs 10 points. New members are allowed to go negative 100 points.</p>
               </Col>
 
-              <Col className="card_box" lg={7} style={{width:'100%', paddingBottom:70}}> 
+              <Col className="card_box" lg={7} md={24} xs={24} style={{width:'100%', paddingBottom:70}}> 
               {/* <Link to="/"> */}
               <img src={imgMine3} className="card_img"/>
          

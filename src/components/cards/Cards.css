@@ -119,4 +119,10 @@ color: #1F2124;
 }
 
 
-
+@media screen and (max-width: 800px) {
+  .main_row_cards{
+    /* margin-top: 60px; */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+}
