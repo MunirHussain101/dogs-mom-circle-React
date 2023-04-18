@@ -25,7 +25,7 @@ const Login = () => {
           password: values.password,
         },
       );
-      setUserId(response?.data?.data?.user.id)
+      setUserId(response?.data?.data?.user.id);
       localStorage.setItem("token", response?.data?.data?.token);
       setLoginSuccess(true);
 
@@ -76,7 +76,13 @@ const Login = () => {
       userDetails()  
       }
     
-  },[loginSuccess])
+  },[loginSuccess]);
+
+  useEffect(() => {
+    if(tokenValue) {
+      navigate("/");
+    }
+  }, []);
   
   return (
     <> 
