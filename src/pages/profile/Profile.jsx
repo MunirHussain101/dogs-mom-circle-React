@@ -4,9 +4,7 @@ import card from "../../components/cards/cards.json";
 import "./Profile.css";
 import { useParams } from 'react-router-dom';
 import axios from '../../api/axios';
-import verifyImg from "../../../public/assets/profile/verify-user.svg";
-import pointImg from "../../../public/assets/home-cards/layer1.svg";
-import footImg from "../../../public/assets/profile/IMAGE.svg";
+
 
 function Profile() {
   const [userData, setUserData] = useState();
@@ -41,7 +39,7 @@ function Profile() {
                     <Row style={{display:"flex", gap:20}}>
                     <h1 className="userName">{userData?.firstname} {userData?.lastname}</h1>
                     <img
-                        src={verifyImg}
+                        src="/assets/profile/verify-user.svg"
                         width={18}
                         height={22}
                         alt="profile-image"
@@ -67,7 +65,7 @@ function Profile() {
             <Row  style={{marginTop:7, display:'flex', justifyContent:'flex-end', gap:40}}>
                 <Col style={{display:"flex", flexDirection:"row", alignItems:"center" ,columnGap:10}}>
                 <img
-                src={pointImg}
+                src="/assets/home-cards/layer1.svg"
                 alt="Picture of the author"
                 className="main_row_cards_icon_profile"
               />
@@ -231,7 +229,7 @@ function Profile() {
           <Row>
             <Col>
               <img
-                src={footImg}
+                src="/assets/profile/IMAGE.svg"
                 width={50}
                 height={50}
                 alt="foot"
