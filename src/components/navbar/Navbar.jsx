@@ -6,12 +6,9 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAuth } from "../../features/auth/authSlice";
+import headerImg from "../../../public/assets/header/Dogs-Mom-Circle (4) 1.svg";
 
 
-// const handleMenuClick = (e) => {
-//   message.info("Click on menu item.");
-//   console.log("click", e);
-// };
 
 const Navbar = () => {
   const location = useLocation();
@@ -81,7 +78,7 @@ const Navbar = () => {
        height={66}
     /> */}
             <LazyLoadImage
-              src="assets/header/Dogs-Mom-Circle (4) 1.svg"
+              src={headerImg}
               width={124.27}
               height={66}
               alt="dog mom nav image"

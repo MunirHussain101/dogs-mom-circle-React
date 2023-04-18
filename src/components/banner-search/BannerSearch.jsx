@@ -3,7 +3,7 @@ import './BannerSearch.css';
 import SearchField from "../Searchfield/SearchField";
 
 
-const BannerSearch=()=>{
+const BannerSearch=({userData, setUserData})=>{
     return(
         <>
         <Row>
@@ -25,7 +25,7 @@ const BannerSearch=()=>{
     <Row style={{marginTop:16}}>
          <Col lg={6}></Col>
          <Col lg={12}>
-            <SearchField />
+            <SearchField userData={userData} setUserData={setUserData} />
          </Col>
 
     <Col lg={6}></Col>

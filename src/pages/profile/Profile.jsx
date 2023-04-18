@@ -4,6 +4,9 @@ import card from "../../components/cards/cards.json";
 import "./Profile.css";
 import { useParams } from 'react-router-dom';
 import axios from '../../api/axios';
+import verifyImg from "../../../public/assets/profile/verify-user.svg";
+import pointImg from "../../../public/assets/home-cards/layer1.svg";
+import footImg from "../../../public/assets/profile/IMAGE.svg";
 
 function Profile() {
   const [userData, setUserData] = useState();
@@ -12,6 +15,7 @@ function Profile() {
   const tokenValue = localStorage.getItem("token");
 
 
+   useEffect(() =>{
     const getData = async () => {
       const response = await axios.post(`/api/user/get-profile`, {
         id: id,
@@ -20,6 +24,8 @@ function Profile() {
       setUserData(response?.data);
     }
     getData();
+   }, [])
+
   
   return (
     <>
@@ -34,13 +40,13 @@ function Profile() {
                 <Col>
                     <Row style={{display:"flex", gap:20}}>
                     <h1 className="userName">{userData?.firstname} {userData?.lastname}</h1>
-                    {/* <img
-                        src="assets/profile/verify-user.svg"
+                    <img
+                        src={verifyImg}
                         width={18}
                         height={22}
                         alt="profile-image"
                         className="verify_img"
-                    /> */}
+                    />
                     </Row>
                     <div style={{display:"flex", flexDirection:"column"}}>
                         <p className="place_name">Richmond, CA</p>
@@ -60,11 +66,11 @@ function Profile() {
         <Col lg={8}>
             <Row  style={{marginTop:7, display:'flex', justifyContent:'flex-end', gap:40}}>
                 <Col style={{display:"flex", flexDirection:"row", alignItems:"center" ,columnGap:10}}>
-                {/* <img
-                src="assets/home-cards/layer1.svg"
+                <img
+                src={pointImg}
                 alt="Picture of the author"
                 className="main_row_cards_icon_profile"
-              /> */}
+              />
                 <p className="main_row_card_f_points_profile">
                     {card.pets[0].petsPoint}
                     {" "}
@@ -126,7 +132,7 @@ function Profile() {
           <h1 className="gallery_head">
           {userData?.firstname} {userData?.lastname} <span className="gallery_name">Gallery</span>
           </h1>
-          <img src={userData?.profile_pic}  />
+          <img src={userData?.dogs[0]?.profile_pic}  />
         </Col>
         <Col lg={4}></Col>
       </Row>
@@ -224,13 +230,13 @@ function Profile() {
           <h1 className="additional_Info">Reviews</h1>
           <Row>
             <Col>
-              {/* <img
-                src="assets/profile/IMAGE.svg"
+              <img
+                src={footImg}
                 width={50}
                 height={50}
                 alt="foot"
                 className="pets_foot"
-              /> */}
+              />
             </Col>
             <Col>
               <p className="review_para">Anna</p>

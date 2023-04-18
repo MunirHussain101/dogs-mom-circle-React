@@ -1,27 +1,14 @@
 import { useEffect, useState } from "react";
 import { Col, Rate, Row } from "antd"
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "../../api/axios";
 import cards from "./cards.json";
 import './Cards.css'
-import { getSearchDetails } from "../../features/additionalnfo/Info";
 
 
 
-const Cards = () => {
-    const [userData, setUserData] = useState([]);
 
-    const dispatch = useDispatch();
+const Cards = ({userData}) => {
 
-  useEffect(() => {
-    const getData = async () => {
-        const response = await axios.get(`/api/users`);
-        setUserData(response.data);
-        dispatch(getSearchDetails(response.data));
-    }
-    getData();
-  }, []);
 
 
   var dt = new Date();
@@ -34,6 +21,7 @@ const Cards = () => {
                  return(
                     <>
                     <Col lg={5}
+                    xs={24}
                     style={{margin:15}}
                     className="main_col_searchpg"
                 >

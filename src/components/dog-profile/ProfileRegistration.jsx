@@ -15,6 +15,7 @@ import {
 } from "antd";
 import {
   UploadOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import "./DogProfile.css";
@@ -51,6 +52,7 @@ const ProfileRegistration = () => {
     dog_profile: null,
   });
 
+
   const cloud_name = "dbwdp3ixw";
   const [images, setImages] = useState();
   const [images2, setImages2] = useState();
@@ -62,7 +64,6 @@ const ProfileRegistration = () => {
   formData.append("upload_preset", "profilePic");
   axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,  formData)
   .then(res => {
-    console.log(res.data)
     setImages(res.data.secure_url)
   })
   .then(err => console.log(err))
@@ -75,7 +76,6 @@ const handleImage2 = (e) => {
   formData.append("upload_preset", "dogPic");
   axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,  formData)
   .then(res => {
-    console.log(res.data.secure_url)
     setImages2(res.data.secure_url)
   })
   .then(err => console.log(err))
@@ -825,7 +825,6 @@ function ProfileRegistration4({profileData, setProfileData, handleImage, handleI
     },
     onChange(info) {
       if (info.file.status !== "uploading") {
-        // console.log(info.file, info.fileList);
       }
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
@@ -1046,9 +1045,7 @@ function ProfileRegistration4({profileData, setProfileData, handleImage, handleI
               name="user_profile"
               onChange={handleImage}
             >
-              <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-              </Upload>
+              <input type="file" accept="image/*" />
             </Form.Item>
           </Row>
 
@@ -1062,9 +1059,8 @@ function ProfileRegistration4({profileData, setProfileData, handleImage, handleI
               name="dog_profile"
               onChange={handleImage2}
             >
-              <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-              </Upload>
+            <input type="file" accept="image/*" />
+
 
             </Form.Item>
             {/* <Form.Item 

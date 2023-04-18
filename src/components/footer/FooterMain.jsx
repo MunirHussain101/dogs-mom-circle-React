@@ -1,5 +1,6 @@
 import { Col, Row } from "antd"
 import './Footer.css';
+import footerImg from "../../../public/assets/footer/Dogs 1.svg"
 
 const FooterMain=()=>{
     return(
@@ -8,7 +9,7 @@ const FooterMain=()=>{
             <Col >
              <img
       // loader={myLoader}
-        src="assets/footer/Dogs 1.svg"
+        src={footerImg}
         alt="Picture of the author"
            width={156}
        height={66}
