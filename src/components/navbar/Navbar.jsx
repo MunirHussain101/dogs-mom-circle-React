@@ -111,7 +111,7 @@ const Navbar = () => {
                     {!authDetails?'Account':`${firstName + " " +lastName}`}
 
                       {/* <UserOutlined /> */}
-                        <Avatar size="small" src = {profilePic}/>
+                        {!authDetails ? <UserOutlined /> : <Avatar size="small" src = {profilePic}/>}
                     </Space>
                   </Button>
                 </Dropdown>
