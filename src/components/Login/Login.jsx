@@ -103,13 +103,20 @@ const Login = () => {
           <Form onFinish={handleSubmit}>
             <Col lg={24} xs={24}>
                 <div className='main_login_input'>
-                    <Link to="/login">
+                <p className="login_link" style={{background:"none"}}>
+                Doesn't have an account?
+                 &nbsp;
+                 <Link to="/register" style={{color:"#EAB2BB"}}>
+                 Signup
+                 </Link>
+                </p>
+                    {/* <Link to="/login">
                     <Button type="text"className='login_link' style={{color:"#EAB2BB", background:"none"}} >Login</Button>
                     </Link>
                     {"  "}
                     <Link to="/register" className='signup_link'>
                     <Button type="text" className='login_link' style={{background:"none"}}>Sign Up</Button>
-                    </Link>
+                    </Link> */}
                 </div>
             </Col>
             <br />
@@ -142,14 +149,14 @@ const Login = () => {
                 prefix={<LockOutlined style={{color: "#EAB2BB"}}/>} />
              </Form.Item>
             </Col>
-            <Col lg={24} xs={24}>
-              <Row >
-              <Col><Checkbox color="#EAB2BB" style={{display:"flex", alignItems:"center"}}>Remember me</Checkbox></Col>
-              {/* <Col><Link to="/forget-password">
-                <p className="forget_password_head">Forget Password?</p>
+            <Col>
+              <div style={{display:'flex', justifyContent:'space-between'}}>
+              <div><Checkbox style={{display:"flex"}}>Remember me</Checkbox></div>
+              <div><Link to="/forget-password">
+                <span className="forget_password_head">Forget Password?</span>
               </Link>
-              </Col> */}
-              </Row>
+              </div>
+              </div>
             </Col>
             <br />
             <Col lg={24} xs={24} className="login_btn_div">

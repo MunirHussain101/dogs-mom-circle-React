@@ -12,6 +12,7 @@ import {
   Upload,
   Modal,
   message,
+  Checkbox,
 } from "antd";
 import {
   UploadOutlined,
@@ -26,6 +27,7 @@ const {TextArea} = Input;
 
 const ProfileRegistration = () => {
   const [current, setCurrent] = useState(0);
+  const [messageApi, contextHolder] = message.useMessage();
   const authDetails = useSelector((state) => state?.auth?.userGetId);
   const [profileData, setProfileData] = useState({
     zipCode: "",
@@ -51,6 +53,7 @@ const ProfileRegistration = () => {
     user_profile: null,
     dog_profile: null,
   });
+
 
 
   const cloud_name = "dbwdp3ixw";
@@ -111,8 +114,6 @@ const handleImage2 = (e) => {
   formData.append("user_profile", images);
   formData.append("dog_profile", images2);
 
-  
-
   const navigate = useNavigate();
 
 
@@ -130,6 +131,7 @@ const handleImage2 = (e) => {
           "/api/auth/additional-data",
           formData
         );
+        console.log(response?.data)
         setProfileSuccess(true);
       } catch (err) {
         messageApi.open({
@@ -177,8 +179,12 @@ const handleImage2 = (e) => {
     }
   };
 
+ 
+ 
+
   return (
     <>
+    {contextHolder}
       <Row>
         <Col lg={4}></Col>
 
@@ -208,6 +214,7 @@ const handleImage2 = (e) => {
             ]}
           />
           <Form>
+            <br />
             {conditionalComponent()}
 
             <div style={{display: "flex", justifyContent: "space-around"}}>
@@ -260,15 +267,14 @@ function ProfileRegistration1({profileData, setProfileData}) {
           </Row>
           <br />
 
-          <Row style={{display: "flex", flexDirection: "column", gap: 10}}>
+          <Row style={{display: "flex", flexDirection: "column"}}>
             <h1 className="pets_heading">
-              The dog was born in year xx month xx
+              The dog was born 
             </h1>
             <Row style={{gap: 10}}>
               <Col>
                 <DatePicker
-                  picker="month"
-                  placeholder="Select month and year"
+                  placeholder="Select Date of Birth"
                   className="input_box"
                   name="dog_birthday"
                   value={profileData.dog_birthday}
@@ -355,7 +361,7 @@ function ProfileRegistration1({profileData, setProfileData}) {
               </Radio.Group>
             </Form.Item>
           </Row>
-          <br />
+          {/* <br /> */}
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">The breed is</h1>
@@ -412,7 +418,6 @@ function ProfileRegistration2({profileData, setProfileData}) {
           </Row>
 
           <br />
-
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">
@@ -453,45 +458,25 @@ function ProfileRegistration2({profileData, setProfileData}) {
               </Radio.Group>
             </Form.Item>
           </Row>
-          <br />
-
+              {/* <Row></Row> */}
+              {/* <Row></Row> */}
+              {/* <Row></Row> */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">
               What are you looking for ( Feel free to select multiple choices)?
             </h1>
-            <Form.Item>
-              <Radio.Group
-                style={{display: "flex", flexDirection: "row", gap: 10}}
-                value={profileData.activity_type}
-                onChange={(e) => {
-                  setProfileData({
-                    ...profileData,
-                    activity_type: e.target.value,
-                  });
-                }}
-              >
-                <Radio.Button
-                  className="radio_btn"
-                  value="boarding"
-                  style={{color: "black"}}
-                >
-                  Boarding
-                </Radio.Button>
-                <Radio.Button
-                  className="radio_btn"
-                  value="daycare"
-                  style={{color: "black"}}
-                >
-                  Daycare
-                </Radio.Button>
-                <Radio.Button
-                  className="radio_btn"
-                  value="playdate"
-                  style={{color: "black"}}
-                >
-                  Playdate
-                </Radio.Button>
-              </Radio.Group>
+            <Form.Item
+            value={profileData.activity_type}
+            onChange={(e) => {
+              setProfileData({
+                ...profileData,
+                activity_type: e.target.value,
+              });
+            }}
+            >
+             <Checkbox value="boarding">Boarding</Checkbox>
+             <Checkbox value="daycare">Daycare</Checkbox>
+             <Checkbox value="playdate">Playdate</Checkbox>
             </Form.Item>
           </Row>
           <br />
@@ -577,8 +562,7 @@ function ProfileRegistration3({profileData, setProfileData}) {
                   value="work in progress"
                   style={{color: "black"}}
                 >
-                  working in <br />
-                  <span>progress</span>
+                  working in progress
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
@@ -619,16 +603,14 @@ function ProfileRegistration3({profileData, setProfileData}) {
                   value="couple hours"
                   style={{color: "black"}}
                 >
-                  yes, a couple <br />
-                  <span>of hour</span>
+                  yes, a couple of hours
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
                   value="a few hours"
                   style={{color: "black"}}
                 >
-                  yes, a few of <br />
-                  <span>hours</span>
+                  yes, a few of hours
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
@@ -843,7 +825,7 @@ function ProfileRegistration4({profileData, setProfileData, handleImage, handleI
           {/* Row for Breed  */}
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
             <h1 className="dog_size_heading">
-              preference regarding spaying or neutering
+              Preference regarding spaying or neutering
             </h1>
             <Form.Item>
               <Radio.Group
@@ -877,7 +859,7 @@ function ProfileRegistration4({profileData, setProfileData, handleImage, handleI
           <br />
 
           <Row style={{display: "flex", flexDirection: "column"}} gutter={16}>
-            <h1 className="dog_size_heading">Shedding type you'd prefer?</h1>
+            <h1 className="dog_size_heading">Shedding type you'd prefer</h1>
             <Form.Item>
               <Radio.Group
                 style={{display: "flex", flexDirection: "row", gap: 10}}
