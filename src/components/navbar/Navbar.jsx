@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const firstName = authDetails?.firstname;
   const lastName = authDetails?.lastname;
+  const profilePic = authDetails?.profile_pic;
 
  
 
@@ -69,7 +70,7 @@ const Navbar = () => {
         }
       >
         <Col lg={12} className="main_first_col">
-          <Link to="/">
+          <Link to={!authDetails ? "/register" : "/search"}>
             {/* <img
         src="assets/header/Dogs-Mom-Circle (4) 1.svg"
         alt="Picture of the author"
@@ -96,7 +97,9 @@ const Navbar = () => {
                        
                         {!authDetails?'Account':`${firstName + " " +lastName}`}
                       
-                      <UserOutlined />
+                        <UserOutlined />
+                        {/* <Avatar size="small" src = {profilePic}/> */}
+
                     </Space>
                   </Button>
                 </Dropdown>
@@ -107,7 +110,8 @@ const Navbar = () => {
                     <Space>
                     {!authDetails?'Account':`${firstName + " " +lastName}`}
 
-                      <UserOutlined />
+                      {/* <UserOutlined /> */}
+                        <Avatar size="small" src = {profilePic}/>
                     </Space>
                   </Button>
                 </Dropdown>

@@ -4,6 +4,7 @@
     background: #F0F2F5;
     border-radius: 22px;
     display: flex;
+    align-items: center;
     /* gap: 30px; */
 
 }
@@ -24,17 +25,13 @@
     text-align: center;
 }
 
+
 .login_link {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    padding: 20px;
+    text-align: center;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    /* line-height: 22px; */
+    font-size: 14px; 
 }
 
 .signup_link {

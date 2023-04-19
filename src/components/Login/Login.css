@@ -44,10 +44,12 @@
 }
 
 .forget_password_head {
-    display: flex;
-    align-items:center;
+    /* display: flex; */
+    /* align-items:center; */
     /* flex-direction: row; */
     /* justify-content: space-evenly; */
+    display: flex;
+    justify-content: start;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -74,3 +76,13 @@
 
     color: #FFFFFF;
 }
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #EAB2BB;
+    border-color: #EAB2BB;
+}
+
+/* .ant-checkbox-checked .ant-checkbox-inner:hover {
+    background-color: #EAB2BB;
+    border-color: #EAB2BB;
+} */

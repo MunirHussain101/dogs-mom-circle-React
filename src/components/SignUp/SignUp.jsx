@@ -62,7 +62,14 @@ const SignUp = () => {
           <Form onFinish={handleSubmit} scrollToFirstError>
             <Col lg={24} xs={24}>
               <div className="main_login_input">
-                <Link to="/login">
+                <p className="login_link" style={{background:"none"}}>
+                 Already a member?
+                 &nbsp;
+                 <Link to="/login" style={{color:"#EAB2BB"}}>
+                 Login here
+                 </Link>
+                </p>
+                {/* <Link to="/login">
                   <Button type="text" className="login_link" style={{background:"none"}}>
                     Login
                   </Button>
@@ -76,7 +83,7 @@ const SignUp = () => {
                   >
                     Sign Up
                   </Button>
-                </Link>
+                </Link> */}
               </div>
             </Col>
             <br />
@@ -152,11 +159,11 @@ const SignUp = () => {
               style={{marginTop: 22}}
             >
                 <Row>
-                  <Checkbox >
-                  By using this platform, you accept full <br/>responsibility for the
-                  safety of yourself and <br/>your dog during any exchanges. The
-                  platform <br/>is not liable for any incidents or damages that <br/>may
-                  occur. Please use caution and due <br/>diligence when interacting
+                  <Checkbox style={{width:"360px"}}>
+                  By using this platform, you accept full responsibility for the
+                  safety of yourself and your dog during any exchanges.The
+                  platform is not liable for any incidents or damages that may
+                  occur. Please use caution and due diligence when interacting
                   with other users.
                 </Checkbox>
                 </Row>
