@@ -1,11 +1,12 @@
 import { Spin } from 'antd';
 import React , {Suspense, lazy} from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
-import { useSelector } from 'react-redux';
-import ProfileRegistration from './components/dog-profile/ProfileRegistration';
 import ErrorPage from './pages/404/ErrorPage';
+import ReusableMultiStepFrom from './components/common-component/multi-step-form/ReusableMultiStepFrom';
+// import AvatarChanger from './pages/step-pages/AvatarChanger';
 
 
 const Home=lazy(()=>import('./pages/home/Home'))
@@ -33,7 +34,8 @@ const SubRoutes=()=>{
                 <Route path='/' element={<Home/>} />
                 <Route path="/register" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/profileReg" element={<ProfileRegistration />} />
+                <Route path="/profileReg" element={<ReusableMultiStepFrom />} />
+                {/* <Route path="/upload-img" element={<AvatarChanger />} /> */}
                 <Route path="/404" element={<ErrorPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
 

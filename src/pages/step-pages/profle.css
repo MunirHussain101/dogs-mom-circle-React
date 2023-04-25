@@ -82,17 +82,22 @@
 .next_btn { 
     /* width: 91px; */
     /* height: 56px; */
-    display: flex;
-    align-items: center;
-    padding: 24px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* display: flex;
+    justify-content: flex-end; */
+    width: 90px;
+    height: 50px;
+    /* padding: 24px; */
     background: #EAB2BB;
     border-radius: 50px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
+/* margin-left: auto; */
     /* line-height: 24px; */
-    text-align: center;
+    /* text-align: center; */
     color: #FFFFFF;
     border: none;
     margin-top: 10px;
@@ -104,9 +109,12 @@
     /* width: 92px; */
     /* height: 56px; */
     /* background: #1F2124; */
-    display: flex;
-    align-items: center;
-    padding: 24px;
+    /* display: flex; */
+    /* align-items: center; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 90px;
+    height: 50px;
     border-radius: 50px;
     font-family: 'Inter';
     font-style: normal;
@@ -162,6 +170,7 @@
 
 }
 
+
 .ant-radio-button-checked,
 .ant-radio-button-inner,
 .ant-radio-button-inner,
@@ -175,6 +184,8 @@
 .ant-radio:hover,
 .ant-radio-button-wrapper:hover {
   background: #EAB2BB;
+  border-color: #EAB2BB;
+
 }
 
 /* .ant-checkbox-checked .ant-checkbox-inner::before{
@@ -190,3 +201,45 @@
     height: 100px;
 
 } */
+@media screen and (max-width: 800px) {
+
+.main_form_box{
+width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  flex-direction: column;
+}
+.input_box_contaienr{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.input_box{
+    width: 300px;
+}
+.radio_btn_2 {
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    /* padding: 35px; */
+    /* padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 50px;
+    padding-bottom: 50px; */
+    /* gap: 10px; */
+    width: 100%;
+    height: 130px;
+    background: #FFFFFF;
+    /* border: 1px solid #DDDDDD; */
+    /* border-radius: 12px; */
+    font-weight: 600;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+} 
+
+}
