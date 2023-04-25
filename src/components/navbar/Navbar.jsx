@@ -4,39 +4,45 @@ import {UserOutlined} from "@ant-design/icons";
 import {Link, useLocation} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import "./Navbar.css";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUserAuth } from "../../features/auth/authSlice";
-
-
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUserAuth} from "../../features/auth/authSlice";
+import CreatePost from "../posts/CreatePost";
 
 const Navbar = () => {
   const location = useLocation();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const authDetails = useSelector((state) => state?.auth?.userDetails);
-
 
   const firstName = authDetails?.firstname;
   const lastName = authDetails?.lastname;
   const profilePic = authDetails?.profile_pic;
 
- 
-
-
-  
-     const logoutAuth=()=>{
-      dispatch((logoutUserAuth()))
-  }
-
-
+  const logoutAuth = () => {
+    dispatch(logoutUserAuth());
+  };
 
   const itemsMenuAuth = [
     {
       key: "4",
-      label: <Link to='/' onClick={logoutAuth}>Logout</Link>,
+      label: <Link to="/">Profile</Link>,
     },
-   
+    {
+      key: "5",
+      label: <Link to="/">Requests</Link>,
+    },
+    {
+      key: "6",
+      label: <Link to="/">Settings</Link>,
+    },
+    {
+      key: "7",
+      label: (
+        <Link to="/" onClick={logoutAuth}>
+          Logout
+        </Link>
+      ),
+    },
   ];
-     
 
   const itemsMenuNoAuth = [
     {
@@ -47,21 +53,16 @@ const Navbar = () => {
       key: "2",
       label: <Link to="/login">Login</Link>,
     },
-  
   ];
   const menuPropsAuth = {
-    items:itemsMenuAuth
+    items: itemsMenuAuth,
     //   onClick: handleMenuClick,
   };
   const menuPropsNoAuth = {
-    items:itemsMenuNoAuth
+    items: itemsMenuNoAuth,
     //   onClick: handleMenuClick,
   };
 
-
-
-
-  
   return (
     <>
       <Row
@@ -86,108 +87,91 @@ const Navbar = () => {
             />{" "}
           </Link>
         </Col>
+
         <Col lg={12} className="main_sec_col">
-          <Link href="/search-page">
-   
-               {location.pathname==='/'?(
-                <>
-                  <Dropdown menu={authDetails?menuPropsAuth:menuPropsNoAuth}>
-                  <Button>
-                    <Space>
-                       
-                        {!authDetails?'Account':`${firstName + " " +lastName}`}
-                      
-                        <UserOutlined />
-                        {/* <Avatar size="small" src = {profilePic}/> */}
+          <Row style={{display: "flex", gap: 25, alignItems: "center"}}>
+            <Col>
+              {location.pathname === "/" ||
+              location.pathname === "/register" ||
+              location.pathname === "/login" ||
+              location.pathname === "/profileReg" ? (
+                <></>
+              ) : (
+                <CreatePost />
+              )}
+              {/* <Button
+              style={{background:"#EAB2BB", borderRadius:7, color:"white", borderColor:"#EAB2BB"}}
+              >Post
+             </Button> */}
+            </Col>
+            <Col>
+              {location.pathname === "/" ||
+              location.pathname === "/register" ||
+              location.pathname === "/login" ||
+              location.pathname === "/profileReg" ? (
+                <></>
+              ) : (
+                <LazyLoadImage src="/assets/favicoIcon/bell.svg" />
+              )}
+            </Col>
 
-                    </Space>
-                  </Button>
-                </Dropdown>
-                </>
-               ):<>
-                      <Dropdown menu={authDetails?menuPropsAuth:menuPropsNoAuth}>
-                  <Button>
-                    <Space>
-                    {!authDetails?'Account':`${firstName + " " +lastName}`}
+            <Col>
+              {location.pathname === "/" ||
+              location.pathname === "/register" ||
+              location.pathname === "/login" ||
+              location.pathname === "/profileReg" ? (
+                <></>
+              ) : (
+                <LazyLoadImage src="/assets/favicoIcon/message.svg" />
+              )}
+            </Col>
+            <Col>
+              <Link href="/search-page">
+                {location.pathname === "/" ||
+                location.pathname === "/register" ||
+                location.pathname === "/login" ||
+                location.pathname === "/profileReg" ? (
+                  <>
+                    <Dropdown
+                      menu={authDetails ? menuPropsAuth : menuPropsNoAuth}
+                    >
+                      <Button>
+                        <Space>
+                          {!authDetails
+                            ? "Account"
+                            : `${firstName + " " + lastName}`}
 
-                      {/* <UserOutlined /> */}
-                        {!authDetails ? <UserOutlined /> : <Avatar size="small" src = {profilePic}/>}
-                    </Space>
-                  </Button>
-                </Dropdown>
-               </>}
+                          <UserOutlined />
+                        </Space>
+                      </Button>
+                    </Dropdown>
+                  </>
+                ) : (
+                  <>
+                    <Dropdown
+                      menu={authDetails ? menuPropsAuth : menuPropsNoAuth}
+                    >
+                      <Button>
+                        <Space>
+                          {!authDetails
+                            ? "Account"
+                            : `${firstName + " " + lastName}`}
 
-              {/* {authDetails ? (
-              <>
-                <Dropdown menu={menuProps}>
-                  <Button>
-                    <Space>
-                    <b>{firstName + " " + lastName}</b>
-                      <UserOutlined />
-                    </Space>
-                  </Button>
-                </Dropdown>
-              </>
-            ) : (
-              <>
-                <Button icon={<UserOutlined />}>
-                  {""}
-                  <b>{firstName + " " + lastName}</b>
-                </Button>
-              </>
-            )} */}
-            {/* {location.pathname === "/" ? (
-              <>
-                <Dropdown menu={menuProps}>
-                  <Button>
-                    <Space>
-                      Account
-                      <UserOutlined />
-                    </Space>
-                  </Button>
-                </Dropdown>
-              </>
-            ) : (
-              <>
-                <Button icon={<UserOutlined />}>
-                  {""}
-                  <b>{firstName + " " + lastName}</b>
-                </Button>
-              </>
-            )} */}
-            {/* <Button icon={<UserOutlined />}>
-                  {''}
-                  <b>
-                   Bao
-                   </b>
-                   
-                   </Button>
-            <Dropdown menu={menuProps}>
-              <Button>
-                <Space>
-                  Account
-                  <UserOutlined />
-                </Space>
-              </Button>
-            </Dropdown> */}
-          </Link>
+                          {/* <UserOutlined /> */}
+                          {!authDetails ? (
+                            <UserOutlined />
+                          ) : (
+                            <Avatar size="small" src={profilePic} />
+                          )}
+                        </Space>
+                      </Button>
+                    </Dropdown>
+                  </>
+                )}
+              </Link>
+            </Col>
+          </Row>
         </Col>
-
-        {/* {location.pathname!=='/'?(
-                    <>
-                             <Col lg={12} className="main_sec_col">
-                    <Link href='/search-page'>
-                <Button icon={<UserOutlined />}>
-                  {''}
-                  <b>
-                   Bao
-                   </b>
-                   
-                   </Button>
-                   </Link>
-                </Col>
-                    </>
-                ):<></>} */}
       </Row>
     </>
   );

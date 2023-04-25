@@ -168,9 +168,9 @@ function Profile() {
           <br />
 
           <div className="flex_container">
-            <div className="furBaby_box">Moderate Shedding</div>
-            <div className="furBaby_box">Very house trained</div>
-            <div className="furBaby_box">Can not be left along</div>
+            <div className="furBaby_box">{userData?.shedding_prefs}</div>
+            <div className="furBaby_box">{userData?.house_training_prefs}</div>
+            <div className="furBaby_box">{userData?.dog_left_alone_prefs}</div>
             <div className="furBaby_box">Get along with cats</div>
           </div>
         </Col>

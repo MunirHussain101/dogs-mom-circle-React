@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
+
+.ant-modal-header .ant-modal-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    /* line-height: 32px; */
+    /* display: flex; */
+    /* align-items: center; */
+    text-align: center;
+    color: #1F2124;
+
+}
+.post_modal {
+    display: "flex";
+  justify-content: "center";
+  align-items: "center"
+}
+
+.create_post_heading {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    /* line-height: 32px; */
+    /* display: flex; */
+    /* align-items: center; */
+    text-align: center;
+    color: #1F2124;
+}
+
+.post_para {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    /* line-height: 32px; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* text-align: center; */
+    color: #1F2124;
+}
+
+.sub_post_para {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #EAB2BB;
+}
+
+.date_para {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #1F2124;
+}
+
+.text_area{
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+}
+
+
+.edit_btn {
+    /* box-sizing: border-box; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* padding: 8px 12px; */
+    /* gap: 4px; */
+    width: 227px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #7A7777;
+    border-radius: 12px;
+}
+
+.confirm_btn {
+    background: #EAB2BB;
+    color: #FFFFFF;
+    border: 1px solid #EAB2BB;
+    border-radius: 12px;
+    width: 227px;
+    height: 40px;
+}
+
+.ant-modal-close-x {
+    display: none;
+}
+
+.submit_modal {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center; 
+    /* display: flex;
+    align-items: center;*/
+    color: #1F2124;
+}
+
+.ant-picker-suffix
+.anticon .anticon-calendar {
+    /* background: #EAB2BB; */
+    color: red;
+}
+
+
+@media screen and (max-width: 800px) {
+    .edit_btn{
+     width: 100%;
+    } 
+    .confirm_btn {
+        width: 100%;
+    }
+
+ }
