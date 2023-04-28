@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { Steps, Button, Row, Col, Modal, message, Form } from "antd";
-import StepOne from "../../../pages/step-pages/StepOne";
-import StepTwo from "../../../pages/step-pages/StepTwo";
-import StepThree from "../../../pages/step-pages/StepThree";
-import StepFour from "../../../pages/step-pages/StepFour";
-import axios from "../../../api/axios";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-const { Step } = Steps;
+import React, {useState} from "react";
+import {Steps, Button, Row, Col, Modal, message, Form} from "antd";
+import StepOne from "../../../../pages/step-pages/StepOne";
+import StepTwo from "../../../../pages/step-pages/StepTwo";
+import StepThree from "../../../../pages/step-pages/StepThree";
+import StepFour from "../../../../pages/step-pages/StepFour";
+import axios from "../../../../api/axios";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
+import { completeForm, storeFormData } from "../../../../features/multi-step-form/formSlice";
+const {Step} = Steps;
 
 const ReusableMultiStepFrom = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -16,6 +17,8 @@ const ReusableMultiStepFrom = () => {
   const authDetails = useSelector((state) => state?.auth?.userGetId);
   const [image, setImage] = useState(null);
   const [image2, setImage2] = useState(null);
+  const dispatch = useDispatch();
+  // const completed = useSelector(state => state.form.completed);
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
@@ -117,7 +120,11 @@ const ReusableMultiStepFrom = () => {
   const handleFinish = async () => {
     try {
       const response = await axios.post("/api/auth/additional-data", formData);
+      // dispatch(completeForm());
+      // dispatch((storeFormData(response.data)))
+
       console.log(response?.data);
+
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -211,6 +218,16 @@ const ReusableMultiStepFrom = () => {
                   Back
                 </Button>
               )}
+              {currentStep === 0 && (
+                <Link to="/login">
+                  <Button
+                    className="back_btn"
+                    style={{color: "black", borderColor: "black"}}
+                  >
+                    Skip for now
+                  </Button>
+                </Link>
+              )}
               {currentStep < 3 && (
                 <Button
                   className="next_btn"
@@ -224,6 +241,7 @@ const ReusableMultiStepFrom = () => {
                   Next
                 </Button>
               )}
+
               {currentStep === 3 && (
                 <Button
                   className="next_btn"

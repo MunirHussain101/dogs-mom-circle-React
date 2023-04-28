@@ -19,6 +19,7 @@ function Profile() {
         id: id,
         token: tokenValue
       });
+      // console.log("GetProfile -->",response?.data);
       setUserData(response?.data);
     }
     getData();
@@ -56,7 +57,14 @@ function Profile() {
                     <p className="card_msg">{card.pets[0].datePara}</p>
                     <p className="card_date">{new Date(userData?.createdAt).toLocaleString().split(',')[0]}</p>
                     </div>
+                    <br />
+                    <div>
+                    <Button className="chat_btn">
+                    <span className="btn_msg">Chat Now</span>
+                  </Button>
+                    </div>
                 </Col>
+                
             </Row>
         </Col>
 
@@ -94,13 +102,13 @@ function Profile() {
 
           
 
-            <Row style={{marginTop:100, display:'flex', justifyContent:'flex-end'}}>
+            {/* <Row style={{marginTop:100, display:'flex', justifyContent:'flex-end'}}>
               <Col>
                   <Button className="chat_btn">
                     <span className="btn_msg">Chat Now</span>
                   </Button>
               </Col>
-            </Row>
+            </Row> */}
         </Col>
         <Col lg={4}></Col>
       </Row>

@@ -7,6 +7,8 @@ import "./Navbar.css";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserAuth} from "../../features/auth/authSlice";
 import CreatePost from "../posts/CreatePost";
+import NotificationDropdown from "../notification/NotificationDropdown";
+import Chat from "../../pages/chats/Chat";
 
 const Navbar = () => {
   const location = useLocation();
@@ -28,14 +30,10 @@ const Navbar = () => {
     },
     {
       key: "5",
-      label: <Link to="/">Requests</Link>,
-    },
-    {
-      key: "6",
       label: <Link to="/">Settings</Link>,
     },
     {
-      key: "7",
+      key: "6",
       label: (
         <Link to="/" onClick={logoutAuth}>
           Logout
@@ -56,11 +54,9 @@ const Navbar = () => {
   ];
   const menuPropsAuth = {
     items: itemsMenuAuth,
-    //   onClick: handleMenuClick,
   };
   const menuPropsNoAuth = {
     items: itemsMenuNoAuth,
-    //   onClick: handleMenuClick,
   };
 
   return (
@@ -111,7 +107,7 @@ const Navbar = () => {
               location.pathname === "/profileReg" ? (
                 <></>
               ) : (
-                <LazyLoadImage src="/assets/favicoIcon/bell.svg" />
+                <NotificationDropdown />
               )}
             </Col>
 
@@ -122,7 +118,10 @@ const Navbar = () => {
               location.pathname === "/profileReg" ? (
                 <></>
               ) : (
-                <LazyLoadImage src="/assets/favicoIcon/message.svg" />
+                // <LazyLoadImage src="/assets/favicoIcon/message.svg" />
+                <Link to="/chats">
+                  <LazyLoadImage src="/assets/favicoIcon/message.svg" />
+                </Link>
               )}
             </Col>
             <Col>
