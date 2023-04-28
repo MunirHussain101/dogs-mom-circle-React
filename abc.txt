@@ -43,7 +43,7 @@ Chat div
 </Row>
 
 
-<COl>
+<Col>
 </Row>
 
 

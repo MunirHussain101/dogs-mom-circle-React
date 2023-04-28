@@ -1,6 +1,7 @@
 import { configureStore, combineReducers} from '@reduxjs/toolkit';
 import authSlice from '../features/auth/authSlice';
 import InfoSlice from "../features/additionalnfo/Info";
+import formSlice from '../features/multi-step-form/formSlice';
 
 import  storage  from 'redux-persist/lib/storage';
 import {
@@ -16,7 +17,8 @@ const persistConfig={
 
 const reducer=combineReducers({
   auth:authSlice,
-  info: InfoSlice
+  info: InfoSlice,
+  form: formSlice
 })
 
 

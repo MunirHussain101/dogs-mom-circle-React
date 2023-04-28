@@ -1,0 +1,32 @@
+{
+    "chats" : [
+        {
+            "img": "assets/home-cards/new13.svg",
+            "name": "Navena",
+            "msg": "Thank you!",
+            "time": "5 min ago",
+            "dropdownImg": "/assets/dropdownIcon/dropdownImg.svg"
+        },
+        {
+            "img":"assets/home-cards/new22.svg",
+            "name": "Kristin",
+            "msg": "Thank you!",
+            "time": "5 min ago",
+            "dropdownImg": "/assets/dropdownIcon/dropdownImg.svg"
+        },
+        {
+            "img": "assets/home-cards/new21.svg",
+            "name": "Oceane",
+            "msg": "Thank you!",
+            "time": "5 min ago",
+            "dropdownImg": "/assets/dropdownIcon/dropdownImg.svg"
+        },
+        {
+            "img": "assets/home-cards/new24.svg",
+            "name": "Sarah",
+            "msg": "Thank you!",
+            "time": "5 min ago",
+            "dropdownImg": "/assets/dropdownIcon/dropdownImg.svg"
+        }
+    ]
+}

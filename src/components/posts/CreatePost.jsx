@@ -16,6 +16,7 @@ const CreatePost = () => {
   // const [isMainModel, setMainModel] = useState(false);
   const [isSubModel, setSubModel] = useState(false); // Second Model
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
 
@@ -29,21 +30,19 @@ const CreatePost = () => {
     // setMainModel(false);
     setIsModalOpen(false);
     setSubModel(true);
+    setDisable(true);
     navigate("/search");
-
   };
   const token = localStorage.getItem("token");
   // POST API INTEGRATE:
   const handleSubmit = async () => {
-   console.log('payload::', posts)
+    console.log("payload::", posts);
 
     try {
-      const response = await axios.post("/api/posts", 
-      posts, 
-      {
+      const response = await axios.post("/api/posts", posts, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       // console.log("post response --->", response.data);
       messageApi.open({
@@ -62,7 +61,7 @@ const CreatePost = () => {
   const ViewRequest = () => {
     handleSubmit();
     window.location.reload("/search");
-  }
+  };
   return (
     <>
       {contextHolder}
@@ -138,12 +137,27 @@ const CreatePost = () => {
         {/* Button */}
         <Row>
           <Col lg={12} xs={12}>
+            <Link to="/profileReg">
             <Button className="edit_btn">Edit profile</Button>
+            </Link>
           </Col>
           <Col lg={12} xs={12}>
-            <Button className="confirm_btn" onClick={onSubModel}>
+            {disable ? (
+              <Button
+              className="confirm_btn"
+              onClick={onSubModel}
+              disabled={disable}
+            >
               Confirm Request
             </Button>
+            ) : (
+              <Button
+              className="confirm_btn"
+              onClick={onSubModel}
+            >
+              Confirm Request
+            </Button>
+            )}
           </Col>
         </Row>
         <br />
@@ -174,7 +188,10 @@ const CreatePost = () => {
         <Row>
           <Col lg={12} xs={12}>
             <Link to="/search">
-              <Button className="edit_btn" onClick={() => window.location.reload("/search")}>
+              <Button
+                className="edit_btn"
+                onClick={() => window.location.reload("/search")}
+              >
                 Back
               </Button>
             </Link>

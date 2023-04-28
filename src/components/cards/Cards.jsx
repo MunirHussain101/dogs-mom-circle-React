@@ -27,7 +27,7 @@ const Cards = ({userData}) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("reviews response --->", response.data);
+      // console.log("reviews response --->", response.data);
       navigate("/search");
     } catch (err) {
       messageApi.open({
@@ -42,23 +42,48 @@ const Cards = ({userData}) => {
     const getPost = async () => {
       const response = await axios.get("/api/posts", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+          Authorization: `Bearer ${token}`,
+        },
+      });
       // console.log("post get ---> ", response.data);
       setGetPosts(response.data);
-    }
+    };
     getPost();
   }, []);
 
- console.log(getPosts)
+  //  console.log(getPosts)
+  //  console.log("UserData", userData);
+  // const date = new Date("2023-04-05T10:20:18.945Z");
+
+  // const month = new Intl.DateTimeFormat("en", {month: "short"}).format(date);
+  // const day = date.getDate();
+  // const year = date.getFullYear().toString().substr(-2);
+
+  // const formattedDate = `${month} ${day}${getSuffix(day)}’${year}`;
+
+  // function getSuffix(day) {
+  //   if (day === 1 || day === 21 || day === 31) {
+  //     return "st";
+  //   } else if (day === 2 || day === 22) {
+  //     return "nd";
+  //   } else if (day === 3 || day === 23) {
+  //     return "rd";
+  //   } else {
+  //     return "th";
+  //   }
+  // }
+
+  // console.log(formattedDate); // Output: Apr 7th’23
 
   return (
     <>
       {contextHolder}
+      <Row justify="space-between" className="main_row_cards_heading">
+        <h1>All Members</h1>
+      </Row>
       <Row justify="space-between" className="main_row_cards">
-        {userData
-          ? userData.map((values) => {
+        {getPosts.allUsers
+          ? getPosts.allUsers.map((values) => {
               return (
                 <>
                   <Col
@@ -83,7 +108,7 @@ const Cards = ({userData}) => {
                     <Row justify="space-between" style={{height: 40}}>
                       <Col>
                         <h1 className="main_row_card_f_head">
-                          {values.firstname} {values.lastname}
+                          {values?.firstname} {values?.lastname}
                         </h1>
                       </Col>
                       <Col>
@@ -129,21 +154,24 @@ const Cards = ({userData}) => {
                     </p>
                     {/* </div> */}
                     <Row justify="space-between">
-                    <Col>
-                        <h1 className="main_row_card_dates_val">
-                          {
-                            new Date(values.createdAt)
-                              .toLocaleDateString()
-                              .split(",")[0]
-                          }
-                        </h1>
+                      <Col>
+                        {getPosts.posts.map((val) => {
+                          return (
+                            <>
+                            <p>{val.start_date}</p>
+                            {/* <span>{new Date(val.end_date).toLocaleDateString()}</span>; */}
+                            </>
+                          )
+                        })}
                       </Col>
                       <Col style={{display: "flex", alignItems: "center"}}>
                         <Rate
                           style={{color: "#3E6DA8", fontSize: 14}}
                           defaultValue={5}
                         />{" "}
-                        <span style={{color: "#3E6DA8", fontSize: 14}}>(10)</span>
+                        <span style={{color: "#3E6DA8", fontSize: 14}}>
+                          (10)
+                        </span>
                       </Col>
                     </Row>
                   </Col>

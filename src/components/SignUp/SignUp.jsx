@@ -53,7 +53,6 @@ const SignUp = () => {
           style={{
             display: "flex",
             justifyContent: "center",
-
             background: "#FFFFFF",
             padding: "45px",
             borderRadius: "20px",
