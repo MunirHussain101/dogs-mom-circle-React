@@ -27,11 +27,12 @@ const Chat = () => {
                       display: "flex",
                       flexDirection: "row",
                       columnGap: 10,
+                      cursor:"pointer"
                     }}
                     onClick={() => setChat(true)}
                   >
                     <Avatar size={74} src={val.img} />
-                    <div>
+                    <div >
                       <h1>{val.name}</h1>
                       <p>{val.msg}</p>
                       <p>{val.time}</p>
@@ -45,7 +46,7 @@ const Chat = () => {
                     <img
                       // src="/assets/dropdownIcon/dropdownImg.svg"
                       src={val.dropdownImg}
-                      style={{marginTop: 25}}
+                      style={{marginTop: 25,}}
                     />
                   </Col>
                 </>
