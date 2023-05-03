@@ -30,8 +30,9 @@ const CreatePost = () => {
     // setMainModel(false);
     setIsModalOpen(false);
     setSubModel(true);
+    handleSubmit();
     setDisable(true);
-    navigate("/search");
+    // navigate("/profile");
   };
   const token = localStorage.getItem("token");
   // POST API INTEGRATE:
@@ -49,7 +50,7 @@ const CreatePost = () => {
         type: "success",
         content: "New Post Added",
       });
-      navigate("/search");
+      // navigate("/search");
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -58,10 +59,10 @@ const CreatePost = () => {
     }
   };
 
-  const ViewRequest = () => {
-    handleSubmit();
-    window.location.reload("/search");
-  };
+  // const ViewRequest = () => {
+  //   handleSubmit();
+  //   window.location.reload("/search");
+  // };
   return (
     <>
       {contextHolder}
@@ -112,7 +113,7 @@ const CreatePost = () => {
         </Row>
         <br />
         {/* Additional Information */}
-        <Row justify="center">
+        {/* <Row justify="center">
           <Col lg={24} xs={24}>
             <p className="post_para">
               Additional information about this request
@@ -131,7 +132,7 @@ const CreatePost = () => {
               }
             />
           </Col>
-        </Row>
+        </Row> */}
 
         <br />
         {/* Button */}
@@ -164,12 +165,10 @@ const CreatePost = () => {
       </ReusableModal>
 
       {/* Sub Modal */}
-      <Modal
+      {/* <Modal
         closable={false}
         footer={false}
         open={isSubModel}
-        // onOk={(e) => onSubModel(e, false)}
-        // onCancel={(e) => onSubModel(e, false)}
       >
         <Row>
           <Col lg={24} style={{marginTop: 40, marginBottom: 40}}>
@@ -202,7 +201,7 @@ const CreatePost = () => {
             </Button>
           </Col>
         </Row>
-      </Modal>
+      </Modal> */}
       <br />
     </>
   );

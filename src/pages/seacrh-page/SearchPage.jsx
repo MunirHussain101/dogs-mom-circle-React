@@ -6,7 +6,6 @@ import axios from "../../api/axios";
 import Cards from "../../components/cards/Cards";
 import { getSearchDetails } from "../../features/additionalnfo/Info";
 import { useEffect, useState } from "react";
-// import Cards from "../components/singleton-comp/Cards";
 
 const SearchPage=()=>{
   const [userData, setUserData] = useState([]);

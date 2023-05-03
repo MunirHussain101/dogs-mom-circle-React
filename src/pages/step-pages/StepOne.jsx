@@ -21,13 +21,7 @@ const StepOne = ({profileData, setProfileData}) => {
     obj.value = index;
     return obj;
   });
-  // const renderOptions = () => {
-  //   return breeds.map((option) => (
-  //     <Option key={option.value} value={option.value}>
-  //       {option.label}
-  //     </Option>
-  //   ));
-  // };
+
   return (
     <>
       <Row>
@@ -71,7 +65,6 @@ const StepOne = ({profileData, setProfileData}) => {
             {/* <Row> */}
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row"}}
                 className="radio_group"
                 value={profileData.dog_size}
                 onChange={(e) => {
@@ -149,45 +142,27 @@ const StepOne = ({profileData, setProfileData}) => {
             <h1 className="dog_size_heading">The breed is</h1>
             <div>
               <Select
-               style={{width: 120}}
+               style={{width: "180px"}}
+               placeholder="Select Breed"
+               showSearch
+               optionFilterProp="children"
+               filterOption={(input, option) =>
+                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }
                className="input_box_1"
-                // showSearch
-                placeholder={"Select Breed"}
-                // optionFilterProp="children"
-                // filterOption={(input, option) =>
-                //   (option?.label ?? "").includes(input)
-                // }
                 options={[
                   {value: "0", label: `Select Breed`},
-                  // {value: "1", label: `Pug2`},
-                  // {value: "2", label: `Pug3`},
                   ...breedsDetails,
                 ]}
-              >
-                {/* {breeds.map((option) => {
-                  return <Select.Option key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Option>
-                })} */}
-                </Select>
-              {/* <Select
-                style={{width: 120}}
-                className="input_box_1"
-                showSearch
                 value={profileData.dog_breed}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
-                    dog_breed: e,
+                    dog_breed: breeds[e],
                   });
-                }} */}
-                {/* // options={[...breedsDetails]} */}
-              {/* // > */}
-                {/* {renderOptions()} */}
-                {/* <Option value="pug">Pug</Option> */}
-              {/* </Select> */}
-
-              {/* </Form.Item> */}
+                }} 
+              >
+                </Select>
             </div>
           </Row>
           <br />

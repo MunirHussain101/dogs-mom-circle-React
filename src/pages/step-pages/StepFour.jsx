@@ -11,7 +11,6 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
         <Col lg={4} xs={0}></Col>
 
         <Col lg={16} xs={24} className="main_form_box" >
-          {/* Row for Breed  */}
           <Row
             style={{display: "flex", flexDirection: "column", gap: 20}}
             gutter={16}
@@ -105,7 +104,6 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.house_training_prefs}
                 onChange={(e) => {
@@ -261,6 +259,7 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
               <input
                 type="file"
                 accept="image/*"
+                multiple
                 value={profileData.image2}
                 onChange={handleImage2}
               />
