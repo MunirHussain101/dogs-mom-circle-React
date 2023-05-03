@@ -1,8 +1,17 @@
 import React, {useState} from "react";
-import {Row, Col, Form, Radio} from "antd";
+import {Row, Col, Form, Radio, Checkbox} from "antd";
 import "./StepPage.css";
 
 const StepThree = ({profileData, setProfileData}) => {
+  const [selectedBoxes, setSelectedBoxes] = useState([]);
+
+  const handleBoxSelection = (id) => {
+    if (selectedBoxes.includes(id)) {
+      setSelectedBoxes(selectedBoxes.filter((boxId) => boxId !== id));
+    } else {
+      setSelectedBoxes([...selectedBoxes, id]);
+    }
+  };
   return (
     <>
       <Row>
@@ -19,7 +28,6 @@ const StepThree = ({profileData, setProfileData}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.dog_shedding}
                 onChange={(e) => {
@@ -34,7 +42,7 @@ const StepThree = ({profileData, setProfileData}) => {
                   value="no shedding"
                   style={{color: "black"}}
                 >
-                  No shedding
+                  Non shedding
                 </Radio.Button>
                 <Radio.Button
                   className="radio_btn"
@@ -62,7 +70,6 @@ const StepThree = ({profileData, setProfileData}) => {
             <h1 className="dog_size_heading">Is your dog house trained?</h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.dog_house_trained}
                 onChange={(e) => {
@@ -107,7 +114,6 @@ const StepThree = ({profileData, setProfileData}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.dog_can_be_left_alone}
                 onChange={(e) => {
@@ -152,7 +158,6 @@ const StepThree = ({profileData, setProfileData}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.dog_spayed_neutered}
                 onChange={(e) => {
@@ -190,7 +195,6 @@ const StepThree = ({profileData, setProfileData}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
                 value={profileData.dog_good_with_cats}
                 onChange={(e) => {
@@ -227,90 +231,75 @@ const StepThree = ({profileData, setProfileData}) => {
           <br />
 
           <Row
-            style={{display: "flex", flexDirection: "column", gap: 20}}
             gutter={16}
           >
             <h1 className="dog_size_heading">
               What size dogs does your dog get along with? (Feel free to select
               multiple choices)
             </h1>
-            <Form.Item>
-              <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
-                className="radio_group"
-                value={profileData.dog_other_dog_size_compatibility}
-                onChange={(e) => {
-                  setProfileData({
-                    ...profileData,
-                    dog_other_dog_size_compatibility: e.target.value,
-                  });
-                }}
-              >
-                <Radio.Button
-                  className="radio_btn_2"
-                  value="0-15lbs"
-                  style={{color: "black"}}
+            <Form.Item
+              value={profileData.dog_other_dog_size_compatibility}
+              onChange={(e) => {
+                setProfileData({
+                  ...profileData,
+                  dog_other_dog_size_compatibility: e.target.value,
+                });
+              }}
+            >
+              <div className="box-selection-container">
+                <div
+                  className={`box${
+                    selectedBoxes.includes(1) ? " selected" : ""
+                  }`}
+                  onClick={() => handleBoxSelection(1)}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img src="assets/size/small-dog.svg" />
-                    0-15lbs <span>Small</span>
-                  </Row>
-                </Radio.Button>
-                <Radio.Button
-                  className="radio_btn_2"
-                  style={{color: "black"}}
-                  value="16-40lbs"
+                  <img src="assets/size/small-dog.svg" alt="box-1" />
+                  0-15lbs <span>Small</span>
+                  <Checkbox
+                    value="0-15lbs"
+                    // checked={selectedBoxes.includes(1)}
+                  />
+                </div>
+                <div
+                  className={`box${
+                    selectedBoxes.includes(2) ? " selected" : ""
+                  }`}
+                  onClick={() => handleBoxSelection(2)}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img src="assets/size/medium-dog.svg" />
-                    16-40lbs <span>Medium</span>
-                  </Row>
-                </Radio.Button>
-                <Radio.Button
-                  className="radio_btn_2"
-                  value="41-100lbs"
-                  style={{color: "black"}}
+                  <img src="assets/size/medium-dog.svg" alt="box-2" />
+                  16-40lbs <span>Medium</span>
+                  <Checkbox
+                    value="16-40lbs"
+                    // checked={selectedBoxes.includes(2)}
+                  />
+                </div>
+                <div
+                  className={`box${
+                    selectedBoxes.includes(3) ? " selected" : ""
+                  }`}
+                  onClick={() => handleBoxSelection(3)}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img src="assets/size/large-dog.svg" />
-                    41-100lbs <span>Large</span>
-                  </Row>
-                </Radio.Button>
-                <Radio.Button
-                  className="radio_btn_2"
-                  value="100+lbs"
-                  style={{color: "black"}}
+                  <img src="assets/size/large-dog.svg" alt="box-3" />
+                  41-100lbs <span>Large</span>
+                  <Checkbox
+                    value="41-100lbs"
+                    // checked={selectedBoxes.includes(3)}
+                  />
+                </div>
+                <div
+                  className={`box${
+                    selectedBoxes.includes(4) ? " selected" : ""
+                  }`}
+                  onClick={() => handleBoxSelection(4)}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img src="assets/size/gaintdog.svg" />
-                    100+lbs <span>Giant</span>
-                  </Row>
-                </Radio.Button>
-              </Radio.Group>
+                  <img src="assets/size/gaintdog.svg" alt="box-4" />
+                  100+lbs <span>Giant</span>
+                  <Checkbox
+                    value="100+lbs"
+                    // checked={selectedBoxes.includes(4)}
+                  />
+                </div>
+              </div>
             </Form.Item>
           </Row>
           <br />

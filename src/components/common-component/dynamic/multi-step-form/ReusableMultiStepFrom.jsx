@@ -7,7 +7,6 @@ import StepFour from "../../../../pages/step-pages/StepFour";
 import axios from "../../../../api/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import { completeForm, storeFormData } from "../../../../features/multi-step-form/formSlice";
 const {Step} = Steps;
 
 const ReusableMultiStepFrom = () => {
@@ -109,6 +108,7 @@ const ReusableMultiStepFrom = () => {
   formData.append("user_profile", image);
   formData.append("dog_profile", image2);
 
+
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
   };
@@ -121,9 +121,10 @@ const ReusableMultiStepFrom = () => {
     try {
       const response = await axios.post("/api/auth/additional-data", formData);
       // dispatch(completeForm());
-      // dispatch((storeFormData(response.data)))
+      // dispatch((storeFormData(formData)))
 
       console.log(response?.data);
+
 
     } catch (err) {
       messageApi.open({
