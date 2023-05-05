@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, Avatar, Rate, Button} from "antd";
 import card from "../../components/cards/cards.json";
 import "./Profile.css";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "../../api/axios";
 import {useSelector} from "react-redux";
 
@@ -88,9 +88,11 @@ function Profile() {
               </div>
               <br />
               <div>
-                <Button className="chat_btn">
+               <Link to="/chats">
+               <Button className="chat_btn">
                   <span className="btn_msg">Chat Now</span>
                 </Button>
+               </Link>
               </div>
             </Col>
           </Row>

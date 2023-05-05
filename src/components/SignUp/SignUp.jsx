@@ -4,6 +4,10 @@ import { getUserId } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../../api/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 
 import "./SignUp.css";
@@ -11,12 +15,12 @@ import "./SignUp.css";
 
 const SignUp = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [err, setErr] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
  
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, e) => {
 
     try {
       const response = await axios.post(
@@ -29,17 +33,50 @@ const SignUp = () => {
           phone: values.phone,
         },
       );
-      dispatch(getUserId(response?.data?.data?.id));
-
-      navigate("/profileReg");
-      setRegisterSuccess(true);
-
-    } catch (err) {
+      
+     
+        dispatch(getUserId(response?.data?.data?.id));
+        const { firstname, lastname, email, phone, password, file } = values;
+        const displayName = firstname + lastname;
+         //Create user
+         const res = await createUserWithEmailAndPassword(auth, email, password);
+   
+         //Create a unique image name
+         const date = new Date().getTime();
+         const storageRef = ref(storage, `${displayName + date}`);
+   
+         await uploadBytesResumable(storageRef, file).then(() => {
+           getDownloadURL(storageRef).then(async (downloadURL) => {
+               //Update profile
+               await updateProfile(res.user, {
+                 displayName,
+                 photoURL: downloadURL,
+               });
+               //create user on firestore
+               await setDoc(doc(db, "users", res.user.uid), {
+                 uid: res.user.uid,
+                 displayName,
+                 email,
+                 phone,
+                 photoURL: downloadURL,
+               });
+   
+               //create empty user chats on firestore
+               await setDoc(doc(db, "userChats", res.user.uid), {});
+             
+           });
+         });
+  
+        navigate("/profileReg");
+        setRegisterSuccess(true);
+      } catch (err) {
+        setErr(err);
       messageApi.open({
         type: "error",
         content: err.response.data.message,
       });
     }
+  
   };  
 
   return (
