@@ -7,6 +7,9 @@ import InputField from '../common-component/dynamic/form/InputField';
 import axios from '../../api/axios';
 import { getUserDetails } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../api/firebase";
+
 const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -27,6 +30,9 @@ const Login = () => {
       );
       setUserId(response?.data?.data?.user.id);
       localStorage.setItem("token", response?.data?.data?.token);
+      const { email, password } = values;
+      await signInWithEmailAndPassword(auth, email, password);
+      
       setLoginSuccess(true);
 
     } catch (err) {

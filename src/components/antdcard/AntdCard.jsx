@@ -4,8 +4,6 @@ import './AntdCard.css'
 import { useSelector } from "react-redux";
 import './AntdCard.css';
 
-// import styles from "../../styles/components/antdCard.module.css";
-
 const AntdCard=()=>{
     const imgMine1='assets/home-cards/new9.svg'
     const imgMine2='assets/home-cards/new10.svg'

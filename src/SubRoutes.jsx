@@ -5,8 +5,8 @@ import {useSelector} from "react-redux";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import ErrorPage from "./pages/404/ErrorPage";
-import Chat from "./pages/chats/Chat";
 import ReusableMultiStepFrom from "./components/common-component/dynamic/multi-step-form/ReusableMultiStepFrom";
+import ChatSidebar from "./pages/chats/ChatSidebar/ChatSidebar";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const SearchPage = lazy(() => import("./pages/seacrh-page/SearchPage"));
@@ -32,7 +32,7 @@ const SubRoutes = () => {
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profileReg" element={<ReusableMultiStepFrom />} />
-          <Route path="/chats" element={<Chat />} />
+          <Route path="/chats" element={<ChatSidebar />} />
 
 
           <Route path="/404" element={<ErrorPage />} />

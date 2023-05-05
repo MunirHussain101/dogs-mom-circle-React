@@ -1,5 +1,8 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Row, Col, List, Layout, Input, Button} from "antd";
+import ChatInput from "../../../../pages/chats/ChatInput/ChatInput";
+import Messages from "../../../../pages/chats/Messages/Messages";
+import { ChatContext } from "../../../../context/ChatContext";
 const {Header, Content, Footer} = Layout;
 
 export const ChatPortion = () => {
@@ -24,6 +27,7 @@ export const ChatPortion = () => {
 export const ChatPortion2 = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const { data } = useContext(ChatContext);
 
   const handleSend = () => {
     if (message.trim() === "") return;
@@ -47,38 +51,23 @@ export const ChatPortion2 = () => {
         }}
       >
         <div style={{marginLeft: 15, lineHeight: 1}}>
-          <h1>Navena</h1>
-          <p>Online</p>
+
+          <h1>{data?.user?.displayName}</h1>
+          <p>{data?.user?.displayName ? "Online" : ""}</p>
         </div>
 
         <div style={{height: 2, backgroundColor: "lightgrey"}}></div>
 
         {/* Content */}
         <Content className="content">
-          <List
-            className="list"
-            dataSource={messages}
-            renderItem={(item) => <List.Item>{item.text}</List.Item>}
-          />
+          <Messages />
         </Content>
 
         {/* Input and Button */}
         <Row style={{display: "flex", gap: 20}}>
           <Col>
-            <Input
-              placeholder="Enter Type here"
-              style={{width: 500, marginLeft:10, backgroundColor:"#F8F8F8", borderRadius:12}}
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-          </Col>
-
-          <Col>
-            <Button onClick={handleSend}
-            style={{background:"#EAB2BB", color:"white"}}
-            >Send</Button>
-          </Col>
+          <ChatInput />
+         </Col>
         </Row>
       </Col>
     </>

@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {logoutUserAuth} from "../../features/auth/authSlice";
 import CreatePost from "../posts/CreatePost";
 import NotificationDropdown from "../notification/NotificationDropdown";
-import Chat from "../../pages/chats/Chat";
 
 const Navbar = () => {
   const location = useLocation();
