@@ -10,7 +10,7 @@ import Search from "../Search/Search";
 import {AuthContext} from "../../../context/AuthContext";
 import {ChatContext} from "../../../context/ChatContext";
 import {db} from "../../../api/firebase";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const ChatSidebar = () => {
   const [chat, setChat] = useState(false);
@@ -90,7 +90,10 @@ const ChatSidebar = () => {
                       key={chat[0]}
                       onClick={() => handleSelect(chat[1].userInfo)}
                     >
-                      <Avatar size={70} src={chat[1]?.userInfo?.photoURL} />
+                      <Avatar
+                        size={70}
+                        src="https://images.unsplash.com/photo-1632498301446-5f78baad40d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9nJTIwYW5kJTIwZ2lybHxlbnwwfHwwfHw%3D&w=1000&q=80"
+                      />
                       <Col
                         onClick={() => setChat(true)}
                         style={{cursor: "pointer"}}

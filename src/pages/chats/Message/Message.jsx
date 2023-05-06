@@ -64,11 +64,12 @@ const Message = ({message}) => {
         >
           <div className="messageInfo">
             <LazyLoadImage
-              src={
-                message.senderId === currentUser.uid
-                  ? currentUser.photoURL
-                  : data.user.photoURL
-              }
+              src="https://images.unsplash.com/photo-1632498301446-5f78baad40d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9nJTIwYW5kJTIwZ2lybHxlbnwwfHwwfHw%3D&w=1000&q=80"
+              // src={
+              //   message.senderId === currentUser.uid
+              //     ? currentUser.photoURL
+              //     : data.user.photoURL
+              // }
               alt=""
             />
           </div>
