@@ -5,13 +5,14 @@ import "./Profile.css";
 import {Link, useParams} from "react-router-dom";
 import axios from "../../api/axios";
 import {useSelector} from "react-redux";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 function Profile() {
   const [userData, setUserData] = useState();
   const {id} = useParams();
   const tokenValue = localStorage.getItem("token");
   const posts = useSelector((state) => state.posts.postDetails);
-  console.log("Post", posts);
+  console.log("Posts ---> ", posts);
 
   useEffect(() => {
     const getData = async () => {
@@ -23,6 +24,9 @@ function Profile() {
     };
     getData();
   }, []);
+
+
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const month = date.toLocaleString("default", {month: "short"});
@@ -52,7 +56,7 @@ function Profile() {
                 <h1 className="userName">
                   {userData?.firstname} {userData?.lastname}
                 </h1>
-                <img
+                <LazyLoadImage
                   src="/assets/profile/verify-user.svg"
                   width={18}
                   height={22}
@@ -72,27 +76,27 @@ function Profile() {
               <div className="card">
                 <p className="card_msg">{card.pets[0].datePara}</p>
                 <p className="card_date">
-               {posts.map((val) => {
-                return (
-                  <>
-                   <span className="start_date">
+                  {posts.map((val) => {
+                    return (
+                      <>
+                        <span className="start_date" key={val}>
                           {formatDate(val.start_date)}
                         </span>
                         <span className="end_date">
                           {formatDate(val.end_date)}
                         </span>
-                  </>
-                )
-               })}
+                      </>
+                    );
+                  })}
                 </p>
               </div>
               <br />
               <div>
-               <Link to="/chats">
-               <Button className="chat_btn">
-                  <span className="btn_msg">Chat Now</span>
-                </Button>
-               </Link>
+                <Link to="/chats">
+                  <Button className="chat_btn">
+                    <span className="btn_msg">Chat Now</span>
+                  </Button>
+                </Link>
               </div>
             </Col>
           </Row>
@@ -116,7 +120,7 @@ function Profile() {
                 columnGap: 10,
               }}
             >
-              <img
+              <LazyLoadImage
                 src="/assets/home-cards/layer1.svg"
                 alt="Picture of the author"
                 className="main_row_cards_icon_profile"
@@ -168,7 +172,7 @@ function Profile() {
             {userData?.firstname} {userData?.lastname}{" "}
             <span className="gallery_name">Gallery</span>
           </h1>
-          <img src={userData?.dogs[0]?.profile_pic} />
+          <LazyLoadImage src={userData?.dogs[0]?.profile_pic} />
         </Col>
         <Col lg={4}></Col>
       </Row>
@@ -256,7 +260,7 @@ function Profile() {
           <h1 className="additional_Info">Reviews</h1>
           <Row>
             <Col>
-              <img
+              <LazyLoadImage
                 src="/assets/profile/IMAGE.svg"
                 width={50}
                 height={50}
@@ -280,7 +284,6 @@ function Profile() {
         <Col lg={4}></Col>
       </Row>
     </>
-    // </div>
   );
 }
 

@@ -13,6 +13,7 @@ import {ChatContext} from "../../../context/ChatContext";
 import {v4 as uuid} from "uuid";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import "./ChatInput.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ChatInput = () => {
   const [text, setText] = useState("");
@@ -28,9 +29,7 @@ const ChatInput = () => {
       const uploadTask = uploadBytesResumable(storageRef, img);
 
       uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
+        (error) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
@@ -90,7 +89,6 @@ const ChatInput = () => {
               value={text}
             />
             <div className="send">
-             
               <Input
                 type="file"
                 style={{display: "none"}}
@@ -98,7 +96,7 @@ const ChatInput = () => {
                 onChange={(e) => setImg(e.target.files[0])}
               />
               <label htmlFor="file">
-                <img src="assets/chat-img/img.png" alt="" />
+                <LazyLoadImage src="assets/chat-img/img.png" alt="" />
               </label>
               <Button
                 onClick={handleSend}

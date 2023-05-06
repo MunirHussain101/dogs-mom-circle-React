@@ -1,16 +1,16 @@
-import {Spin} from "antd";
 import React, {Suspense, lazy} from "react";
+import {Spin} from "antd";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import SignUp from "./components/SignUp/SignUp";
-import Login from "./components/Login/Login";
-import ErrorPage from "./pages/404/ErrorPage";
-import ReusableMultiStepFrom from "./components/common-component/dynamic/multi-step-form/ReusableMultiStepFrom";
-import ChatSidebar from "./pages/chats/ChatSidebar/ChatSidebar";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const SearchPage = lazy(() => import("./pages/seacrh-page/SearchPage"));
 const Profile = lazy(() => import("./pages/profile/Profile"));
+const SignUp = lazy(() => import("./components/SignUp/SignUp"));
+const Login = lazy(() => import("./components/Login/Login"));
+const ErrorPage = lazy(() => import("./pages/404/ErrorPage"));
+const ReusableMultiStepFrom = lazy(() => import("./components/common-component/dynamic/multi-step-form/ReusableMultiStepFrom"));
+const ChatSidebar = lazy(() => import("./pages/chats/ChatSidebar/ChatSidebar"));
 
 const SubRoutes = () => {
   const authObject = useSelector((state) => state.auth.userDetails);
@@ -22,6 +22,8 @@ const SubRoutes = () => {
             <>
               <Route path="/search" element={<SearchPage />} />
               <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/chats" element={<ChatSidebar />} />
+
             </>
           ) : (
             <></>
@@ -31,10 +33,7 @@ const SubRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profileReg" element={<ReusableMultiStepFrom />} />
-          <Route path="/chats" element={<ChatSidebar />} />
-
-
+          <Route path="/profile-register" element={<ReusableMultiStepFrom />} />
           <Route path="/404" element={<ErrorPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

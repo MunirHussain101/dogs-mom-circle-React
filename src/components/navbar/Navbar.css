@@ -1,46 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
-.main_row_nav{
-    margin-left: 104px;
-    margin-right: 104px;
-    padding-top: 40px;
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap");
+.main_row_nav {
+  margin-left: 104px;
+  margin-right: 104px;
+  padding-top: 40px;
 }
-.main_row_nav_home{
-    padding-left: 104px;
-    padding-right: 104px;
-    padding-top: 20px;
-    background: linear-gradient(180.51deg, #ffe5ea, #fff);
+.main_row_nav_home {
+  padding-left: 104px;
+  padding-right: 104px;
+  padding-top: 20px;
+  background: linear-gradient(180.51deg, #ffe5ea, #fff);
 }
-/* .styles.main_first_row{
-    display: flex;
-    justify-content: flex-start;
-} */
-.main_sec_col{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+
+.main_sec_col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 @media screen and (max-width: 800px) {
-    .main_row_nav{
-         margin-left: 20px;
-         margin-right: 20px;
-         padding-top: 40px;
-         display: flex;
-         justify-content: space-between;
-    }
-     .main_row_nav_home{
-         padding-left: 20px;
-         padding-right: 20px;
-         padding-top: 20px;
-         display: flex;
-         justify-content: space-between;
-    }
-    /* .main_row_nav_home{} */
-    .main_sec_col{
-         display: flex;
-         justify-content: flex-end;
-         float: right;
-         /* align-items: center; */
-    }
+  .main_row_nav {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
   }
+  .main_row_nav_home {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .main_sec_col {
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+  }
+}

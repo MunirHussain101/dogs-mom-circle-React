@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Row, Col, Form, Radio, Input, Upload} from "antd";
+import React from "react";
+import {Row, Col, Form, Radio, Input} from "antd";
 import "./StepPage.css";
 
 const {TextArea} = Input;
@@ -10,7 +10,7 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
       <Row>
         <Col lg={4} xs={0}></Col>
 
-        <Col lg={16} xs={24} className="main_form_box" >
+        <Col lg={16} xs={24} className="main_form_box">
           <Row
             style={{display: "flex", flexDirection: "column", gap: 20}}
             gutter={16}
@@ -57,9 +57,8 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             <h1 className="dog_size_heading">Shedding type you'd prefer</h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
-                value={profileData.shedding_prefs}
+                value={profileData.shedding_prefs || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -96,7 +95,6 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
 
           <Row
             style={{display: "flex", flexDirection: "column", gap: 20}}
-            
             gutter={16}
           >
             <h1 className="dog_size_heading">
@@ -105,7 +103,7 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.house_training_prefs}
+                value={profileData.house_training_prefs || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -141,9 +139,8 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             <h1 className="dog_size_heading">Will the dog be left along?</h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
-                value={profileData.dog_left_alone_prefs}
+                value={profileData.dog_left_alone_prefs || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -184,9 +181,8 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             <h1 className="dog_size_heading">Do you have a cat?</h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
-                value={profileData.have_a_cat}
+                value={profileData.have_a_cat || ""}
                 onChange={(e) => {
                   setProfileData({...profileData, have_a_cat: e.target.value});
                 }}
@@ -217,7 +213,7 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             <TextArea
               rows={4}
               style={{width: 340, height: 120}}
-              value={profileData.additional_notes}
+              value={profileData.additional_notes || ""}
               onChange={(e) => {
                 setProfileData({
                   ...profileData,
@@ -235,17 +231,9 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
               <input
                 type="file"
                 accept="image/*"
-                value={profileData.image}
+                value={profileData.image || ""}
                 onChange={handleImage}
               />
-              {/* <Upload
-                name="user_profile"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={true}
-              >
-                Dog Profile
-              </Upload> */}
             </Form.Item>
           </Row>
 
@@ -260,65 +248,12 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
                 type="file"
                 accept="image/*"
                 multiple
-                value={profileData.image2}
+                value={profileData.image2 || ""}
                 onChange={handleImage2}
               />
-              {/* <Upload
-                name="dog_profile"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={true}
-              >
-                Dog Profile
-              </Upload> */}
             </Form.Item>
-            {/* <Form.Item 
-            valuePropName="fileList"
-            name="dog_profile"
-            getValueFromEvent={(event) => {
-              return event?.fileList
-            }}
-            rules={[
-              {
-                required: true,
-                message: "Please upload your profile"
-              },
-              {
-                validator(_, fileList) {
-                  return new Promise((resolve, reject) => {
-                    if(fileList && fileList[0].size > 9000000) {
-                      reject("File size exceeded")
-                    } else {
-                      resolve("success")
-                    }
-                  })
-                }
-              }
-            ]}>
-            <Upload
-              maxCount={1}
-              beforeUpload={(file) => {
-                return new Promise((resolve, reject) => {
-                  if(file.size > 9000000) {
-                    reject("File size exceeded")
-                  } else {
-                    resolve("success")
-                  }
-                })
-              }}
-              name="dog_profile"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={true}
-            >
-              <PlusOutlined />
-            </Upload>
-              
-            </Form.Item> */}
           </Row>
           <br />
-
-          {/* Modal */}
         </Col>
 
         <Col lg={4} xs={0}></Col>

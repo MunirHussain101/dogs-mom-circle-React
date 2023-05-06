@@ -47,13 +47,9 @@ const NotificationDropdown = () => {
             <Avatar size={50} src={notification.img} />
             &nbsp; &nbsp;
             {notification.message}
-            {/* {!notification.read && (
-            <span className="notification-dropdown-badge">New</span>
-          )} */}
           </Menu.Item>
         ))}
         <div className="notification-dropdown-header">
-          {/* <span>Notifications</span> */}
           {notificationCount > 0 && (
             <span
               onClick={markAllRead}

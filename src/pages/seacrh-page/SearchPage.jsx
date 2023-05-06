@@ -1,5 +1,3 @@
-// import Banner from "../components/sections/banner/Banner";
-import { useParams } from "react-router-dom";
 import BannerSearch from "../../components/banner-search/BannerSearch";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "../../api/axios";

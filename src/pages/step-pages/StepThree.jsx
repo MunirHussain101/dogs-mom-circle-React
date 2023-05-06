@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Row, Col, Form, Radio, Checkbox} from "antd";
 import "./StepPage.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StepThree = ({profileData, setProfileData}) => {
   const [selectedBoxes, setSelectedBoxes] = useState([]);
@@ -29,7 +30,7 @@ const StepThree = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_shedding}
+                value={profileData.dog_shedding || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -71,7 +72,7 @@ const StepThree = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_house_trained}
+                value={profileData.dog_house_trained || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -115,7 +116,7 @@ const StepThree = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_can_be_left_alone}
+                value={profileData.dog_can_be_left_alone || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -159,7 +160,7 @@ const StepThree = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_spayed_neutered}
+                value={profileData.dog_spayed_neutered || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -196,7 +197,7 @@ const StepThree = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_good_with_cats}
+                value={profileData.dog_good_with_cats || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -230,15 +231,13 @@ const StepThree = ({profileData, setProfileData}) => {
           </Row>
           <br />
 
-          <Row
-            gutter={16}
-          >
+          <Row gutter={16}>
             <h1 className="dog_size_heading">
               What size dogs does your dog get along with? (Feel free to select
               multiple choices)
             </h1>
             <Form.Item
-              value={profileData.dog_other_dog_size_compatibility}
+              value={profileData.dog_other_dog_size_compatibility || ""}
               onChange={(e) => {
                 setProfileData({
                   ...profileData,
@@ -253,12 +252,9 @@ const StepThree = ({profileData, setProfileData}) => {
                   }`}
                   onClick={() => handleBoxSelection(1)}
                 >
-                  <img src="assets/size/small-dog.svg" alt="box-1" />
+                  <LazyLoadImage src="assets/size/small-dog.svg" alt="box-1" />
                   0-15lbs <span>Small</span>
-                  <Checkbox
-                    value="0-15lbs"
-                    // checked={selectedBoxes.includes(1)}
-                  />
+                  <Checkbox value="0-15lbs" />
                 </div>
                 <div
                   className={`box${
@@ -266,12 +262,9 @@ const StepThree = ({profileData, setProfileData}) => {
                   }`}
                   onClick={() => handleBoxSelection(2)}
                 >
-                  <img src="assets/size/medium-dog.svg" alt="box-2" />
+                  <LazyLoadImage src="assets/size/medium-dog.svg" alt="box-2" />
                   16-40lbs <span>Medium</span>
-                  <Checkbox
-                    value="16-40lbs"
-                    // checked={selectedBoxes.includes(2)}
-                  />
+                  <Checkbox value="16-40lbs" />
                 </div>
                 <div
                   className={`box${
@@ -279,12 +272,9 @@ const StepThree = ({profileData, setProfileData}) => {
                   }`}
                   onClick={() => handleBoxSelection(3)}
                 >
-                  <img src="assets/size/large-dog.svg" alt="box-3" />
+                  <LazyLoadImage src="assets/size/large-dog.svg" alt="box-3" />
                   41-100lbs <span>Large</span>
-                  <Checkbox
-                    value="41-100lbs"
-                    // checked={selectedBoxes.includes(3)}
-                  />
+                  <Checkbox value="41-100lbs" />
                 </div>
                 <div
                   className={`box${
@@ -292,12 +282,9 @@ const StepThree = ({profileData, setProfileData}) => {
                   }`}
                   onClick={() => handleBoxSelection(4)}
                 >
-                  <img src="assets/size/gaintdog.svg" alt="box-4" />
+                  <LazyLoadImage src="assets/size/gaintdog.svg" alt="box-4" />
                   100+lbs <span>Giant</span>
-                  <Checkbox
-                    value="100+lbs"
-                    // checked={selectedBoxes.includes(4)}
-                  />
+                  <Checkbox value="100+lbs" />
                 </div>
               </div>
             </Form.Item>
