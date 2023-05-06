@@ -10,6 +10,7 @@ const StepOne = ({profileData, setProfileData}) => {
   useEffect(() => {
     const loadBreeds = async () => {
       const breedResponse = await axios.get("/api/breeds");
+      console.log("Breed --->", breedResponse?.data);
       setBreeds(breedResponse?.data);
     };
 

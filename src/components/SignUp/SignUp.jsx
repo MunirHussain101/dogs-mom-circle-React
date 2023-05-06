@@ -58,7 +58,7 @@ const SignUp = () => {
         });
       });
 
-      navigate("/profileReg");
+      navigate("/profile-register");
       setRegisterSuccess(true);
     } catch (err) {
       setErr(err);

@@ -82,7 +82,7 @@ const Navbar = () => {
               {location.pathname === "/" ||
               location.pathname === "/register" ||
               location.pathname === "/login" ||
-              location.pathname === "/profileReg" ? (
+              location.pathname === "/profile-register" ? (
                 <></>
               ) : (
                 <CreatePost />
@@ -92,7 +92,7 @@ const Navbar = () => {
               {location.pathname === "/" ||
               location.pathname === "/register" ||
               location.pathname === "/login" ||
-              location.pathname === "/profileReg" ? (
+              location.pathname === "/profile-register" ? (
                 <></>
               ) : (
                 <NotificationDropdown />
@@ -103,7 +103,7 @@ const Navbar = () => {
               {location.pathname === "/" ||
               location.pathname === "/register" ||
               location.pathname === "/login" ||
-              location.pathname === "/profileReg" ? (
+              location.pathname === "/profile-register" ? (
                 <></>
               ) : (
                 <Link to="/chats">
@@ -116,7 +116,7 @@ const Navbar = () => {
                 {location.pathname === "/" ||
                 location.pathname === "/register" ||
                 location.pathname === "/login" ||
-                location.pathname === "/profileReg" ? (
+                location.pathname === "/profile-register" ? (
                   <>
                     <Dropdown
                       menu={authDetails ? menuPropsAuth : menuPropsNoAuth}

@@ -102,7 +102,7 @@ const CreatePost = () => {
         <br />
         <Row>
           <Col lg={12} xs={12}>
-            <Link to="/profileReg">
+            <Link to="/profile-register">
               <Button className="edit_btn">Edit profile</Button>
             </Link>
           </Col>
