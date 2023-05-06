@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, Select, Input, DatePicker, Form, Radio} from "antd";
 import axios from "../../api/axios";
 import "./StepPage.css";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const StepOne = ({profileData, setProfileData}) => {
   const [breeds, setBreeds] = useState([]);
@@ -13,11 +14,11 @@ const StepOne = ({profileData, setProfileData}) => {
     };
 
     loadBreeds();
-  }, []);
-  
+  }, [breeds]);
+
   const breedsDetails = breeds.map((el, index) => {
     const obj = {};
-    obj.label = el; 
+    obj.label = el;
     obj.value = index;
     return obj;
   });
@@ -50,7 +51,7 @@ const StepOne = ({profileData, setProfileData}) => {
                 placeholder="Select Date of Birth"
                 className="input_box"
                 name="dog_birthday"
-                value={profileData.dog_birthday}
+                value={profileData.dog_birthday || ""}
                 onChange={(e) => {
                   setProfileData({...profileData, dog_birthday: e});
                 }}
@@ -66,7 +67,7 @@ const StepOne = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.dog_size}
+                value={profileData.dog_size || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -83,7 +84,7 @@ const StepOne = ({profileData, setProfileData}) => {
                       color: "black",
                     }}
                   >
-                    <img
+                    <LazyLoadImage
                       src="assets/size/small-dog.svg"
                       style={{color: "black"}}
                     />
@@ -100,7 +101,7 @@ const StepOne = ({profileData, setProfileData}) => {
                       color: "black",
                     }}
                   >
-                    <img src="assets/size/medium-dog.svg" />
+                    <LazyLoadImage src="assets/size/medium-dog.svg" />
                     16-40lbs <span>Medium</span>
                   </div>
                 </Radio.Button>
@@ -113,7 +114,7 @@ const StepOne = ({profileData, setProfileData}) => {
                       color: "black",
                     }}
                   >
-                    <img src="assets/size/large-dog.svg" />
+                    <LazyLoadImage src="assets/size/large-dog.svg" />
                     41-100lbs <span>Large</span>
                   </div>
                 </Radio.Button>
@@ -126,14 +127,13 @@ const StepOne = ({profileData, setProfileData}) => {
                       color: "black",
                     }}
                   >
-                    <img src="assets/size/gaintdog.svg" />
+                    <LazyLoadImage src="assets/size/gaintdog.svg" />
                     100+lbs <span>Giant</span>
                   </Row>
                 </Radio.Button>
               </Radio.Group>
             </Form.Item>
           </Row>
-          {/* <br /> */}
 
           <Row
             style={{display: "flex", flexDirection: "column", gap: 20}}
@@ -142,27 +142,28 @@ const StepOne = ({profileData, setProfileData}) => {
             <h1 className="dog_size_heading">The breed is</h1>
             <div>
               <Select
-               style={{width: "180px"}}
-               placeholder="Select Breed"
-               showSearch
-               optionFilterProp="children"
-               filterOption={(input, option) =>
-                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-              }
-               className="input_box_1"
+                style={{width: "180px"}}
+                placeholder="Select Breed"
+                showSearch
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
+                className="input_box_1"
                 options={[
                   {value: "0", label: `Select Breed`},
                   ...breedsDetails,
                 ]}
-                value={profileData.dog_breed}
+                value={profileData.dog_breed || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
                     dog_breed: breeds[e],
                   });
-                }} 
-              >
-                </Select>
+                }}
+              ></Select>
             </div>
           </Row>
           <br />
@@ -175,5 +176,3 @@ const StepOne = ({profileData, setProfileData}) => {
 };
 
 export default StepOne;
-
-// add more steps as needed

@@ -1,84 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap');
-.main_head_email{
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Syne:wght@700&display=swap");
+.main_head_email {
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38px;
+  letter-spacing: -0.005em;
+  color: #7a7777;
+}
+.main_emailFiedl {
+  height: 68px;
+  background: #ffffff;
+  box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+}
 
-    font-family: 'Syne';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 38px;
-    letter-spacing: -0.005em;
-    
-    /* Light grey */
-    
-    color: #7A7777;
-    }
-    .main_emailFiedl{
-        /* display: flex; */
-    /* flex-direction: row; */
-    /* align-items: center; */
-    /* padding: 21px 23px; */
-    /* gap: 214px; */
-    
-    /* position: absolute; */
-    /* width: 736px; */
-    height: 68px;
-    /* left: calc(50% -/ 736px/2); */
-    /* top: 817px; */
-    
-    background: #FFFFFF;
-    box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.05);
-    border-radius: 100px;
-    }
-    
-    .mail_icon{
-    
-    font-size: 20px;
-    
-    color: #D2CFCF;
-    }
-    .submit_icon{
-    
-    width: 139px;
-    height: 46px;
-    
-    /* Primary Pink */
-    
-    background: #EAB2BB;
-    border-radius: 50px;
-    
-    /* Inside auto layout */
-    
-    
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
-    
-    
-    color: #FFFFFF;
-    
-    
-    /* Inside auto layout */
-    
-    
-    }
-    
-    .main_emailFiedl::placeholder{
-    
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 137.9%;
-    /* or 26px */
-    
-    /* text-align: center; */
-    letter-spacing: 0.05em;
-    
-    /* Light grey */
-    
-    color: #7A7777;
-    }
+.mail_icon {
+  font-size: 20px;
+
+  color: #d2cfcf;
+}
+.submit_icon {
+  width: 139px;
+  height: 46px;
+  background: #eab2bb;
+  border-radius: 50px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.main_emailFiedl::placeholder {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 137.9%;
+  letter-spacing: 0.05em;
+  color: #7a7777;
+}

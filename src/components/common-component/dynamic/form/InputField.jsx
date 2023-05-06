@@ -17,10 +17,6 @@ const InputField = (props) => {
             }}
             suffix={suffix?suffix:""}
             prefix={prefix?prefix:""}
-            // value="raheel"
-            // defaultValue={defaultValue}
-            // value={defaultValue}
-      
           />
         </Form.Item>
       </>

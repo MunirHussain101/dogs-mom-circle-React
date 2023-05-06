@@ -3,6 +3,7 @@ import {Row, Col, List, Layout, Input, Button} from "antd";
 import ChatInput from "../../../../pages/chats/ChatInput/ChatInput";
 import Messages from "../../../../pages/chats/Messages/Messages";
 import { ChatContext } from "../../../../context/ChatContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const {Header, Content, Footer} = Layout;
 
 export const ChatPortion = () => {
@@ -17,7 +18,7 @@ export const ChatPortion = () => {
           alignItems: "center",
         }}
       >
-        <img width={100} src="/assets/dropdownIcon/message.svg" />
+        <LazyLoadImage width={100} src="/assets/dropdownIcon/message.svg" />
         <p>Messages sent and received will be shown here</p>
       </Col>
     </>
@@ -47,7 +48,6 @@ export const ChatPortion2 = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          // columnGap: 20,
         }}
       >
         <div style={{marginLeft: 15, lineHeight: 1}}>

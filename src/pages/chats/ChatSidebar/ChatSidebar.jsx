@@ -10,6 +10,7 @@ import Search from "../Search/Search";
 import {AuthContext} from "../../../context/AuthContext";
 import {ChatContext} from "../../../context/ChatContext";
 import {db} from "../../../api/firebase";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ChatSidebar = () => {
   const [chat, setChat] = useState(false);
@@ -44,26 +45,26 @@ const ChatSidebar = () => {
   ];
   function getTimeAgo(timestamp) {
     const now = new Date().getTime();
-    const seconds = (now - timestamp?.seconds * 1000 - timestamp?.nanoseconds / 1000000) / 1000;
+    const seconds =
+      (now - timestamp?.seconds * 1000 - timestamp?.nanoseconds / 1000000) /
+      1000;
     const minutes = Math.floor(seconds / 60);
-  
+
     if (minutes === 0) {
-      return 'just now';
+      return "just now";
     } else if (minutes < 60) {
-      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+      return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
     } else {
       const hours = Math.floor(minutes / 60);
       if (hours < 24) {
-        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
       } else {
         const days = Math.floor(hours / 24);
-        return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+        return `${days} ${days === 1 ? "day" : "days"} ago`;
       }
     }
   }
 
-  
-  
   return (
     <>
       <Row justify="center">
@@ -84,28 +85,37 @@ const ChatSidebar = () => {
                         flexDirection: "row",
                         gap: 10,
                         marginTop: 20,
+                        // height:100
                       }}
                       key={chat[0]}
                       onClick={() => handleSelect(chat[1].userInfo)}
                     >
-                      
                       <Avatar size={70} src={chat[1]?.userInfo?.photoURL} />
-                      {/* <img src={chat[1]?.userInfo?.photoURL} /> */}
-                      <Col onClick={() => setChat(true)} style={{cursor:'pointer'}}>
-                        <h1 className="name_heading">{chat[1]?.userInfo?.displayName}</h1>
+                      <Col
+                        onClick={() => setChat(true)}
+                        style={{cursor: "pointer"}}
+                      >
+                        <h1 className="name_heading">
+                          {chat[1]?.userInfo?.displayName}
+                        </h1>
                         <p className="msg_para">{chat[1].lastMessage?.text}</p>
                         <p className="time_para">{getTimeAgo(chat[1]?.date)}</p>
-                       
                       </Col>
                     </Col>
 
-                    <Col style={{display: "flex", justifyContent: "center", alignItems:"center"}}>
+                    <Col
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <Dropdown
                         menu={{
                           items,
                         }}
                       >
-                        <img src="/assets/dropdownIcon/dropdownImg.svg" />
+                        <LazyLoadImage src="/assets/dropdownIcon/dropdownImg.svg" />
                       </Dropdown>
                     </Col>
                   </Row>
@@ -121,7 +131,6 @@ const ChatSidebar = () => {
             marginLeft: 20,
           }}
         ></div>
-
 
         {chat == false ? <ChatPortion /> : <ChatPortion2 />}
         <div

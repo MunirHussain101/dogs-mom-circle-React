@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {Row, Col, Input, Form, Radio, Checkbox} from "antd";
 import "./StepPage.css";
 
 const StepTwo = ({profileData, setProfileData}) => {
   const [selectedBoxes, setSelectedBoxes] = useState([]);
-  
+
   const handleBoxSelection = (id) => {
     if (selectedBoxes.includes(id)) {
       setSelectedBoxes(selectedBoxes.filter((boxId) => boxId !== id));
@@ -44,7 +44,7 @@ const StepTwo = ({profileData, setProfileData}) => {
             <Form.Item>
               <Radio.Group
                 className="radio_group"
-                value={profileData.willing_travel_distance}
+                value={profileData.willing_travel_distance || ""}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
@@ -76,14 +76,12 @@ const StepTwo = ({profileData, setProfileData}) => {
               </Radio.Group>
             </Form.Item>
           </Row>
-          <Row
-            gutter={16}
-          >
+          <Row gutter={16}>
             <h1 className="dog_size_heading">
               What are you looking for ( Feel free to select multiple choices)?
             </h1>
             <Form.Item
-              value={profileData.activity_type}
+              value={profileData.activity_type || ""}
               onChange={(e) => {
                 setProfileData({
                   ...profileData,
@@ -99,10 +97,9 @@ const StepTwo = ({profileData, setProfileData}) => {
                   onClick={() => handleBoxSelection(1)}
                 >
                   <p className="box_heading">Boarding</p>
-                  <Checkbox
-                    value="boarding"
-                    // checked={selectedBoxes.includes(1)}
-                  />
+                  <Form.Item name="boarding" valuePropName="checked">
+                  <Checkbox value="boarding" />
+                  </Form.Item>
                 </div>
                 <div
                   className={`box${
@@ -112,10 +109,9 @@ const StepTwo = ({profileData, setProfileData}) => {
                 >
                   <p className="box_heading">Daycare</p>
 
-                  <Checkbox
-                    value="daycare"
-                    // checked={selectedBoxes.includes(2)}
-                  />
+                  <Form.Item name="daycare" valuePropName="checked">
+                  <Checkbox value="daycare" />
+                  </Form.Item>
                 </div>
                 <div
                   className={`box${
@@ -125,12 +121,10 @@ const StepTwo = ({profileData, setProfileData}) => {
                 >
                   <p className="box_heading">Playdate</p>
 
-                  <Checkbox
-                    value="playdate"
-                    // checked={selectedBoxes.includes(3)}
-                  />
+                  <Form.Item name="playdate" valuePropName="checked">
+                  <Checkbox value="playdate" />
+                  </Form.Item>
                 </div>
-                
               </div>
             </Form.Item>
           </Row>

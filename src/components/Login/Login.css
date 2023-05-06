@@ -4,7 +4,6 @@
     background: #F0F2F5;
     border-radius: 22px;
     display: flex;
-    /* gap: 30px; */
 
 }
 
@@ -34,7 +33,6 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    /* line-height: 22px; */
 }
 
 .signup_link {
@@ -44,17 +42,13 @@
 }
 
 .forget_password_head {
-    /* display: flex; */
-    /* align-items:center; */
-    /* flex-direction: row; */
-    /* justify-content: space-evenly; */
+    
     display: flex;
     justify-content: start;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    /* line-height: 22px; */
     color: #EAB2BB;
 }
 
@@ -67,13 +61,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    /* line-height: 24px; */
-    /* or 150% */
-
     text-align: center;
-
-    /* Character / Primary(inverse) */
-
     color: #FFFFFF;
 }
 
@@ -81,8 +69,3 @@
     background-color: #EAB2BB;
     border-color: #EAB2BB;
 }
-
-/* .ant-checkbox-checked .ant-checkbox-inner:hover {
-    background-color: #EAB2BB;
-    border-color: #EAB2BB;
-} */

@@ -1,14 +1,14 @@
-import React,{ useState, useEffect } from 'react'
-import { Row, Col, Form, Input, Button, Checkbox, message } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
+import {Link, useNavigate} from "react-router-dom";
 import "./Login.css";
-import { LockOutlined,  MailOutlined} from "@ant-design/icons"
-import InputField from '../common-component/dynamic/form/InputField';
-import axios from '../../api/axios';
-import { getUserDetails } from '../../features/auth/authSlice';
-import { useDispatch } from 'react-redux';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../api/firebase";
+import {LockOutlined, MailOutlined} from "@ant-design/icons";
+import InputField from "../common-component/dynamic/form/InputField";
+import axios from "../../api/axios";
+import {getUserDetails} from "../../features/auth/authSlice";
+import {useDispatch} from "react-redux";
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../../api/firebase";
 
 const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -19,79 +19,63 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
-
     try {
-      const response = await axios.post(
-        '/api/auth/signin',
-        {
-          email: values.email,
-          password: values.password,
-        },
-      );
+      const response = await axios.post("/api/auth/signin", {
+        email: values.email,
+        password: values.password,
+      });
       setUserId(response?.data?.data?.user.id);
       localStorage.setItem("token", response?.data?.data?.token);
-      const { email, password } = values;
+      const {email, password} = values;
       await signInWithEmailAndPassword(auth, email, password);
-      
-      setLoginSuccess(true);
 
+      setLoginSuccess(true);
     } catch (err) {
       messageApi.open({
         type: "error",
         content: err.response.data.message,
       });
     }
-  }
+  };
   const tokenValue = localStorage.getItem("token");
 
-
-  useEffect(()=>{
-
-    if(loginSuccess){
-      const userDetails=async()=>{
+  useEffect(() => {
+    if (loginSuccess) {
+      const userDetails = async () => {
         try {
+          const response = await axios.post(`/api/user/get-profile`, {
+            id: userId,
+            token: tokenValue,
+          });
+          dispatch(getUserDetails(response.data));
+          messageApi.open({
+            type: "success",
+            content: "Logged In SuccessFully",
+          });
+          setTimeout(() => {
+            form.resetFields();
 
-        const response =await axios.post(`/api/user/get-profile`, {
-          
-            id:userId,
-            token:tokenValue
-        }, 
-        
-      
-        
-        );
-        dispatch((getUserDetails(response.data)))
-        messageApi.open({
-          type: "success",
-          content: "Logged In SuccessFully",
-        });
-        setTimeout(()=>{
-        form.resetFields()
-
-    navigate('/search')
-        },1000)
-      
-    }catch(err){
-
-      messageApi.open({
-        type: "error",
-        content: err.response,
-      });
+            navigate("/search");
+          }, 1000);
+        } catch (err) {
+          messageApi.open({
+            type: "error",
+            content: err.response,
+          });
+        }
+      };
+      userDetails();
     }
-  }
-      userDetails()  
-      }
-    
-  },[loginSuccess]);
+  }, [loginSuccess]);
 
   useEffect(() => {
-    if(tokenValue) {
+    if (tokenValue) {
       navigate("/");
     }
   }, []);
-  
+
   return (
-    <> 
+    <>
       {contextHolder}
       <Row className="main_row_for_login" justify="center">
         <Col lg={5} xs={0}></Col>
@@ -99,8 +83,8 @@ const Login = () => {
           lg={14}
           xs={24}
           style={{
-            display:'flex',
-            justifyContent:"center",
+            display: "flex",
+            justifyContent: "center",
             background: "#FFFFFF",
             padding: "45px",
             borderRadius: "20px",
@@ -108,78 +92,81 @@ const Login = () => {
         >
           <Form onFinish={handleSubmit}>
             <Col lg={24} xs={24}>
-                <div className='main_login_input'>
-                <p className="login_link" style={{background:"none"}}>
-                Doesn't have an account?
-                 &nbsp;
-                 <Link to="/register" style={{color:"#EAB2BB"}}>
-                 Signup
-                 </Link>
+              <div className="main_login_input">
+                <p className="login_link" style={{background: "none"}}>
+                  Doesn't have an account? &nbsp;
+                  <Link to="/register" style={{color: "#EAB2BB"}}>
+                    Signup
+                  </Link>
                 </p>
-                    {/* <Link to="/login">
-                    <Button type="text"className='login_link' style={{color:"#EAB2BB", background:"none"}} >Login</Button>
-                    </Link>
-                    {"  "}
-                    <Link to="/register" className='signup_link'>
-                    <Button type="text" className='login_link' style={{background:"none"}}>Sign Up</Button>
-                    </Link> */}
-                </div>
+              </div>
             </Col>
             <br />
             <Col lg={24} xs={24}>
-             <Form.Item 
-             name="email"
-             rules={[
-              {
-                required: true,
-                message: "Email is required",
-              }
-            ]}>
-                <Input placeholder='Enter your email' className='login_input' prefix={<MailOutlined 
-                style={{color: "#EAB2BB"}} />} />
-                {/* <InputField fieldName="email" placeHolder="Enter your email"
-                 className='login_input' prefix={<MailOutlined 
-                  style={{color: "#EAB2BB"}} />} /> */}
-             </Form.Item>
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Email is required",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Enter your email"
+                  className="login_input"
+                  prefix={<MailOutlined style={{color: "#EAB2BB"}} />}
+                />
+              </Form.Item>
             </Col>
             <Col lg={24} xs={24}>
-            <Form.Item 
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Password is required",
-              }
-            ]}>
-                <Input.Password placeholder='Enter your password' className='login_input'
-                prefix={<LockOutlined style={{color: "#EAB2BB"}}/>} />
-             </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Password is required",
+                  },
+                ]}
+              >
+                <Input.Password
+                  placeholder="Enter your password"
+                  className="login_input"
+                  prefix={<LockOutlined style={{color: "#EAB2BB"}} />}
+                />
+              </Form.Item>
             </Col>
             <Col>
-              <div style={{display:'flex', justifyContent:'space-between'}}>
-              <div><Checkbox style={{display:"flex"}}>Remember me</Checkbox></div>
-              <div><Link to="/forget-password">
-                <span className="forget_password_head">Forget Password?</span>
-              </Link>
-              </div>
+              <div style={{display: "flex", justifyContent: "space-between"}}>
+                <div>
+                  <Checkbox style={{display: "flex"}}>Remember me</Checkbox>
+                </div>
+                <div>
+                  <Link to="/forget-password">
+                    <span className="forget_password_head">
+                      Forget Password?
+                    </span>
+                  </Link>
+                </div>
               </div>
             </Col>
             <br />
             <Col lg={24} xs={24} className="login_btn_div">
-              {/* <Link to="/"> */}
-              <Button htmlType="submit" className="login_btn"  style={{border:"none", color:"white"}}>
+              <Button
+                htmlType="submit"
+                className="login_btn"
+                style={{border: "none", color: "white"}}
+              >
                 Login
               </Button>
-              {/* </Link> */}
             </Col>
           </Form>
         </Col>
         <Col lg={5} xs={0}></Col>
-
       </Row>
       <br />
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

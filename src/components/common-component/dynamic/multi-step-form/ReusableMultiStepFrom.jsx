@@ -7,17 +7,18 @@ import StepFour from "../../../../pages/step-pages/StepFour";
 import axios from "../../../../api/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const {Step} = Steps;
 
 const ReusableMultiStepFrom = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [err, setErr] = useState(false);
   const authDetails = useSelector((state) => state?.auth?.userGetId);
   const [image, setImage] = useState(null);
   const [image2, setImage2] = useState(null);
   const dispatch = useDispatch();
-  // const completed = useSelector(state => state.form.completed);
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
@@ -59,7 +60,7 @@ const ReusableMultiStepFrom = () => {
       .then((res) => {
         setImage(res.data.secure_url);
       })
-      .then((err) => console.log(err));
+      .then((err) => setErr(err));
   };
 
   const handleImage2 = (e) => {
@@ -75,7 +76,7 @@ const ReusableMultiStepFrom = () => {
       .then((res) => {
         setImage2(res.data.secure_url);
       })
-      .then((err) => console.log(err));
+      .then((err) => setErr(err));
   };
 
   let formData = new FormData();
@@ -120,12 +121,6 @@ const ReusableMultiStepFrom = () => {
   const handleFinish = async () => {
     try {
       const response = await axios.post("/api/auth/additional-data", formData);
-      // dispatch(completeForm());
-      // dispatch((storeFormData(formData)))
-
-      console.log(response?.data);
-
-
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -208,7 +203,7 @@ const ReusableMultiStepFrom = () => {
                 handleImage2={handleImage2}
               />
             )}
-            {/* // add more step components as needed */}
+
             <div style={{display: "flex", justifyContent: "space-between"}}>
               {currentStep > 0 && (
                 <Button
@@ -270,7 +265,7 @@ const ReusableMultiStepFrom = () => {
                 alignItems: "center",
               }}
             >
-              <img src="assets/modal/modal.svg" width={50} />
+              <LazyLoadImage src="assets/modal/modal.svg" width={50} />
             </Row>
             <p>
               We have saved your information and will work hard to help find you

@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {Col, Rate, Row, message} from "antd";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import cards from "./cards.json";
 import "./Cards.css";
 import axios from "../../api/axios";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getPostDetails} from "../../features/posts/postSlice";
 
 const Cards = ({userData}) => {
@@ -12,7 +12,6 @@ const Cards = ({userData}) => {
     rating: "",
     review: "",
   });
-  const [getPosts, setGetPosts] = useState([]);
   const [usersWithPost, setUsersWithPost] = useState([]);
   const [usersWithoutPost, setUsersWithoutPost] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
@@ -21,16 +20,13 @@ const Cards = ({userData}) => {
   const genId = new Date().getMilliseconds();
   const token = localStorage.getItem("token");
 
-  //   var dt = new Date();
   const handleSubmit = async () => {
-
     try {
       const response = await axios.post(`/api/review/${genId}`, reviews, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log("reviews response --->", response.data);
       navigate("/search");
     } catch (err) {
       messageApi.open({
@@ -49,8 +45,6 @@ const Cards = ({userData}) => {
         },
       });
 
-      // console.log("post get ---> ", response.data.posts);
-      // setGetPosts(response.data);
       const usersWithPost = response.data.posts.filter(
         (user) => user.start_date
       );
@@ -59,9 +53,6 @@ const Cards = ({userData}) => {
       const usersWithoutPost = response.data.allUsers.filter(
         (user) => !user.start_date
       );
-      // console.log(usersWithPost);
-      // console.log(usersWithoutPost);
-
       setUsersWithPost(usersWithPost);
       setUsersWithoutPost(usersWithoutPost);
     };
@@ -92,6 +83,7 @@ const Cards = ({userData}) => {
                     xs={24}
                     style={{margin: 15}}
                     className="main_col_searchpg"
+                    key={values}
                   >
                     <Link to={`/profile/${values?.id}`}>
                       <div
@@ -100,7 +92,6 @@ const Cards = ({userData}) => {
                           height: "213px",
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover",
-                          // backgroundPosition: "center",
                           borderRadius: 8,
                         }}
                       ></div>
@@ -154,7 +145,6 @@ const Cards = ({userData}) => {
                       Dates need help
                     </p>
                     <br />
-                    {/* </div> */}
                     <Row justify="space-between">
                       <Col
                         style={{
@@ -202,6 +192,7 @@ const Cards = ({userData}) => {
                     xs={24}
                     style={{margin: 15}}
                     className="main_col_searchpg"
+                    key={values}
                   >
                     <Link to={`/profile/${values?.id}`}>
                       <div
@@ -210,7 +201,6 @@ const Cards = ({userData}) => {
                           height: "213px",
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover",
-                          // backgroundPosition: "center",
                           borderRadius: 8,
                         }}
                       ></div>
@@ -263,18 +253,7 @@ const Cards = ({userData}) => {
                     >
                       Dates need help
                     </p>
-                    {/* </div> */}
                     <Row justify="space-between">
-                      {/* <Col>
-                        {getPosts.posts.map((val) => {
-                          return (
-                            <>
-                            <p>{val.start_date}</p>
-                            <span>{new Date(val.end_date).toLocaleDateString()}</span>;
-                            </>
-                          )
-                        })}
-                      </Col> */}
                       <Col style={{display: "flex", alignItems: "center"}}>
                         <Rate
                           style={{color: "#3E6DA8", fontSize: 14}}

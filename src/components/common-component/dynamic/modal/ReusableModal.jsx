@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Modal, Button} from "antd";
 
 const ReusableModal = (props) => {
@@ -11,20 +11,9 @@ const ReusableModal = (props) => {
     title,
     buttonText,
     closable,
-    // setIsModalOpen,
     isModalOpen,
     showModal
   } = props;
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const showModal = () => {
-  //   setIsModalOpen(true);
-  // };
-  // const handleOk = () => {
-  //   setIsModalOpen(false);
-  // };
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  // };
   
   return (
     <>
@@ -42,8 +31,6 @@ const ReusableModal = (props) => {
       <Modal
         title={title}
         open={isModalOpen}
-        // onOk={handleOk}
-        // onCancel={handleCancel}
         footer={footer}
         closable={closable}
         className={!className ? "modal_field" : className}

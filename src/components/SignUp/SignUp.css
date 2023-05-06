@@ -5,8 +5,6 @@
     border-radius: 22px;
     display: flex;
     align-items: center;
-    /* gap: 30px; */
-
 }
 
 .login_input {
@@ -43,12 +41,10 @@
 .forget_password_head {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    /* line-height: 22px; */
     color: #EAB2BB;
 }
 
@@ -63,13 +59,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    /* line-height: 24px; */
-    /* or 150% */
-
     text-align: center;
-
-    /* Character / Primary(inverse) */
-
     color: #FFFFFF;
 }
 

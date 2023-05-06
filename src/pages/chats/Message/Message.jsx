@@ -3,12 +3,13 @@ import {Row, Col, Spin} from "antd";
 import {AuthContext} from "../../../context/AuthContext";
 import {ChatContext} from "../../../context/ChatContext";
 import "./Message.css";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Message = ({message}) => {
   const {currentUser} = useContext(AuthContext);
   const {data} = useContext(ChatContext);
   const [loading, setLoading] = useState(false);
- 
+
   const ref = useRef();
 
   useEffect(() => {
@@ -36,17 +37,21 @@ const Message = ({message}) => {
       }
     }
   }
-  
+
   function getTime(timestampObj) {
     const dateObj = new Date(timestampObj.seconds * 1000);
     const hours = dateObj.getHours();
     const minutes = dateObj.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const formattedTime = (hours % 12 || 12) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedTime =
+      (hours % 12 || 12) +
+      ":" +
+      (minutes < 10 ? "0" + minutes : minutes) +
+      " " +
+      ampm;
     // console.log(formattedTime); // Output: "09:52 PM"
-    return formattedTime
+    return formattedTime;
   }
-  
 
   return (
     <Row>
@@ -58,7 +63,7 @@ const Message = ({message}) => {
           }`}
         >
           <div className="messageInfo">
-            <img
+            <LazyLoadImage
               src={
                 message.senderId === currentUser.uid
                   ? currentUser.photoURL
@@ -68,14 +73,11 @@ const Message = ({message}) => {
             />
           </div>
           <div className={message.img ? "messageContent_2" : "messageContent"}>
-
             <p>{message.text}</p>
             <span>{getTime(message?.date)}</span>
-            {message.img && <img src={message.img} alt="" />}
-
+            {message.img && <LazyLoadImage src={message.img} alt="" />}
           </div>
         </div>
-       
       </Col>
     </Row>
   );

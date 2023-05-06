@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import {db} from "../../../api/firebase";
 import {AuthContext} from "../../../context/AuthContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -94,7 +95,7 @@ const Search = () => {
             {err && <span>User not found!</span>}
             {user && (
               <div className="userChat" onClick={handleSelect} style={{cursor:"pointer"}}>
-                <img src={user.photoURL} alt="" />
+                <LazyLoadImage src={user.photoURL} alt="" />
                 <div className="userChatInfo">
                   <span>{user.displayName}</span>
                 </div>

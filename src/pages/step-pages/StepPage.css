@@ -148,7 +148,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   border: 1px solid #ccc;
   cursor: pointer;
   width: 117px;
@@ -164,7 +163,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   border: 1px solid #ccc;
   cursor: pointer;
   width: 117px;
@@ -173,18 +171,11 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  /* font-size: 16px; */
 }
 
 .box.selected {
   border-color: #eab2bb;
 }
-
-/* .box img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-} */
 
 .box p {
   font-weight: 600;

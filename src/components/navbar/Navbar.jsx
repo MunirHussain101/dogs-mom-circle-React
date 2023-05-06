@@ -1,13 +1,12 @@
 import {Avatar, Button, Col, Dropdown, Row, Space, message} from "antd";
-// import styles from "../../../styles/sections/Navbar.module.css"
 import {UserOutlined} from "@ant-design/icons";
 import {Link, useLocation} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import "./Navbar.css";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserAuth} from "../../features/auth/authSlice";
 import CreatePost from "../posts/CreatePost";
 import NotificationDropdown from "../notification/NotificationDropdown";
+import "./Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -67,12 +66,6 @@ const Navbar = () => {
       >
         <Col lg={12} className="main_first_col">
           <Link to={!authDetails ? "/register" : "/search"}>
-            {/* <img
-        src="assets/header/Dogs-Mom-Circle (4) 1.svg"
-        alt="Picture of the author"
-           width={124.27}
-       height={66}
-    /> */}
             <LazyLoadImage
               src="/assets/header/Dogs-Mom-Circle (4) 1.svg"
               width={124.27}
@@ -94,10 +87,6 @@ const Navbar = () => {
               ) : (
                 <CreatePost />
               )}
-              {/* <Button
-              style={{background:"#EAB2BB", borderRadius:7, color:"white", borderColor:"#EAB2BB"}}
-              >Post
-             </Button> */}
             </Col>
             <Col>
               {location.pathname === "/" ||
@@ -117,7 +106,6 @@ const Navbar = () => {
               location.pathname === "/profileReg" ? (
                 <></>
               ) : (
-                // <LazyLoadImage src="/assets/favicoIcon/message.svg" />
                 <Link to="/chats">
                   <LazyLoadImage src="/assets/favicoIcon/message.svg" />
                 </Link>
