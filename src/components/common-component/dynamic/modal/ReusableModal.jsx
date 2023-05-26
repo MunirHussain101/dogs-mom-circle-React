@@ -12,9 +12,11 @@ const ReusableModal = (props) => {
     buttonText,
     closable,
     isModalOpen,
-    showModal
+    showModal,
+    onOk,
+    onCancel,
   } = props;
-  
+
   return (
     <>
       <Button
@@ -37,6 +39,8 @@ const ReusableModal = (props) => {
         icon={icon}
         okButtonProps={okButtonProps}
         closeButtonProps={closeButtonProps}
+        onOk={onOk}
+        onCancel={onCancel}
       >
         {props.children}
       </Modal>

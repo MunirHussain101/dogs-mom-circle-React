@@ -1,6 +1,6 @@
 import {Avatar, Button, Col, Dropdown, Row, Space, message} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUserAuth} from "../../features/auth/authSlice";
@@ -8,7 +8,7 @@ import CreatePost from "../posts/CreatePost";
 import NotificationDropdown from "../notification/NotificationDropdown";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({socket}) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const authDetails = useSelector((state) => state?.auth?.userDetails);
@@ -16,6 +16,8 @@ const Navbar = () => {
   const firstName = authDetails?.firstname;
   const lastName = authDetails?.lastname;
   const profilePic = authDetails?.profile_pic;
+  const id = authDetails?.id;
+
 
   const logoutAuth = () => {
     dispatch(logoutUserAuth());
@@ -24,7 +26,7 @@ const Navbar = () => {
   const itemsMenuAuth = [
     {
       key: "4",
-      label: <Link to="/">Profile</Link>,
+      label: <Link to={`/profile/${id}`}>Profile</Link>,
     },
     {
       key: "5",
@@ -95,7 +97,7 @@ const Navbar = () => {
               location.pathname === "/profile-register" ? (
                 <></>
               ) : (
-                <NotificationDropdown />
+                <NotificationDropdown socket={socket} />
               )}
             </Col>
 

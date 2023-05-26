@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import { Input, Row, Col } from "antd";
+import {Input, Row, Col} from "antd";
 import {
   collection,
   query,
@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import {db} from "../../../api/firebase";
 import {AuthContext} from "../../../context/AuthContext";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -94,7 +94,11 @@ const Search = () => {
             </div>
             {err && <span>User not found!</span>}
             {user && (
-              <div className="userChat" onClick={handleSelect} style={{cursor:"pointer"}}>
+              <div
+                className="userChat"
+                onClick={handleSelect}
+                style={{cursor: "pointer"}}
+              >
                 <LazyLoadImage src={user.photoURL} alt="" />
                 <div className="userChatInfo">
                   <span>{user.displayName}</span>

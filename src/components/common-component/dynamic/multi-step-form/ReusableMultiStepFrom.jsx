@@ -1,13 +1,20 @@
 import React, {useState} from "react";
-import {Steps, Button, Row, Col, Modal, message, Form} from "antd";
+
 import StepOne from "../../../../pages/step-pages/StepOne";
 import StepTwo from "../../../../pages/step-pages/StepTwo";
 import StepThree from "../../../../pages/step-pages/StepThree";
 import StepFour from "../../../../pages/step-pages/StepFour";
 import axios from "../../../../api/axios";
+
+import {Steps, Button, Row, Col, Modal, message, Form} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+import { storage, db } from "../../../../api/firebase";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext";
+import {doc, setDoc, updateDoc} from "firebase/firestore";
 const {Step} = Steps;
 
 const ReusableMultiStepFrom = () => {
@@ -17,15 +24,16 @@ const ReusableMultiStepFrom = () => {
   const [err, setErr] = useState(false);
   const authDetails = useSelector((state) => state?.auth?.userGetId);
   const [image, setImage] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const dispatch = useDispatch();
+  const [image2, setImage2] = useState([]);
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  console.log("currentuser --->", currentUser);
 
   const [profileData, setProfileData] = useState({
     zipCode: "",
     willing_travel_distance: "",
-    activity_type: "",
-    spay_neuter_prefes: "",
+    activity_type: [],
+    spay_neuter_prefs: "",
     shedding_prefs: "",
     house_training_prefs: "",
     dog_left_alone_prefs: "",
@@ -40,75 +48,79 @@ const ReusableMultiStepFrom = () => {
     dog_can_be_left_alone: "",
     dog_spayed_neutered: "",
     dog_good_with_cats: "",
-    dog_other_dog_size_compatibility: "",
+    dog_other_dog_size_compatibility: [],
     dog_breed: "",
     user_profile: null,
     dog_profile: null,
   });
 
   const cloud_name = "dbwdp3ixw";
-  const handleImage = (e) => {
+  const handleImage = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "profilePic");
-    axios
+    const res = await axios
       .post(
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         formData
       )
-      .then((res) => {
-        setImage(res.data.secure_url);
-      })
-      .then((err) => setErr(err));
+      setImage(res.data.secure_url);
+      setErr(err)
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${res.data.secure_url, date}`);
+
+      const uploadPic =  await uploadBytesResumable(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          await updateDoc(doc(db, "users", currentUser.uid), {
+            photoURL: downloadURL,
+          });
+        });
+      });
   };
 
   const handleImage2 = (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "dogPic");
-    axios
-      .post(
-        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-        formData
-      )
-      .then((res) => {
-        setImage2(res.data.secure_url);
-      })
-      .then((err) => setErr(err));
+    const selectedFiles = e.target.files;
+
+    if (selectedFiles.length > 5) {
+      const confirmation = window.confirm(
+        "You can only upload a maximum of 5 images. Do you want to proceed with the first 5 selected images?"
+      );
+
+      if (confirmation) {
+        // Slice the selectedFiles array to keep only the first 5 files
+        const files = Array.from(selectedFiles).slice(0, 5);
+        processFiles(files);
+      } else {
+        // Reset the file input
+        e.target.value = null;
+      }
+    } else {
+      processFiles(selectedFiles);
+    }
   };
 
-  let formData = new FormData();
-  formData.append("id", authDetails);
-  formData.append("zipCode", profileData.zipCode);
-  formData.append(
-    "willing_travel_distance",
-    profileData.willing_travel_distance
-  );
-  formData.append("activity_type", profileData.activity_type);
-  formData.append("spay_neuter_prefes", profileData.spay_neuter_prefes);
-  formData.append("shedding_prefs", profileData.shedding_prefs);
-  formData.append("house_training_prefs", profileData.house_training_prefs);
-  formData.append("dog_left_alone_prefs", profileData.dog_left_alone_prefs);
-  formData.append("have_a_cat", profileData.have_a_cat);
-  formData.append("additional_notes", profileData.additional_notes);
-  formData.append("dog_name", profileData.dog_name);
-  formData.append("dog_birthday", profileData.dog_birthday);
-  formData.append("dog_shedding", profileData.dog_shedding);
-  formData.append("dog_size", profileData.dog_size);
-  formData.append("dog_house_trained", profileData.dog_house_trained);
-  formData.append("dog_can_be_left_alone", profileData.dog_can_be_left_alone);
-  formData.append("dog_spayed_neutered", profileData.dog_spayed_neutered);
-  formData.append("dog_good_with_cats", profileData.dog_good_with_cats);
-  formData.append(
-    "dog_other_dog_size_compatibility",
-    profileData.dog_other_dog_size_compatibility
-  );
-  formData.append("dog_breed", profileData.dog_breed);
-  formData.append("user_profile", image);
-  formData.append("dog_profile", image2);
+  const processFiles = (files) => {
+    const uploadedFiles = [];
 
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData();
+      formData.append("file", files[i]);
+      formData.append("upload_preset", "dogPic");
+      axios
+        .post(
+          `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+          formData
+        )
+        .then((response) => {
+          uploadedFiles.push(response.data.secure_url);
+
+          if (uploadedFiles.length === files.length) {
+            setImage2(uploadedFiles);
+          }
+        });
+    }
+  };
 
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
@@ -120,7 +132,33 @@ const ReusableMultiStepFrom = () => {
 
   const handleFinish = async () => {
     try {
-      const response = await axios.post("/api/auth/additional-data", formData);
+      const body = {
+        id: authDetails,
+        zipCode: profileData.zipCode,
+        willing_travel_distance: profileData.willing_travel_distance,
+        activity_type: profileData.activity_type,
+        spay_neuter_prefs: profileData.spay_neuter_prefs,
+        shedding_prefs: profileData.shedding_prefs,
+        house_training_prefs: profileData.house_training_prefs,
+        dog_left_alone_prefs: profileData.dog_left_alone_prefs,
+        have_a_cat: profileData.have_a_cat,
+        additional_notes: profileData.additional_notes,
+        dog_name: profileData.dog_name,
+        dog_birthday: profileData.dog_birthday,
+        dog_shedding: profileData.dog_shedding,
+        dog_size: profileData.dog_size,
+        dog_house_trained: profileData.dog_house_trained,
+        dog_can_be_left_alone: profileData.dog_can_be_left_alone,
+        dog_spayed_neutered: profileData.dog_spayed_neutered,
+        dog_good_with_cats: profileData.dog_good_with_cats,
+        dog_other_dog_size_compatibility:
+          profileData.dog_other_dog_size_compatibility,
+        dog_breed: profileData.dog_breed,
+        user_profile: image,
+        dog_profile: image2,
+      };
+
+      const response = await axios.post("/api/auth/additional-data", body);
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -142,6 +180,14 @@ const ReusableMultiStepFrom = () => {
     setIsModalOpen(false);
   };
 
+  function navigateToSearch() {
+    const getToken = localStorage.getItem("tokenSignup");
+    if (getToken) {
+      navigate("/search");
+    } else {
+      navigate("/");
+    }
+  }
   return (
     <>
       {contextHolder}
@@ -201,6 +247,7 @@ const ReusableMultiStepFrom = () => {
                 setImage2={setImage2}
                 handleImage={handleImage}
                 handleImage2={handleImage2}
+                image2={image2}
               />
             )}
 
@@ -215,6 +262,7 @@ const ReusableMultiStepFrom = () => {
                 </Button>
               )}
               {currentStep === 0 && (
+                // <Link to={localStorage.getItem("tokenSignup") ? "/search" : ""}>
                 <Link to="/login">
                   <Button
                     className="back_btn"

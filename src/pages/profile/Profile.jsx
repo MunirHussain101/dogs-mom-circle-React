@@ -1,18 +1,32 @@
 import React, {useEffect, useState} from "react";
-import {Row, Col, Avatar, Rate, Button} from "antd";
+import {Row, Col, Avatar, Rate, Button, Input, message, Form} from "antd";
 import card from "../../components/cards/cards.json";
-import "./Profile.css";
 import {Link, useParams} from "react-router-dom";
 import axios from "../../api/axios";
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import "./Profile.css";
+
+const {TextArea} = Input;
 
 function Profile() {
   const [userData, setUserData] = useState();
+  const [rating, setRating] = useState("");
+  const [review, setReview] = useState("");
+
   const {id} = useParams();
+  const [messageApi, contextHolder] = message.useMessage();
   const tokenValue = localStorage.getItem("token");
   const posts = useSelector((state) => state.posts.postDetails);
-  console.log("Posts ---> ", posts);
+
+
+  const handleRatingChange = (event) => {
+    setRating(event.target.value);
+  };
+
+  const handleReviewChange = (event) => {
+    setReview(event.target.value);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +39,31 @@ function Profile() {
     getData();
   }, []);
 
-
+  // Review API
+  const handleSubmit = async () => {
+    try {
+      const body = {
+        review,
+        rating,
+      };
+      const response = await axios.post(`/api/review/${id}`, body, {
+        headers: {
+          Authorization: `Bearer ${tokenValue}`,
+        },
+      });
+      console.log("review --->", response?.data);
+      messageApi.open({
+        type: "success",
+        content: "Review Send Successfully",
+      });
+      setRating("");
+      setReview("");
+    } catch (err) {
+      messageApi.open({
+        type: "error",
+      });
+    }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -37,6 +75,7 @@ function Profile() {
 
   return (
     <>
+      {contextHolder}
       <Row className="main_row_user_profile" style={{marginTop: 80}}>
         <Col lg={4}></Col>
         <Col lg={8}>
@@ -77,16 +116,19 @@ function Profile() {
                 <p className="card_msg">{card.pets[0].datePara}</p>
                 <p className="card_date">
                   {posts.map((val) => {
-                    return (
-                      <>
-                        <span className="start_date" key={val}>
-                          {formatDate(val.start_date)}
-                        </span>
-                        <span className="end_date">
-                          {formatDate(val.end_date)}
-                        </span>
-                      </>
-                    );
+
+                    if(id == val.userId) {
+                      return (
+                        <>
+                          <span className="start_date" key={val}>
+                            {formatDate(val.start_date)}
+                          </span>
+                          <span className="end_date">
+                            {formatDate(val.end_date)}
+                          </span>
+                        </>
+                      );
+                    }
                   })}
                 </p>
               </div>
@@ -172,7 +214,17 @@ function Profile() {
             {userData?.firstname} {userData?.lastname}{" "}
             <span className="gallery_name">Gallery</span>
           </h1>
-          <LazyLoadImage src={userData?.dogs[0]?.profile_pic} />
+          <Row style={{display: "flex", gap: 20}}>
+            {userData?.dogs.map((dogPic) => {
+              return dogPic?.profile_pic.map((val) => {
+                return (
+                  <>
+                    <LazyLoadImage src={val} width={100} />
+                  </>
+                );
+              });
+            })}
+          </Row>
         </Col>
         <Col lg={4}></Col>
       </Row>
@@ -190,10 +242,7 @@ function Profile() {
 
           <div className="flex_container">
             <h1></h1>
-            {/* <div className="profile_box">Mom</div>
-            <div className="profile_box">2 Kids</div> */}
             <div className="profile_box">{userData?.have_a_cat}</div>
-            <div className="profile_box">1 Dog</div>
           </div>
         </Col>
         <Col lg={4}></Col>
@@ -211,7 +260,15 @@ function Profile() {
             <div className="furBaby_box">{userData?.shedding_prefs}</div>
             <div className="furBaby_box">{userData?.house_training_prefs}</div>
             <div className="furBaby_box">{userData?.dog_left_alone_prefs}</div>
-            <div className="furBaby_box">Get along with cats</div>
+
+            {userData?.dogs.map((dogPic) => {
+              console.log("dogPic", dogPic)
+              return (
+                <>
+                  <div className="furBaby_box">{dogPic?.spayed_neutered}</div>
+                </>
+              );
+            })}
           </div>
         </Col>
         <Col lg={4}></Col>
@@ -221,17 +278,25 @@ function Profile() {
       <Row>
         <Col lg={4}></Col>
         <Col lg={16}>
-          <h1 className="furBaby_head">
+          <h1 className="furBaby_head_2">
             {userData?.firstname} {userData?.lastname} can{" "}
             <span className="furBaby_name">Host</span>
           </h1>
           <br />
 
           <div className="flex_container">
-            <div className="furBaby_box" style={{fontSize: 14}}>
-              0-50lbs
-              <b>Dog</b>
-            </div>
+            {userData?.dogs.map((dogPic) => {
+              return (
+                <>
+                  <div className="furBaby_box" style={{fontSize: 12}}>
+                    {dogPic.size}
+                    <span>
+                      <b>Dogs</b>
+                    </span>
+                  </div>
+                </>
+              );
+            })}
           </div>
         </Col>
         <Col lg={4}></Col>
@@ -280,9 +345,54 @@ function Profile() {
             super helpful and accommodating with my messy schedule and my little
             guy seems totally happy when I pick him up. Recommend 100%.
           </p>
+
+          <Row style={{display: "flex", gap: 20}}>
+            <Col>
+              <Avatar
+                style={{width: 50, height: 50}}
+                src={userData?.profile_pic}
+              />
+            </Col>
+            <Col>
+              <Form>
+                <Form.Item name="review">
+                  <TextArea
+                    name="review"
+                    style={{width: 723, height: 98}}
+                    showCount
+                    maxLength={100}
+                    id="review"
+                    placeholder="Review Type here"
+                    value={review}
+                    onChange={handleReviewChange}
+                  />
+                </Form.Item>
+                <Form.Item name="rating">
+                  <Input
+                    type="number"
+                    id="rating"
+                    placeholder="Ration No."
+                    value={rating}
+                    onChange={handleRatingChange}
+                    style={{width: "20%"}}
+                  />
+                </Form.Item>
+              </Form>
+              <br />
+              <Button className="send_btn" onClick={handleSubmit}>
+                Send
+              </Button>
+            </Col>
+          </Row>
         </Col>
+
         <Col lg={4}></Col>
       </Row>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }

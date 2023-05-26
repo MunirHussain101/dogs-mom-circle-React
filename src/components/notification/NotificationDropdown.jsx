@@ -1,74 +1,80 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Avatar, Badge, Dropdown, Menu} from "antd";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import "./NotificationDropdown.css";
+import { useSelector } from "react-redux";
 
-const notifications = [
-  {
-    id: 1,
-    img: "assets/home-cards/new13.svg",
-    message: "Nevena gave you a review",
-    read: false,
-  },
-  {
-    id: 2,
-    img: "assets/home-cards/new22.svg",
-    message: "Kristin commented on your post",
-    read: true,
-  },
-  {
-    id: 3,
-    img: "assets/home-cards/new21.svg",
-    message: "Oceane commented on your post",
-    read: false,
-  },
-];
+const NotificationDropdown = ({socket}) => {
+  const [notifications, setNotifications] = useState([]);
+  const [open, setOpen] = useState(false);
+  const userDetail = useSelector((state) => state?.auth?.userDetails);
+  const postDetails = useSelector((state) => state?.posts?.postDetails);
 
-const NotificationDropdown = () => {
-  const [unReadNotifications, setUnReadNotifications] = useState(
-    notifications.filter((notification) => !notification.read)
-  );
+  const postMap = postDetails.map((val) => {
+    console.log(val?.userId)
+    return val?.userId;
+  })
 
-  const markAllRead = () => {
-    const updatedNotifications = notifications.map((notification) =>
-      notification.read ? notification : {...notification, read: true}
+
+  useEffect(() => {
+    // const data = {
+    //   targetUserId: postMap, // Replace with the target user's identifier
+    //   message: 'New notification message',
+    // };
+    // socket?.on("new-review", data);
+    socket?.on("new-review", (data) => {
+      setNotifications((prev) => [...prev, data]);
+    });
+  }, [socket]);
+
+  const displayNotification = ({senderName, type}) => {
+    let action;
+
+    if (type === 1) {
+      action = "review";
+    } else if (type === 2) {
+      action = "rating";
+    } else {
+      action = "comment";
+    }
+    return (
+      <span className="notification">{`${userDetail?.firstname} ${action} your post.`}</span>
     );
-    setUnReadNotifications([]);
   };
 
-  const notificationCount = unReadNotifications.length;
+  const handleRead = () => {
+    setNotifications([]);
+    setOpen(false);
+  };
 
   const menu = (
     <Menu className="main_menu">
       <>
         {notifications.map((notification) => (
           <Menu.Item key={notification.id} className="menu_item">
-            <Avatar size={50} src={notification.img} />
+            <Avatar size={50} src={userDetail.profile_pic} />
             &nbsp; &nbsp;
-            {notification.message}
+            {displayNotification(notification)}
           </Menu.Item>
         ))}
         <div className="notification-dropdown-header">
-          {notificationCount > 0 && (
-            <span
-              onClick={markAllRead}
-              className="mark_read"
-              style={{color: "#1F2124"}}
-            >
-              Mark all read
-            </span>
-          )}
+          <span
+            onClick={handleRead}
+            className="mark_read"
+            style={{color: "#1F2124"}}
+          >
+            Mark all read
+          </span>
         </div>
       </>
     </Menu>
   );
-
   return (
     <div className="notification-dropdown-container">
       <Dropdown overlay={menu} trigger={["click"]}>
         <div className="notification-dropdown-trigger">
-          <Badge count={notificationCount}>
+          <Badge count={notifications.length}>
             <LazyLoadImage src="/assets/favicoIcon/bell.svg" />
           </Badge>
         </div>

@@ -10,14 +10,14 @@ const StepOne = ({profileData, setProfileData}) => {
   useEffect(() => {
     const loadBreeds = async () => {
       const breedResponse = await axios.get("/api/breeds");
-      console.log("Breed --->", breedResponse?.data);
       setBreeds(breedResponse?.data);
     };
 
     loadBreeds();
-  }, [breeds]);
+  }, []);
+ 
 
-  const breedsDetails = breeds.map((el, index) => {
+  const breedsDetails = breeds.sort((a, b) => a > b ? 1 : -1).map((el, index) => {
     const obj = {};
     obj.label = el;
     obj.value = index;
@@ -144,7 +144,6 @@ const StepOne = ({profileData, setProfileData}) => {
             <div>
               <Select
                 style={{width: "180px"}}
-                placeholder="Select Breed"
                 showSearch
                 optionFilterProp="children"
                 filterOption={(input, option) =>
