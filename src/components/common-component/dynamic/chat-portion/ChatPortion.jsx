@@ -1,16 +1,17 @@
 import React, {useContext, useState} from "react";
-import {Row, Col, List, Layout, Input, Button} from "antd";
+import {Row, Col, Layout, Button} from "antd";
 import ChatInput from "../../../../pages/chats/ChatInput/ChatInput";
 import Messages from "../../../../pages/chats/Messages/Messages";
-import { ChatContext } from "../../../../context/ChatContext";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-const {Header, Content, Footer} = Layout;
+import {ChatContext} from "../../../../context/ChatContext";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+const { Content } = Layout;
 
 export const ChatPortion = () => {
   return (
     <>
       <Col
         lg={12}
+        xs={24}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -26,21 +27,8 @@ export const ChatPortion = () => {
 };
 
 export const ChatPortion2 = () => {
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
-  const { data } = useContext(ChatContext);
-
-  const handleSend = () => {
-    if (message.trim() === "") return;
-    setMessages([...messages, {id: Date.now(), text: message}]);
-    setMessage("");
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSend();
-    }
-  };
+  const {data} = useContext(ChatContext);
+  
   return (
     <>
       <Col
@@ -49,12 +37,19 @@ export const ChatPortion2 = () => {
           display: "flex",
           flexDirection: "column",
         }}
+        xs={24}
       >
-        <div style={{marginLeft: 15, lineHeight: 1}}>
-
-          <h1>{data?.user?.displayName}</h1>
-          <p>{data?.user?.displayName ? "Online" : ""}</p>
-        </div>
+        <Row justify="space-between">
+          <Col>
+            <div style={{marginLeft: 15, lineHeight: 1}}>
+              <h1>{data?.user?.displayName}</h1>
+              <p>{data?.user?.displayName ? "Online" : ""}</p>
+            </div>
+          </Col>
+          <Col style={{marginTop:25, marginRight:50, marginLeft:50}}>
+            <Button>Request to host</Button>
+          </Col>
+        </Row>
 
         <div style={{height: 2, backgroundColor: "lightgrey"}}></div>
 
@@ -66,8 +61,8 @@ export const ChatPortion2 = () => {
         {/* Input and Button */}
         <Row style={{display: "flex", gap: 20}}>
           <Col>
-          <ChatInput />
-         </Col>
+            <ChatInput />
+          </Col>
         </Row>
       </Col>
     </>

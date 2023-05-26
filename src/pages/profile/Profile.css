@@ -148,6 +148,17 @@
     color: #1F2124;
 }
 
+.furBaby_head_2 {
+    width: 200px;
+    height: 17px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1F2124;
+}
+
 .furBaby_name {
     color: #EAB2BB;
 }
@@ -162,7 +173,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 9.5px;
+    font-size: 12px;
     color: #1F2124;
 }
 
@@ -247,6 +258,22 @@
     text-align: center;
     color: #1F2124;
   }
+
+  .send_btn {
+    width: 62px;
+    height: 30px;
+    background: #EAB2BB;
+    border: #EAB2BB;
+    border-radius: 2px;
+    color: white;
+  }
+
+  .send_btn:hover {
+    background: #EAB2BB;
+    color: white;
+    
+  }
+  
 
 @media screen and (max-width: 800px) {
     .main_row_div {

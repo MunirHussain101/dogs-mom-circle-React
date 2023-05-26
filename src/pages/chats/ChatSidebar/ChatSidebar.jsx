@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Avatar, Row, Col, Dropdown} from "antd";
-import {doc, onSnapshot} from "firebase/firestore";
+import {Avatar, Row, Col, Dropdown, message} from "antd";
+import {doc, collection, onSnapshot, deleteDoc} from "firebase/firestore";
 import "./ChatSidebar.css";
 import {
   ChatPortion,
@@ -15,7 +15,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 const ChatSidebar = () => {
   const [chat, setChat] = useState(false);
   const [chats, setChats] = useState([]);
-
+  const [messageApi, contextHolder] = message.useMessage()
   const {currentUser} = useContext(AuthContext);
   const {dispatch} = useContext(ChatContext);
 
@@ -36,6 +36,27 @@ const ChatSidebar = () => {
   const handleSelect = (u) => {
     dispatch({type: "CHANGE_USER", payload: u});
   };
+
+  const handleDeleteChat = async (chatId) => {
+    try {
+      await deleteDoc(doc(db, 'userChats', chatId));
+      setChats(prevState => {
+        const updatedChats = {...prevState};
+        delete updatedChats[chatId];
+        return updatedChats;
+      });
+      messageApi.open({
+        type:"success",
+        content: 'Chat deleted successfully'
+      });
+    } catch (error) {
+      messageApi.open({
+        type:"error",
+        content:'Error deleting chat',
+      })
+    }
+  };
+
 
   const items = [
     {
@@ -67,15 +88,15 @@ const ChatSidebar = () => {
 
   return (
     <>
-      <Row justify="center">
-        <Col lg={8} xs={6}>
+      {contextHolder}
+      <Row justify="center" style={{minHeight:"80vh"}}>
+        <Col lg={8} xs={6} >
           <h1>Messages</h1>
           <Search />
 
           {Object.entries(chats)
             ?.sort((a, b) => b[1].date - a[1].date)
-            .map((chat) => {
-              // console.log("chat", chat[1].userInfo);
+            .map((chat, index) => {
               return (
                 <>
                   <Row justify="space-between">
@@ -92,7 +113,7 @@ const ChatSidebar = () => {
                     >
                       <Avatar
                         size={70}
-                        src="https://images.unsplash.com/photo-1632498301446-5f78baad40d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9nJTIwYW5kJTIwZ2lybHxlbnwwfHwwfHw%3D&w=1000&q=80"
+                        src={chat[1]?.userInfo?.photoURL}
                       />
                       <Col
                         onClick={() => setChat(true)}
@@ -117,8 +138,11 @@ const ChatSidebar = () => {
                         menu={{
                           items,
                         }}
-                      >
-                        <LazyLoadImage src="/assets/dropdownIcon/dropdownImg.svg" />
+                      
+                      > 
+                        <a onClick={() => handleDeleteChat(chat[index])}>
+                        <LazyLoadImage src="/assets/dropdownIcon/dropdownImg.svg"  />
+                        </a>
                       </Dropdown>
                     </Col>
                   </Row>

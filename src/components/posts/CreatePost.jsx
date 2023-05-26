@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ReusableModal from "../common-component/dynamic/modal/ReusableModal";
 import {Col, DatePicker, Row, Button, message} from "antd";
+import {LogoutOutlined} from "@ant-design/icons";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "../../api/axios";
 import "./CreatePost.css";
@@ -23,16 +24,16 @@ const CreatePost = () => {
 
   const onSubModel = () => {
     setIsModalOpen(false);
+
     handleSubmit();
-    // navigate("/profile");
+    navigate("/search");
     setDisable(true);
   };
   const token = localStorage.getItem("token");
 
   const handleSubmit = async () => {
-
     try {
-      const response = await axios.post("/api/posts", posts, {
+      const response = await axios.post("/api/setPosts", posts, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,18 +50,27 @@ const CreatePost = () => {
     }
   };
 
- 
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       {contextHolder}
       <ReusableModal
         title="Post a boarding request!"
         buttonText="Post"
-        closable={false}
+        closable={true}
+        centered
         footer={false}
         showModal={showModal}
         setIsModalOpen={setIsModalOpen}
         isModalOpen={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
       >
         {/* Paragraph */}
         <Row>

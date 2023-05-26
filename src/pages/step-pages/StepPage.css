@@ -151,7 +151,7 @@
   border: 1px solid #ccc;
   cursor: pointer;
   width: 117px;
-  height: 87px;
+  height: 90px;
   font-weight: 600;
   font-family: "Inter";
   font-style: normal;
@@ -175,7 +175,14 @@
 
 .box.selected {
   border-color: #eab2bb;
+  /* background-color: #eab2bb; */
 }
+
+.box_2.selected {
+  /* background-color: #eab2bb; */
+  border: 1px solid #eab2bb;
+}
+
 
 .box p {
   font-weight: 600;

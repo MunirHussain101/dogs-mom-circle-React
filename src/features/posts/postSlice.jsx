@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    postDetails: false,
+    postDetails: [],
 }
 
 
@@ -14,8 +14,6 @@ export const postSlice = createSlice({
         getPostDetails: (state, action) => {
             state.postDetails = action.payload;
         },
-        
-
     }
 })
 

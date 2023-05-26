@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
 import {Link, useNavigate} from "react-router-dom";
-import "./Login.css";
 import {LockOutlined, MailOutlined} from "@ant-design/icons";
-import InputField from "../common-component/dynamic/form/InputField";
 import axios from "../../api/axios";
 import {getUserDetails} from "../../features/auth/authSlice";
 import {useDispatch} from "react-redux";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../api/firebase";
+import "../SignUp/SignUp.css";
 
 const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);

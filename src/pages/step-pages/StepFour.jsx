@@ -1,10 +1,19 @@
 import React from "react";
-import {Row, Col, Form, Radio, Input} from "antd";
+import {Row, Col, Form, Radio, Input, Upload, Modal} from "antd";
+import { PlusOutlined } from '@ant-design/icons';
 import "./StepPage.css";
 
 const {TextArea} = Input;
 
-const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
+const StepFour = ({
+  profileData,
+  setProfileData,
+  handleImage,
+  setImage2,
+  handleImage2,
+  
+}) => {
+
   return (
     <>
       <Row>
@@ -20,13 +29,12 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
             </h1>
             <Form.Item>
               <Radio.Group
-                // style={{display: "flex", flexDirection: "row", gap: 20}}
                 className="radio_group"
-                value={profileData.spay_neuter_prefes}
+                value={profileData.spay_neuter_prefs}
                 onChange={(e) => {
                   setProfileData({
                     ...profileData,
-                    spay_neuter_prefes: e.target.value,
+                    spay_neuter_prefs: e.target.value,
                   });
                 }}
               >
@@ -247,10 +255,11 @@ const StepFour = ({profileData, setProfileData, handleImage, handleImage2}) => {
               <input
                 type="file"
                 accept="image/*"
-                multiple
+                multiple={true}
                 value={profileData.image2 || ""}
                 onChange={handleImage2}
               />
+              
             </Form.Item>
           </Row>
           <br />

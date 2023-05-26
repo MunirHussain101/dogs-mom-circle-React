@@ -1,11 +1,10 @@
 import { Card, Col, Row } from "antd"
 import { Link } from "react-router-dom";
-import './AntdCard.css'
 import { useSelector } from "react-redux";
-import './AntdCard.css';
+import './HomeCard.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const AntdCard=()=>{
+const HomeCard=()=>{
     const imgMine1='assets/home-cards/new9.svg'
     const imgMine2='assets/home-cards/new10.svg'
     const imgMine3='assets/home-cards/new11.svg'
@@ -64,4 +63,4 @@ const AntdCard=()=>{
     )
 
 }
-export default AntdCard
+export default HomeCard

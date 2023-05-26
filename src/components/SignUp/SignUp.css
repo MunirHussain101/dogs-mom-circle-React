@@ -30,13 +30,9 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px; 
+    margin-left: 10px;
 }
 
-.signup_link {
-    display: flex;
-    flex-direction: row;
-
-}
 
 .forget_password_head {
     display: flex;

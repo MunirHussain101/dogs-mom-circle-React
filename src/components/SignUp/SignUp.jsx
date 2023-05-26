@@ -3,6 +3,7 @@ import axios from "../../api/axios";
 import {getUserId} from "../../features/auth/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {getUserDetails} from "../../features/auth/authSlice";
 import {Row, Col, Form, Input, Button, Checkbox, message} from "antd";
 import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {auth, db, storage} from "../../api/firebase";
@@ -16,6 +17,7 @@ const SignUp = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
 
   const handleSubmit = async (values, e) => {
     try {
@@ -25,9 +27,10 @@ const SignUp = () => {
         email: values.email,
         password: values.password,
         phone: values.phone,
-      });
-
+      },
+      );
       dispatch(getUserId(response?.data?.data?.id));
+      localStorage.setItem("signUpToken",response?.data?.data?.token);
       const {firstname, lastname, email, phone, password, file} = values;
       const displayName = firstname + lastname;
       //Create user
@@ -68,6 +71,33 @@ const SignUp = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (registerSuccess) {
+      const userDetails = async () => {
+        try {
+          const response = await axios.post(`/api/user/get-profile`, {
+            id: userId,
+            token: tokenValue,
+          });
+          dispatch(getUserDetails(response.data));
+          messageApi.open({
+            type: "success",
+            content: "Logged In SuccessFully",
+          });
+          setTimeout(() => {
+            form.resetFields();
+          }, 1000);
+        } catch (err) {
+          messageApi.open({
+            type: "error",
+            content: err.response,
+          });
+        }
+      };
+      userDetails();
+    }
+  }, [registerSuccess]);
 
   return (
     <>
