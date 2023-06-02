@@ -4,9 +4,12 @@ import ChatInput from "../../../../pages/chats/ChatInput/ChatInput";
 import Messages from "../../../../pages/chats/Messages/Messages";
 import {ChatContext} from "../../../../context/ChatContext";
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import axios from "../../../../api/axios";
+import { useSelector } from "react-redux";
 const { Content } = Layout;
 
 export const ChatPortion = () => {
+  
   return (
     <>
       <Col
@@ -28,7 +31,20 @@ export const ChatPortion = () => {
 
 export const ChatPortion2 = () => {
   const {data} = useContext(ChatContext);
-  
+  const postDetails = useSelector((state) => state.posts.postDetails);
+  const targetId = useSelector((state) => state.auth.targetId)
+  const tokenValue = localStorage.getItem("token");
+
+   const sendRequestToBoard = async() => {
+    const response = await axios.post("/api/boarding/", {
+      targetId
+    }, {
+      headers : {
+        Authorization: `Bearer ${tokenValue}`,
+      }
+    })
+    console.log(response?.data)
+  }
   return (
     <>
       <Col
@@ -47,7 +63,9 @@ export const ChatPortion2 = () => {
             </div>
           </Col>
           <Col style={{marginTop:25, marginRight:50, marginLeft:50}}>
-            <Button>Request to host</Button>
+            <Button onClick={
+              sendRequestToBoard
+            }>Request to host</Button>
           </Col>
         </Row>
 

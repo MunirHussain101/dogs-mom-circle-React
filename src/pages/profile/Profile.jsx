@@ -3,9 +3,10 @@ import {Row, Col, Avatar, Rate, Button, Input, message, Form} from "antd";
 import card from "../../components/cards/cards.json";
 import {Link, useParams} from "react-router-dom";
 import axios from "../../api/axios";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import "./Profile.css";
+import { setTargetId } from "../../features/auth/authSlice";
 
 const {TextArea} = Input;
 
@@ -13,30 +14,38 @@ function Profile() {
   const [userData, setUserData] = useState();
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
+  const params = useParams();
+
 
   const {id} = useParams();
   const [messageApi, contextHolder] = message.useMessage();
   const tokenValue = localStorage.getItem("token");
-  const posts = useSelector((state) => state.posts.postDetails);
-
+  const getPost = useSelector((state) => state.posts.postDetails);
+  const dispatch = useDispatch();
+  // const getId = getPost?.posts?.map((value) => {
+  //   return value?.id
+  // })
 
   const handleRatingChange = (event) => {
     setRating(event.target.value);
+    
   };
+  dispatch(setTargetId(id))
 
   const handleReviewChange = (event) => {
     setReview(event.target.value);
   };
 
   useEffect(() => {
+  
     const getData = async () => {
       const response = await axios.post(`/api/user/get-profile`, {
-        id: id,
+        id: id, 
         token: tokenValue,
       });
       setUserData(response?.data);
     };
-    getData();
+     getData();
   }, []);
 
   // Review API
@@ -115,7 +124,7 @@ function Profile() {
               <div className="card">
                 <p className="card_msg">{card.pets[0].datePara}</p>
                 <p className="card_date">
-                  {posts.map((val) => {
+                  {getPost?.posts?.map((val) => {
 
                     if(id == val.userId) {
                       return (

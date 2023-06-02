@@ -11,10 +11,7 @@ const NotificationDropdown = ({socket}) => {
   const userDetail = useSelector((state) => state?.auth?.userDetails);
   const postDetails = useSelector((state) => state?.posts?.postDetails);
 
-  const postMap = postDetails.map((val) => {
-    console.log(val?.userId)
-    return val?.userId;
-  })
+ 
 
 
   useEffect(() => {

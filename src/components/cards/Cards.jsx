@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import cards from "./cards.json";
 import axios from "../../api/axios";
 import "./Cards.css";
+import { useDispatch } from "react-redux";
+import { getPostDetails } from "../../features/posts/postSlice";
 
 
 const Cards = () => {
@@ -14,6 +16,7 @@ const Cards = () => {
   const [btnValue, setBtnValue] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   // GET API
   useEffect(() => {
@@ -30,6 +33,7 @@ const Cards = () => {
           },
         }
       );
+      dispatch(getPostDetails())
       const usersWithPost = response.data.posts.filter(
         (user) => user.start_date
       );

@@ -38,10 +38,14 @@ const CreatePost = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response?.data)
       messageApi.open({
         type: "success",
         content: "New Post Added",
       });
+      if(response?.data){
+        // return window.location.reload();
+      }
     } catch (err) {
       messageApi.open({
         type: "error",
@@ -117,7 +121,10 @@ const CreatePost = () => {
             </Link>
           </Col>
           <Col lg={12} xs={12}>
-            {disable ? (
+          <Button  onClick={handleSubmit}>
+                Confirm Request
+              </Button>
+            {/* {disable ? (
               <Button
                 className="confirm_btn"
                 onClick={onSubModel}
@@ -129,7 +136,7 @@ const CreatePost = () => {
               <Button className="confirm_btn" onClick={onSubModel}>
                 Confirm Request
               </Button>
-            )}
+            )} */}
           </Col>
         </Row>
         <br />
