@@ -17,8 +17,14 @@ function Profile() {
   const {id} = useParams();
   const [messageApi, contextHolder] = message.useMessage();
   const tokenValue = localStorage.getItem("token");
-  const posts = useSelector((state) => state.posts.postDetails);
-
+  const postDetail = useSelector((state) => state.posts.postDetails);
+  // console.log("post details:::", postDetail);
+  const getId = postDetail?.posts?.map((val) => {
+    // console.log("val", val);
+    return val?.id;
+  });
+  const convertArrInObj = Object.assign({}, getId);
+  // console.log("convertArrInObj --->", convertArrInObj);
 
   const handleRatingChange = (event) => {
     setRating(event.target.value);
@@ -39,6 +45,17 @@ function Profile() {
     getData();
   }, []);
 
+
+  useEffect(() => {
+    const getPostId = async (id) => {
+      const response = await axios.get(`/api/posts/${id}`, {
+        token: tokenValue,
+      });
+      console.log("getPostId", response?.data?.id);
+    };
+    getPostId();
+  }, []);
+
   // Review API
   const handleSubmit = async () => {
     try {
@@ -46,7 +63,7 @@ function Profile() {
         review,
         rating,
       };
-      const response = await axios.post(`/api/review/${id}`, body, {
+      const response = await axios.post(`/api/review/${getId}`, body, {
         headers: {
           Authorization: `Bearer ${tokenValue}`,
         },
@@ -115,7 +132,7 @@ function Profile() {
               <div className="card">
                 <p className="card_msg">{card.pets[0].datePara}</p>
                 <p className="card_date">
-                  {posts.map((val) => {
+                  {postDetail?.posts?.map((val) => {
 
                     if(id == val.userId) {
                       return (
