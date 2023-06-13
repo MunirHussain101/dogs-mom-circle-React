@@ -12,7 +12,7 @@ import {ChatContext} from "../../../context/ChatContext";
 import {db} from "../../../api/firebase";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
-const ChatSidebar = () => {
+const ChatSidebar = ({socket}) => {
   const [chat, setChat] = useState(false);
   const [chats, setChats] = useState([]);
   const [messageApi, contextHolder] = message.useMessage()
@@ -159,7 +159,7 @@ const ChatSidebar = () => {
           }}
         ></div>
 
-        {chat == false ? <ChatPortion /> : <ChatPortion2 />}
+        {chat == false ? <ChatPortion /> : <ChatPortion2 socket={socket} />}
         <div
           style={{
             width: 2,

@@ -19,6 +19,7 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
+      // debugger
       const response = await axios.post("/api/auth/signin", {
         email: values.email,
         password: values.password,
@@ -37,7 +38,6 @@ const Login = () => {
     }
   };
   const tokenValue = localStorage.getItem("token");
-
   useEffect(() => {
     if (loginSuccess) {
       const userDetails = async () => {
@@ -68,8 +68,9 @@ const Login = () => {
   }, [loginSuccess]);
 
   useEffect(() => {
-    if (tokenValue) {
-      navigate("/");
+    if (!tokenValue) {
+      // navigate("/");
+    // console.log({tokenValue})
     }
   }, []);
 

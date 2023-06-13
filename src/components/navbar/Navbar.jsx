@@ -8,7 +8,7 @@ import CreatePost from "../posts/CreatePost";
 import NotificationDropdown from "../notification/NotificationDropdown";
 import "./Navbar.css";
 
-const Navbar = ({socket}) => {
+const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const authDetails = useSelector((state) => state?.auth?.userDetails);
@@ -17,7 +17,6 @@ const Navbar = ({socket}) => {
   const lastName = authDetails?.lastname;
   const profilePic = authDetails?.profile_pic;
   const id = authDetails?.id;
-
 
   const logoutAuth = () => {
     dispatch(logoutUserAuth());
@@ -45,7 +44,7 @@ const Navbar = ({socket}) => {
   const itemsMenuNoAuth = [
     {
       key: "1",
-      label: <Link to="/register">SignUp</Link>,
+      label: <Link to="/register">Signup</Link>,
     },
     {
       key: "2",
@@ -97,7 +96,7 @@ const Navbar = ({socket}) => {
               location.pathname === "/profile-register" ? (
                 <></>
               ) : (
-                <NotificationDropdown socket={socket} />
+                <NotificationDropdown />
               )}
             </Col>
 

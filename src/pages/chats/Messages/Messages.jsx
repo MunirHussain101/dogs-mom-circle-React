@@ -22,15 +22,13 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
-
   return (
     <Row>
       <Col lg={24}>
         <div className="messages">
         {messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
-          
+          <Message message={m} key={m.id} />
+        ))}
         </div>
       </Col>
     </Row>

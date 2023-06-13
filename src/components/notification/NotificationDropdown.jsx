@@ -4,8 +4,9 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import "./NotificationDropdown.css";
 import { useSelector } from "react-redux";
+import socketInstance from '../../utils/socket'
 
-const NotificationDropdown = ({socket}) => {
+const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const userDetail = useSelector((state) => state?.auth?.userDetails);
@@ -16,19 +17,30 @@ const NotificationDropdown = ({socket}) => {
     return val?.userId;
   })
 
+  console.log({socketInstance})
 
   useEffect(() => {
-    // const data = {
-    //   targetUserId: postMap, // Replace with the target user's identifier
-    //   message: 'New notification message',
-    // };
-    // socket?.on("new-review", data);
+    const socket = socketInstance.getSocket()
     socket?.on("new-review", (data) => {
+      console.log({data})
       setNotifications((prev) => [...prev, data]);
     });
-  }, [socket]);
+    socket?.on('reject-request', (data) => {
+      console.log({data})
+      setNotifications(prev => [...prev, data])
+    })
+    console.log('socket set')
+  }, []);
 
-  const displayNotification = ({senderName, type}) => {
+  useEffect(() => {
+    if(notifications?.length > 0)
+    window.localStorage.setItem('notifications', JSON.stringify(notifications))
+  }, [notifications])
+  useEffect(() => {
+    setNotifications(JSON.parse(window.localStorage.getItem('notifications')))
+  }, [])
+
+  const displayNotification = ({senderName, type, message}) => {
     let action;
 
     if (type === 1) {
@@ -39,19 +51,22 @@ const NotificationDropdown = ({socket}) => {
       action = "comment";
     }
     return (
-      <span className="notification">{`${userDetail?.firstname} ${action} your post.`}</span>
+      type !== 3 
+      ? <span className="notification">{`${userDetail?.firstname} ${action} your post.`}</span>
+      : <span className="notification">{`${userDetail?.firstname} ${message}`}</span>
     );
   };
 
   const handleRead = () => {
     setNotifications([]);
+    localStorage.setItem('notifications', '[]')
     setOpen(false);
   };
 
   const menu = (
     <Menu className="main_menu">
       <>
-        {notifications.map((notification) => (
+        {notifications?.map((notification) => (
           <Menu.Item key={notification.id} className="menu_item">
             <Avatar size={50} src={userDetail.profile_pic} />
             &nbsp; &nbsp;

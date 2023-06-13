@@ -26,7 +26,7 @@ function App() {
       <Layout className="layout">
         <Content>
           <div className="site-layout-content">
-            <NavBarMain socket={socket} />
+            <NavBarMain />
 
             <SubRoutes socket={socket} />
           </div>

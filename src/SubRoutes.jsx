@@ -22,7 +22,7 @@ const SubRoutes = ({socket}) => {
             <>
               <Route path="/search" element={<SearchPage />} />
               <Route path="/profile/:id" element={<Profile socket={socket} />} />
-              <Route path="/chats" element={<ChatSidebar />} />
+              <Route path="/chats" element={<ChatSidebar socket={socket} />} />
 
             </>
           ) : (

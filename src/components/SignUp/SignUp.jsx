@@ -27,35 +27,39 @@ const SignUp = () => {
         email: values.email,
         password: values.password,
         phone: values.phone,
-      },
-      );
+      });
       dispatch(getUserId(response?.data?.data?.id));
       localStorage.setItem("signUpToken",response?.data?.data?.token);
       const {firstname, lastname, email, phone, password, file} = values;
       const displayName = firstname + lastname;
       //Create user
+      // debugger
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
+      console.log({ res })
       //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, file).then(() => {
+        console.log('1')
         getDownloadURL(storageRef).then(async (downloadURL) => {
+        console.log('2')
           //Update profile
           await updateProfile(res.user, {
             displayName,
             photoURL: downloadURL,
           });
           //create user on firestore
-          await setDoc(doc(db, "users", res.user.uid), {
+          // debugger
+          console.log('nooooooooo')
+          const r = await setDoc(doc(db, "users", res.user.uid), {
             uid: res.user.uid,
             displayName,
             email,
             phone,
             photoURL: downloadURL,
           });
-
+          console.log({r})
           //create empty user chats on firestore
           await setDoc(doc(db, "userChats", res.user.uid), {});
         });

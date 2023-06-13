@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import cards from "./cards.json";
 import axios from "../../api/axios";
 import "./Cards.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setTargetUserId } from "../../features/auth/authSlice";
 
 const Cards = () => {
   const [usersWithPost, setUsersWithPost] = useState([]);
@@ -14,7 +15,12 @@ const Cards = () => {
   const [btnValue, setBtnValue] = useState(false);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("token");
-
+  const dispatch = useDispatch()
+  const id = useSelector(state => state.auth.userDetails?.id)
+  // useEffect(() => {
+  //   if(id)
+  //   setSocketId(id)
+  // } ,[])
   // GET API
   useEffect(() => {
     const getPost = async () => {
@@ -57,7 +63,9 @@ const Cards = () => {
   };
 
   const phMine = `Enter your  zipcode | How far are you willing to travel? | Search a time period | Dog preference`;
-
+  async function hanldeClick(id) {
+    dispatch(setTargetUserId(id))
+  }
   return (
     <>
       {/* Search Bar */}
@@ -104,7 +112,10 @@ const Cards = () => {
                     className="main_col_searchpg"
                     key={values?.userId}
                   >
-                    <Link to={`/profile/${values?.userId}`}>
+                    <Link
+                      to={`/profile/${values?.userId}`}
+                      onClick={() => hanldeClick(values?.userId)}
+                    >
                       <div
                         style={{
                           backgroundImage: `url(${values.user.profile_pic})`,
