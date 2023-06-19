@@ -29,16 +29,24 @@ const Navbar = () => {
     },
     {
       key: "5",
-      label: <Link to="/">Settings</Link>,
+      label: (
+        <Link to={`/bookings/${id}`}>
+          Hostings
+        </Link>
+      )
     },
     {
       key: "6",
+      label: <Link to="/">Settings</Link>,
+    },
+    {
+      key: "7",
       label: (
         <Link to="/" onClick={logoutAuth}>
           Logout
         </Link>
       ),
-    },
+    }
   ];
 
   const itemsMenuNoAuth = [

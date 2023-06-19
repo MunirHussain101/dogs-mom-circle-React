@@ -45,7 +45,7 @@ const CreatePost = () => {
     } catch (err) {
       messageApi.open({
         type: "error",
-        content: err.response,
+        content: err?.response?.data?.message,
       });
     }
   };

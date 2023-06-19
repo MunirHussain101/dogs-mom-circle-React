@@ -4,7 +4,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import "./NotificationDropdown.css";
 import { useSelector } from "react-redux";
-import socketInstance from '../../utils/socket'
+import socket from '../../utils/socket'
 
 const NotificationDropdown = () => {
   const [notifications, setNotifications] = useState([]);
@@ -16,17 +16,16 @@ const NotificationDropdown = () => {
     console.log(val?.userId)
     return val?.userId;
   })
-
-  console.log({socketInstance})
-
   useEffect(() => {
-    const socket = socketInstance.getSocket()
     socket?.on("new-review", (data) => {
       console.log({data})
       setNotifications((prev) => [...prev, data]);
     });
-    socket?.on('reject-request', (data) => {
-      console.log({data})
+    socket?.on('accept-request', (data) => {
+      setNotifications(prev => [...prev, data])
+    })
+    socket.on('reject-request', data => {
+      console.log({dddd: data})
       setNotifications(prev => [...prev, data])
     })
     console.log('socket set')
@@ -53,7 +52,7 @@ const NotificationDropdown = () => {
     return (
       type !== 3 
       ? <span className="notification">{`${userDetail?.firstname} ${action} your post.`}</span>
-      : <span className="notification">{`${userDetail?.firstname} ${message}`}</span>
+      : <span className="notification">{`${message}`}</span>
     );
   };
 

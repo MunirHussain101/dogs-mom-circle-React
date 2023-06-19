@@ -33,7 +33,9 @@ const ChatSidebar = ({socket}) => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
+  const [targetUser, setTargetUser] = useState('')
   const handleSelect = (u) => {
+    setTargetUser(u.uid)
     dispatch({type: "CHANGE_USER", payload: u});
   };
 
@@ -85,7 +87,10 @@ const ChatSidebar = ({socket}) => {
       }
     }
   }
-
+  // (function i() {
+  //   Object.entries(chats).map((chat) => console.log({chat[1]?.userInfo}))
+  // })()
+  // console.log({chats: chats})
   return (
     <>
       {contextHolder}
@@ -138,7 +143,6 @@ const ChatSidebar = ({socket}) => {
                         menu={{
                           items,
                         }}
-                      
                       > 
                         <a onClick={() => handleDeleteChat(chat[index])}>
                         <LazyLoadImage src="/assets/dropdownIcon/dropdownImg.svg"  />
@@ -159,7 +163,7 @@ const ChatSidebar = ({socket}) => {
           }}
         ></div>
 
-        {chat == false ? <ChatPortion /> : <ChatPortion2 socket={socket} />}
+        {chat == false ? <ChatPortion /> : <ChatPortion2 socket={socket} targetUser={targetUser} />}
         <div
           style={{
             width: 2,

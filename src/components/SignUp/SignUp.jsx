@@ -41,27 +41,25 @@ const SignUp = () => {
       const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, file).then(() => {
-        console.log('1')
         getDownloadURL(storageRef).then(async (downloadURL) => {
-        console.log('2')
           //Update profile
           await updateProfile(res.user, {
             displayName,
             photoURL: downloadURL,
           });
           //create user on firestore
-          // debugger
-          console.log('nooooooooo')
           const r = await setDoc(doc(db, "users", res.user.uid), {
             uid: res.user.uid,
             displayName,
             email,
             phone,
             photoURL: downloadURL,
+            dbId: response?.data?.data?.id
           });
           console.log({r})
           //create empty user chats on firestore
           await setDoc(doc(db, "userChats", res.user.uid), {});
+          
         });
       });
 

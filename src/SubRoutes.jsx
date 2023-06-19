@@ -11,6 +11,7 @@ const Profile = lazy(() => import("./pages/profile/Profile"));
 const ErrorPage = lazy(() => import("./pages/404/ErrorPage"));
 const ReusableMultiStepFrom = lazy(() => import("./components/common-component/dynamic/multi-step-form/ReusableMultiStepFrom"));
 const ChatSidebar = lazy(() => import("./pages/chats/ChatSidebar/ChatSidebar"));
+const Bookings = lazy(() => import('./pages/bookings'))
 
 const SubRoutes = ({socket}) => {
   const authObject = useSelector((state) => state.auth.userDetails);
@@ -23,7 +24,7 @@ const SubRoutes = ({socket}) => {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/profile/:id" element={<Profile socket={socket} />} />
               <Route path="/chats" element={<ChatSidebar socket={socket} />} />
-
+              <Route path='/bookings/:id' element={<Bookings />} />
             </>
           ) : (
             <></>

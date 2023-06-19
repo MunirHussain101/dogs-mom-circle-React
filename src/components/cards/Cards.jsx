@@ -156,7 +156,7 @@ const Cards = () => {
                                 marginLeft: 4,
                               }}
                             >
-                              20 Points
+                              {values?.user?.point?.points} Points
                             </span>
                           </p>
                         </Row>
@@ -264,7 +264,7 @@ const Cards = () => {
                                 marginLeft: 4,
                               }}
                             >
-                              20 Points
+                              {values?.point?.points} Points
                             </span>
                           </p>
                         </Row>
