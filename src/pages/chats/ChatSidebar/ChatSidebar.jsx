@@ -29,7 +29,7 @@ const ChatSidebar = ({socket}) => {
         unsub();
       };
     };
-
+    console.log({abc: currentUser.uid})
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 

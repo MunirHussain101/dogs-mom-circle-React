@@ -34,7 +34,6 @@ export const ChatPortion = () => {
 
 export const ChatPortion2 = ({ targetUser }) => {
   const {data} = useContext(ChatContext);
-  // const targetId = useSelector(state => state.auth.targetUserId)
   const id = useSelector(state => state.auth.userDetails?.id)
   const token = localStorage.getItem('token')
   const [request, setRequest] = useState(false)
@@ -78,7 +77,6 @@ const temp = async () => {
     setTargetId(data.dbId)
   }
   return data.dbId
-  // console.log({data})
 }
   useEffect(() => {
     socket.on('request', (data) => {
@@ -90,7 +88,7 @@ const temp = async () => {
     socket.on('reject-request', data => {
       console.log({dddd: data})
       setIsRejected(true)
-      // setTimeout(() => setIsRejected(false), 6000)
+      setTimeout(() => setIsRejected(false), 6000)
     })
     socket.on('accept-request', data => {
       setHostName(`${data.user.firstname} ${data.user.lastname}`)
@@ -98,6 +96,7 @@ const temp = async () => {
       console.log(`${data.user.firstname} ${data.user.lastname}`)
       setIsAccepted(true)
       setCongrats(data.congrats_msg)
+      setTimeout(() => setIsAccepted(false), 6000)
     })
     const tar = temp()
     if(tar) {
@@ -142,16 +141,18 @@ const temp = async () => {
     if(response.data.statusCode === 200) {
       setLoadings(prev => {
         const newLoadings = [...prev]
-        newLoadings[index] = true
+        newLoadings[index] = false
         return newLoadings
       })
       setRequest(false)
-    } else if(response.data.statusCode === 204) {
+    } else if(response.data.statusCode === 204) { // meaning the request was rejected
       setLoadings(prev => {
         const newLoadings = [...prev]
         newLoadings[index] = false
         return newLoadings
       })
+      console.log({loadings})
+      setLoadings([false, false])
       setRequest(false)
     }
   }

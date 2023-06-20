@@ -15,11 +15,13 @@ const SignUp = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const [err, setErr] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [cbox, setCbox] = useState(true)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
   const handleSubmit = async (values, e) => {
+    
     try {
       const response = await axios.post("/api/auth/signup", {
         firstname: values.firstname,
@@ -27,6 +29,7 @@ const SignUp = () => {
         email: values.email,
         password: values.password,
         phone: values.phone,
+        tc_accepted: cbox
       });
       dispatch(getUserId(response?.data?.data?.id));
       localStorage.setItem("signUpToken",response?.data?.data?.token);
@@ -233,7 +236,7 @@ const SignUp = () => {
             >
               <Row>
                 <Form.Item>
-                  <Checkbox style={{width: "360px"}}>
+                  <Checkbox style={{width: "360px"}} checked={cbox} onChange={e => setCbox(e.target.checked)}>
                     By using this platform, you accept full responsibility for
                     the safety of yourself and your dog during any exchanges.The
                     platform is not liable for any incidents or damages that may

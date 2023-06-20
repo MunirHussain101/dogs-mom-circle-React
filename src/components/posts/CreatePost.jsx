@@ -5,6 +5,7 @@ import {LogoutOutlined} from "@ant-design/icons";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "../../api/axios";
 import "./CreatePost.css";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
   const [posts, setPosts] = useState({
@@ -16,12 +17,29 @@ const CreatePost = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [disable, setDisable] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const id = useSelector(state => state.auth.userDetails?.id)
   const navigate = useNavigate();
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
+  const check = async () => {
+    console.log('before', id)
+    const response = await axios.get(
+      `/api/check_user_data/${id}`
+    )
+    if(!response.data) {
+      setDisable(true)
+      console.log('disabled')
+    }
+    console.log({response: response.data})
+  }
+  useEffect(() => {
+    check()
+  }, [])
+
+  // check this, this method may have to be removed
   const onSubModel = () => {
     setIsModalOpen(false);
 
