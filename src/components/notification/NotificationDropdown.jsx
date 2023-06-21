@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Avatar, Badge, Button, Dropdown, Menu} from "antd";
+import {Avatar, Badge, Button, Dropdown, Menu, message} from "antd";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import "./NotificationDropdown.css";
@@ -18,6 +18,7 @@ const NotificationDropdown = () => {
   const token = localStorage.getItem('token')
   const userDetail = useSelector((state) => state?.auth?.userDetails);
   const postDetails = useSelector((state) => state?.posts?.postDetails);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const postMap = postDetails.map((val) => {
     console.log(val?.userId)
@@ -25,16 +26,20 @@ const NotificationDropdown = () => {
   })
   useEffect(() => {
     socket?.on("new-review", (data) => {
+      console.log({rev: data})
       setNotifications((prev) => [...prev, data]);
     });
     socket?.on('accept-request', (data) => {
+      console.log({accept: data})
       if(data?.message) setNotifications(prev => [...prev, data])
     })
     socket?.on('reject-request', data => {
       // if(data?.message)
+      console.log({reject: data})
       setNotifications(prev => [...prev, data])
     })
     socket?.on('request', data => {
+      console.log({hahayo: data})
       if(window.location.href.endsWith('/chats')) return
       setBoardingId(data?.boardingId)
       setNotifications(prev => [...prev, data])
@@ -42,15 +47,24 @@ const NotificationDropdown = () => {
     console.log('socket set')
   }, []);
 
+  // useEffect(() => {
+    // if(notifications?.length > 0)
+    // window.localStorage.setItem('notifications', JSON.stringify(notifications))
+  // }, [notifications])
+  const getNotifications = async () => {
+    const response = await axios.get('/api/notifications/'+id)
+    setNotifications(response?.data)
+    console.log({got: response})
+  }
   useEffect(() => {
-    if(notifications?.length > 0)
-    window.localStorage.setItem('notifications', JSON.stringify(notifications))
-  }, [notifications])
-  useEffect(() => {
-    setNotifications(JSON.parse(window.localStorage.getItem('notifications')))
+    getNotifications()
+    // setNotifications(JSON.parse(window.localStorage.getItem('notifications')))
   }, [])
 
-  const handleRequestAction = async (action, index, notificationId) => {
+  const handleRequestAction = async (action, index, notificationId, boardingId) => {
+    // console.log({notificationId})
+    // notifications.map(noti => console.log({noti}))
+    // return
     setLoadings(prev => {
       const newLoadings = [...prev];
       newLoadings[index] = true;
@@ -62,6 +76,7 @@ const NotificationDropdown = () => {
         action,
         id: boardingId,
         myId: id,
+        notification_id: notificationId
         // side
       },
       {
@@ -76,7 +91,8 @@ const NotificationDropdown = () => {
         newLoadings[index] = false
         return newLoadings
       })
-      setNotifications(prev => prev.filter(noti => noti.notificationId !== notificationId))
+      // notifications.map(n => console.log({stateId: n.id}, {notificationId}))
+      setNotifications(prev => prev.filter(noti => noti.id !== notificationId))
       setIsAccepted(true)
     } else if(response.data.statusCode === 204) {
       setLoadings(prev => {
@@ -85,54 +101,67 @@ const NotificationDropdown = () => {
         return newLoadings
       })
       setIsRejected(true)
-      setNotifications(prev => prev.filter(noti => noti.notificationId !== notificationId))
+      // notifications.map(n => console.log({stateId: n.notificationId}, {notificationId}))
+
+      setNotifications(prev => prev.filter(noti => noti.id !== notificationId))
     }
     setLoadings([false, false])
   }
   
   const displayNotification = (data) => {
     console.log({bo: data})
-    const {senderName, type, message, notificationId} = data
+    const {senderName, message, id: notificationId, typeId, boardingId} = data
     let action;
-
-    if (type === 1) {
+    console.log({typeId})
+    if (typeId === 1) {
       action = "review";
-    } else if (type === 2) {
+    } else if (typeId === 2) {
       action = "rating";
-    } else {
-      action = "comment";
+    } else if(typeId === 3) {
+      action = "commented";
     }
-    return (
-      type === 3
-      ? <span className="notification">{`${message}`}</span>
-      : type === 4
-      ? <span className="notification">
-          <p>{message}</p>
-          <span style={{width: '100%'}}>
-          <Button
-            style={{background: "#EAB2BB", color: "white", width: '40%', marginRight: '2%'}}
-            onClick={() => handleRequestAction(true, 0, notificationId)}
-            disabled={loadings[1]}
-            loading={loadings[0]}
-          >Accept</Button>
-          <Button
-            style={{color: "white", background: '#000000', width: '40%'}}
-            onClick={() => handleRequestAction(false, 1, notificationId)}
-            disabled={loadings[0]}
-            loading={loadings[1]}
-          >
-            Reject
-          </Button>
-          </span>
+    const Request = () =>
+      <span className="notification">
+        <p>{message}</p>
+        <span style={{width: '100%'}}>
+        <Button
+          style={{background: "#EAB2BB", color: "white", width: '40%', marginRight: '2%'}}
+          onClick={() => handleRequestAction(true, 0, notificationId, boardingId)}
+          disabled={loadings[1]}
+          loading={loadings[0]}
+        >Accept</Button>
+        <Button
+          style={{color: "white", background: '#000000', width: '40%'}}
+          onClick={() => handleRequestAction(false, 1, notificationId, boardingId)}
+          disabled={loadings[0]}
+          loading={loadings[1]}
+        >
+          Reject
+        </Button>
         </span>
-      : <span className="notification">{`${userDetail?.firstname} ${action} your post.`}</span>
+      </span>
+    if(data.typeId === 4)
+    console.log({actionAfter: action}, {typeId})
+    return (
+      typeId === 4
+      ? <Request />
+      : <span className="notification">{`${message}`}</span>
     );
   };
 
-  const handleRead = () => {
-    setNotifications([]);
-    localStorage.setItem('notifications', '[]')
-    setOpen(false);
+  const handleRead = async () => {
+    try {
+      await axios.get(
+        `/api/notifications/read?userId=${id}`,
+      )
+      setNotifications([]);
+      setOpen(false);
+    } catch(err) {
+      messageApi.open({
+        type: "error",
+        content: err,
+      });
+    }
   };
 
   const menu = (

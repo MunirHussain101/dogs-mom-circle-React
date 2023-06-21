@@ -13,6 +13,7 @@ function Profile() {
   const [userData, setUserData] = useState();
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
+  const [reviews, setReviews] = useState([])
 
   const {id} = useParams();
   const [messageApi, contextHolder] = message.useMessage();
@@ -35,6 +36,8 @@ function Profile() {
         token: tokenValue,
       });
       setUserData(response?.data);
+      setReviews(response?.data?.reviews)
+      console.log({resres: response})
     };
     getData();
   }, []);
@@ -323,28 +326,31 @@ function Profile() {
         <Col lg={4}></Col>
         <Col lg={16}>
           <h1 className="additional_Info">Reviews</h1>
-          <Row>
-            <Col>
-              <LazyLoadImage
-                src="/assets/profile/IMAGE.svg"
-                width={50}
-                height={50}
-                alt="foot"
-                className="pets_foot"
-              />
-            </Col>
-            <Col>
-              <p className="review_para">Anna</p>
-              <span className="review_para2">Mar 27, 2023</span>
-            </Col>
-          </Row>
+          {reviews.map(review => (
+            <>
+              <Row>
+                <Col>
+                  <LazyLoadImage
+                    src="/assets/profile/IMAGE.svg"
+                    width={50}
+                    height={50}
+                    alt="foot"
+                    className="pets_foot"
+                  />
+                </Col>
+                <Col>
+                  <p className="review_para">{review?.reviewUser?.firstname} {review?.reviewUser?.lastname}</p>
+                  {/* <span className="review_para2">Mar 27, 2023</span> */}
+                  <span className="review_para2">{formatDate(review?.createdAt)}</span>
+
+                </Col>
+              </Row>
+              <p className="review_last_para">
+              {review?.review}
+              </p>
+            </>
+          ))}
           <br />
-          <p className="review_last_para">
-            {userData?.firstname} {userData?.lastname} has helped me out for
-            some last minute extended trips several times now. She is always
-            super helpful and accommodating with my messy schedule and my little
-            guy seems totally happy when I pick him up. Recommend 100%.
-          </p>
 
           <Row style={{display: "flex", gap: 20}}>
             <Col>

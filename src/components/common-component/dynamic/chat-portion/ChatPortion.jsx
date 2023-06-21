@@ -47,6 +47,7 @@ export const ChatPortion2 = ({ targetUser }) => {
   const [targetId, setTargetId] = useState(null)
   const [requestBtnMsg, setRequestBtnMsg] = useState('')
   const [reqMsg, setReqMsg] = useState('board their')
+  const [notificationId, setNotificationId] = useState(null)
 
   const checkBoarding = async (targetId) => {
     console.log('be', targetUser)
@@ -80,6 +81,7 @@ const temp = async () => {
 }
   useEffect(() => {
     socket.on('request', (data) => {
+      setNotificationId(data?.notificationId)
       setRequest(true)
       setHostName(`${data.user.firstname} ${data.user.lastname}`)
       setHostPic(data?.user?.profile_pic)
@@ -130,6 +132,7 @@ const temp = async () => {
         action,
         id: boardingId,
         myId: id,
+        notification_id: notificationId,
         side
       },
       {
